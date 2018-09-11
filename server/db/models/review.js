@@ -7,16 +7,17 @@ const Review = db.define('review', {
     allowNull: false,
     validate: {
       min: 0,
-      max: 5,
-    },
+      max: 5
+    }
   },
   content: {
     type: Sequelize.TEXT(medium),
+
     allowNull: false,
     validate: {
-      notEmpty: true,
-    },
-  },
-});
+      notEmpty: true
+    }
+  }
+})
 
-module.exports = Review;
+module.exports = Review
