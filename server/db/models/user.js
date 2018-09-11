@@ -7,37 +7,37 @@ const User = db.define('user', {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      notEmpty: true,
-    },
+      notEmpty: true
+    }
   },
   lastName: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      notEmpty: true,
-    },
+      notEmpty: true
+    }
   },
   email: {
     type: Sequelize.STRING,
     unique: true,
     allowNull: false,
     validate: {
-      isEmail: true,
-    },
+      isEmail: true
+    }
   },
   phoneNumber: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      isNumeric: true,
-    },
+      isNumeric: true
+    }
   },
   username: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      notEmpty: true,
-    },
+      notEmpty: true
+    }
   },
   password: {
     type: Sequelize.STRING,

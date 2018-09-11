@@ -6,23 +6,23 @@ const Order = db.define('order', {
     type: Sequelize.ENUM('created', 'ordered', 'delivered', 'shipped'),
     allowNull: false,
     validate: {
-      notEmpty: true,
-    },
+      notEmpty: true
+    }
   },
   tracking: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      isAlphanumeric: true,
-    },
+      isAlphanumeric: true
+    }
   },
   stripeToken: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      notEmpty: true,
-    },
-  },
-});
+      notEmpty: true
+    }
+  }
+})
 
-module.exports = Order;
+module.exports = Order
