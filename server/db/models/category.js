@@ -6,16 +6,16 @@ const Category = db.define('category', {
     type: Sequelize.ENUM('loose leaf', 'tea bag', 'iced tea'),
     allowNull: false,
     validate: {
-      notEmpty: true,
-    },
+      notEmpty: true
+    }
   },
   description: {
     type: Sequelize.TEXT,
     allowNull: false,
     validate: {
-      notEmpty: true,
-    },
-  },
-});
+      notEmpty: true
+    }
+  }
+})
 
-module.exports = Category;
+module.exports = Category

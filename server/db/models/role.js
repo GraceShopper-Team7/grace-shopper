@@ -6,9 +6,9 @@ const Role = db.define('role', {
     type: Sequelize.ENUM('admin', 'customer'),
     allowNull: false,
     validate: {
-      notEmpty: true,
-    },
-  },
-});
+      notEmpty: true
+    }
+  }
+})
 
-module.exports = Role;
+module.exports = Role
