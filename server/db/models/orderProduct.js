@@ -7,16 +7,16 @@ const OrderProduct = db.define('orderProduct', {
     defaultValue: 1,
     validate: {
       min: 0,
-      max: 1000,
-    },
+      max: 1000
+    }
   },
   price: {
     type: Sequelize.DOUBLE,
     allowNull: false,
     validate: {
-      notEmpty: true,
-    },
-  },
-});
+      notEmpty: true
+    }
+  }
+})
 
-module.exports = OrderProduct;
+module.exports = OrderProduct

@@ -6,40 +6,40 @@ const Address = db.define('address', {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      isAlphanumeric: true,
-    },
+      isAlphanumeric: true
+    }
   },
   city: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      isAlpha: true,
-    },
+      isAlpha: true
+    }
   },
   state: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      isAlpha: true,
-    },
+      isAlpha: true
+    }
   },
   country: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      isAlpha: true,
-    },
+      isAlpha: true
+    }
   },
   zipcode: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      isNumeric: true,
-    },
+      isNumeric: true
+    }
   },
   isPrimary: {
-    type: Sequelize.BOOLEAN,
-  },
-});
+    type: Sequelize.BOOLEAN
+  }
+})
 
-module.exports = Address;
+module.exports = Address

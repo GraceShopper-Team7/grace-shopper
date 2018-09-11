@@ -6,16 +6,16 @@ const Type = db.define('type', {
     type: Sequelize.ENUM('green tea', 'black tea', 'white tea', 'herbal tea'),
     allowNull: false,
     validate: {
-      notEmpty: true,
-    },
+      notEmpty: true
+    }
   },
   caffeineStrength: {
     type: Sequelize.ENUM('strong', 'mild', 'weak', 'none'),
     allowNull: false,
     validate: {
-      notEmpty: true,
-    },
-  },
-});
+      notEmpty: true
+    }
+  }
+})
 
-module.exports = Type;
+module.exports = Type
