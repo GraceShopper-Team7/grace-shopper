@@ -23,12 +23,20 @@
 		"test": "NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" --require @babel/polyfill --require @babel/register"
 	},
 	"lint-staged": {
-		"*.{js,jsx}": [ "prettier --write", "npm run lint-fix", "git add" ],
-		"*.{css,scss,json,md}": [ "prettier --write", "git add" ]
+		"*.{js,jsx}": [
+			"prettier --write",
+			"npm run lint-fix",
+			"git add"
+		],
+		"*.{css,scss,json,md}": [
+			"prettier --write",
+			"git add"
+		]
 	},
 	"author": "Fullstack Academy of Code",
 	"license": "MIT",
 	"dependencies": {
+		"@material-ui/core": "^3.0.3",
 		"axios": "^0.15.3",
 		"compression": "^1.7.3",
 		"connect-session-sequelize": "^4.1.0",
