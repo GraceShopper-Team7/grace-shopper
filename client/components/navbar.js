@@ -23,6 +23,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <Link to="/signup">Sign Up</Link>
         </div>
       )}
+      <Link to="/products">Teas</Link>
     </nav>
     <hr />
   </div>
@@ -45,10 +46,7 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(
-  mapState,
-  mapDispatch
-)(Navbar)
+export default connect(mapState, mapDispatch)(Navbar)
 
 /**
  * PROP TYPES
