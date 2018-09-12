@@ -31,7 +31,7 @@ class TypeProductList extends Component {
                 <NavLink to={`/products/${product.id}`}>
                   {product.title}
                 </NavLink>
-                <img src={product.imageUrl} />
+                <img src={`/${product.imageUrl}`} />
                 {product.price}
                 <span>
                   {' '}
