@@ -9,10 +9,11 @@ const Product = db.define('product', {
   },
   imageUrl: {
     type: Sequelize.STRING,
-    allowNull: false
+    defaultValue: 'default.jpg'
+    //allowNull: false
   },
   price: {
-    type: Sequelize.DOUBLE,
+    type: Sequelize.INTEGER,
     allowNull: false
   },
   description: {

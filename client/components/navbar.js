@@ -1,12 +1,15 @@
-import React from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import {Link, NavLink} from 'react-router-dom'
 import {logout} from '../store'
+
+import ConnectedTypeProductList from './typeProductList'
+import ConnectedSingleProduct from './singleProduct'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
-    <h1>BOILERMAKER</h1>
+    <h1>TEA SHOPPER</h1>
     <nav>
       {isLoggedIn ? (
         <div>
@@ -23,6 +26,9 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <Link to="/signup">Sign Up</Link>
         </div>
       )}
+      <Link to="/types/1">
+        <span>BLACK TEA</span>
+      </Link>
     </nav>
     <hr />
   </div>
@@ -45,10 +51,7 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(
-  mapState,
-  mapDispatch
-)(Navbar)
+export default connect(mapState, mapDispatch)(Navbar)
 
 /**
  * PROP TYPES
