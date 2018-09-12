@@ -20,3 +20,13 @@ router.get('/:productId', async (req, res, next) => {
     next(err)
   }
 })
+/*
+router.delete('/:productId', async (req, res, next) => {
+	try {
+		const id = req.params.productId;
+		await Product.destroy({ where: { id } });
+		res.status(204).end();
+	} catch (err) {
+		next(err);
+	}
+});*/
