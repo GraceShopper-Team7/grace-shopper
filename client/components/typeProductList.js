@@ -12,19 +12,18 @@ class TypeProductList extends Component {
   render() {
     console.log('TypeProductList_this.props: ', this.props)
     const typeId = Number(this.props.match.params.typeId)
-    //^^not sure is this is right....do we need to pass as props down in the original component
-    //^^no this should be right, similar to StackChat filtered messages by channel
-    //no this doesnt make sense bc the URI in the nav link does not include categoryId/typeId
-    //!!!!!!!
+    console.log('typeId: ', typeId)
+
     const products = this.props.products.all
-    const filteredProducts = products
-    // .filter(
-    //   product => product.typeId === typeId
-    //)
+    const filteredProducts = products.filter(
+      product => product.typeId === typeId
+    )
+    if (filteredProducts.length < 1) {
+      return <h4>no teas here yet!</h4>
+    }
 
     return (
       <div className="type-list">
-        <p>BEEPBEEP</p>
         <ul>
           {filteredProducts &&
             filteredProducts.map(product => (
