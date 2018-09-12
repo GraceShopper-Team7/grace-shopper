@@ -1,48 +1,76 @@
 import axios from 'axios'
 
-/**
- * ACTION TYPES
- */
-const GOT_PRODUCTS = 'GOT_PRODUCTS'
+//ACTIONS
+const GET_PRODUCTS_FROM_SERVER = 'GET_PRODUCTS_FROM_SERVER'
 
-/**
- * INITIAL STATE
- */
-const initialState = {
-  all: [],
-  selected: {},
-  isLoading: false,
-  hasError: false
-}
+const GET_SINGLE_PRODUCT_FROM_SERVER = 'GET_SINGLE_PRODUCT_FROM_SERVER'
 
-/**
- * ACTION CREATORS
- */
-const gotProducts = products => ({type: GOT_PRODUCTS, products})
-
-/**
- * THUNK CREATOR
- */
-export const fetchProducts = () => async dispatch => {
-  try {
-    const {data: products} = await axios.get('/api/products')
-    dispatch(gotProducts(products))
-  } catch (err) {
-    console.log(err)
+//ACTION CREATORS
+export const setProductsInStore = function(products) {
+  return {
+    type: GET_PRODUCTS_FROM_SERVER,
+    products
   }
 }
 
-/**
- * REDUCER
- */
-export default function(state = initialState, action) {
+export const getSingleProductFromServer = function(singleProduct) {
+  return {
+    type: GET_SINGLE_PRODUCT_FROM_SERVER,
+    singleProduct
+  }
+}
+
+//THUNK CREATORS
+export const fetchProducts = () => {
+  return async dispatch => {
+    //dispatch(setIsLoading())
+
+    let res = await axios.get('/api/products')
+    let products = res.data
+    const action = setProductsInStore(products)
+    console.log("I'm done fetching..., let's dispatch to the store")
+    dispatch(action)
+  }
+}
+
+export const fetchSingleProduct = productId => {
+  return async dispatch => {
+    let res = await axios.get(`/api/products/${productId}`)
+    let singleProduct = res.data
+    const action = getSingleProductFromServer(singleProduct)
+    dispatch(action)
+  }
+}
+
+//REDUCER
+const productReducer = (
+  state = {
+    all: [],
+    selected: {},
+    isLoading: false,
+    hasErrored: false
+  },
+  action
+) => {
   switch (action.type) {
-    case GOT_PRODUCTS:
-      return {...state, all: action.products}
+    case GET_PRODUCTS_FROM_SERVER:
+      return {
+        ...state,
+        isLoading: false,
+        all: action.products
+      }
+    case GET_SINGLE_PRODUCT_FROM_SERVER:
+      return {
+        ...state,
+        isLoading: false,
+        selected: action.singleProduct
+      }
     default:
       return state
   }
 }
+
+export default productReducer
 /*
 import axios from 'axios';
  // Action Type

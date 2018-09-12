@@ -10,6 +10,16 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.get('/:productId', async (req, res, next) => {
+  try {
+    const id = req.params.productId
+    const product = await Product.findById(id)
+    res.json(product)
+  } catch (err) {
+    next(err)
+  }
+})
 /*
 router.delete('/:productId', async (req, res, next) => {
 	try {
