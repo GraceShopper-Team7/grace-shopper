@@ -8,30 +8,39 @@ const Role = require('./role')
 const Type = require('./type')
 const User = require('./user')
 
-Address.belongsTo(User)
 User.hasMany(Address)
+Address.belongsTo(User)
 
 Review.belongsTo(User)
 Review.belongsTo(Product)
 User.hasMany(Review)
 Product.hasMany(Review)
 
-Category.hasMany(Type)
-Type.belongsToMany(Category, {through: 'TypeCategory'})
+// Category.hasMany(Product);
+// Product.belongsTo(Category);
+
+Role.hasMany(User)
+User.belongsTo(Role)
+
+// Category.belongsToMany(Type, { through: 'TypeCategory' });
+// Type.belongsToMany(Category, { through: 'TypeCategory' });
 
 Type.hasMany(Product)
 Product.belongsTo(Type)
-Product.belongsToMany(Category, {through: 'ProductCategory'})
+// Product.belongsToMany(Category, { through: 'ProductCategory' });
 
 Order.belongsTo(User)
 User.hasMany(Order)
 
-Product.belongsToMany(Order, {through: OrderProduct})
-Order.hasMany(Product)
+//Product.belongsToMany(Order, { through: OrderProduct });
+OrderProduct.belongsTo(Order)
+Order.hasMany(OrderProduct)
+//Order.hasMany(Product)
+Order.belongsToMany(Product, {through: OrderProduct})
 
 module.exports = {
   Address,
-  Category,
+  // Category,
   Order,
   OrderProduct,
   Product,
