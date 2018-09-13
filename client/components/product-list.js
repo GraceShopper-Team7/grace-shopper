@@ -15,7 +15,6 @@ class ProductList extends Component {
 
   render() {
     const products = this.props.products || []
-    console.log(this.props)
     if (products.length > 0) {
       return (
         <div>
@@ -25,7 +24,7 @@ class ProductList extends Component {
             {products.map(product => (
               <li key={product.id}>
                 <Link to={`/products/${product.id}`}>
-                  <img src={product.imageUrl} alt="" />
+                  <img src={`/${product.imageUrl}`} alt="" />
                   <h3>{product.title}</h3>
                   <p>{product.rating}</p>
                   <p>{product.price}</p>
