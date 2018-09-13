@@ -1,11 +1,8 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link, NavLink} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import {logout} from '../store'
-
-import ConnectedTypeProductList from './typeProductList'
-import ConnectedSingleProduct from './singleProduct'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
@@ -26,6 +23,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <Link to="/signup">Sign Up</Link>
         </div>
       )}
+      <Link to="/products">ALL TEAS</Link>
       <Link to="/types/1">
         <span>BLACK TEAS</span>
       </Link>
@@ -38,7 +36,9 @@ const Navbar = ({handleClick, isLoggedIn}) => (
       <Link to="/types/4">
         <span>HERBAL TEAS</span>
       </Link>
-      <Link to="/products">ALL Teas</Link>
+      <Link to="/cart">
+        <span>CART</span>
+      </Link>
     </nav>
     <hr />
   </div>

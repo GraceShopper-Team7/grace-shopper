@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-//import {NavLink} from 'react-router-dom'
 import {fetchSingleProduct} from '../store/product'
 
 class SingleProduct extends Component {
@@ -23,7 +22,7 @@ class SingleProduct extends Component {
     return (
       <div>
         <h1>{product.title}</h1>
-        <img src={`/${product.imageUrl}`} />
+        <img src={`/${product.imageUrl}`} width="100px" height="100px" />
 
         <h3>Tea details...</h3>
         <p>price: {product.price}</p>
