@@ -2,24 +2,23 @@ import axios from 'axios'
 
 //ACTIONS
 const GET_PRODUCTS_FROM_SERVER = 'GET_PRODUCTS_FROM_SERVER'
-
 const GET_SINGLE_PRODUCT_FROM_SERVER = 'GET_SINGLE_PRODUCT_FROM_SERVER'
-
 const DELETE_PRODUCT = 'DELETE_PRODUCT'
+const GET_NEW_PRODUCT = 'GET_NEW_PRODUCT'
 
 const EDIT_PRODUCT = 'EDIT_PRODUCT'
 
 // const GET_REVIEWS = 'GET_REVIEWS';
 
 //ACTION CREATORS
-export const setProductsInStore = function(products) {
+const setProductsInStore = function(products) {
   return {
     type: GET_PRODUCTS_FROM_SERVER,
     products
   }
 }
 
-export const getSingleProductFromServer = function(singleProduct) {
+const getSingleProductFromServer = function(singleProduct) {
   return {
     type: GET_SINGLE_PRODUCT_FROM_SERVER,
     singleProduct
@@ -35,6 +34,11 @@ const deleteProduct = id => ({
 // 		singleProduct
 // 	};
 // };
+
+const getNewProduct = product => ({
+  type: GET_NEW_PRODUCT,
+  product
+})
 //THUNK CREATORS
 export const fetchProducts = () => {
   return async dispatch => {
@@ -63,6 +67,12 @@ export const fetchSingleProduct = productId => {
     dispatch(action)
   }
 }
+
+export const addProduct = product => async dispatch => {
+  const {data: newProduct} = await axios.post('/api/products', product)
+  dispatch(getNewProduct(newProduct))
+}
+
 export const removeProduct = productId => async dispatch => {
   await axios.delete(`/api/products/${productId}`)
   dispatch(deleteProduct(productId))
@@ -92,6 +102,8 @@ const productReducer = (
         isLoading: false,
         selected: action.singleProduct
       }
+    case GET_NEW_PRODUCT:
+      return {...state, all: [...state.all, action.product]}
     case DELETE_PRODUCT:
       return {
         ...state,
