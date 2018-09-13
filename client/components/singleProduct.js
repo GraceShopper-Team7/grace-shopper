@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-//import {NavLink} from 'react-router-dom'
 import {fetchSingleProduct} from '../store/product'
 
 class SingleProduct extends Component {
