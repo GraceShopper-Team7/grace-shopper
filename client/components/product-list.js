@@ -25,7 +25,12 @@ class ProductList extends Component {
             {products.map(product => (
               <li key={product.id}>
                 <Link to={`/products/${product.id}`}>
-                  <img src={product.imageUrl} alt="" />
+                  <img
+                    src={product.imageUrl}
+                    alt=""
+                    width="100px"
+                    height="100px"
+                  />
                   <h3>{product.title}</h3>
                   <p>{product.rating}</p>
                   <p>{product.price}</p>
