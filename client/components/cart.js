@@ -21,14 +21,21 @@ class Cart extends Component {
 
     let currentOrders = orders.filter(order => order.status === 'created')
     let pastOrders = orders.filter(order => order.status !== 'created')
-    console.log('CURRENT ORDER', currentOrders)
-    console.log('*****PAST ORDER: ', pastOrders)
+    console.log('CURRENT ORDERS: ', currentOrders)
+    console.log('*****PAST ORDERS: ', pastOrders)
 
     let currentOrder = currentOrders[0]
     console.log('CURRENT ORDER: ', currentOrder)
     let pastOrderProductArrs = pastOrders.map(order => order.products)
-    console.log('*****pastOrderProductObjects: ', pastOrderProductArrs)
+    console.log('*****PastOrderProduct as Objects: ', pastOrderProductArrs)
 
+    let findTotalPrice = function findTotalPrice(productsArray) {
+      let total = 0
+      productsArray.forEach(product => {
+        total += product.price
+      })
+      return total
+    }
     // const priceArray = orders
     //   .map(function(order) {
     //     return order.products
@@ -73,7 +80,9 @@ class Cart extends Component {
                 </li>
               ))}
           </ul>
-          {/* <h4>Total: {totalPrice} </h4> */}
+          <h4>
+            Total: {currentOrder && findTotalPrice(currentOrder.products)}{' '}
+          </h4>
         </div>
 
         <div className="past-order-cart">
@@ -99,10 +108,10 @@ class Cart extends Component {
                         </li>
                       ))}
                   </ul>
+                  <h4>Total: XXX </h4>
                 </li>
               ))}
           </ul>
-          {/* <h4>Total: {totalPrice} </h4> */}
         </div>
       </div>
     )
