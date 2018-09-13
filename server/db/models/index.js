@@ -32,10 +32,6 @@ Product.belongsTo(Type)
 Order.belongsTo(User)
 User.hasMany(Order)
 
-//Product.belongsToMany(Order, { through: OrderProduct });
-OrderProduct.belongsTo(Order)
-Order.hasMany(OrderProduct)
-//Order.hasMany(Product)
 Order.belongsToMany(Product, {through: OrderProduct})
 
 module.exports = {
