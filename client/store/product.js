@@ -5,6 +5,8 @@ const GET_PRODUCTS_FROM_SERVER = 'GET_PRODUCTS_FROM_SERVER'
 
 const GET_SINGLE_PRODUCT_FROM_SERVER = 'GET_SINGLE_PRODUCT_FROM_SERVER'
 
+const DELETE_PRODUCT = 'DELETE_PRODUCT'
+
 //ACTION CREATORS
 export const setProductsInStore = function(products) {
   return {
@@ -19,7 +21,10 @@ export const getSingleProductFromServer = function(singleProduct) {
     singleProduct
   }
 }
-
+const deleteProduct = id => ({
+  type: DELETE_PRODUCT,
+  id
+})
 //THUNK CREATORS
 export const fetchProducts = () => {
   return async dispatch => {
@@ -40,6 +45,10 @@ export const fetchSingleProduct = productId => {
     const action = getSingleProductFromServer(singleProduct)
     dispatch(action)
   }
+}
+export const removeProduct = productId => async dispatch => {
+  await axios.delete(`/api/products/${productId}`)
+  dispatch(deleteProduct(productId))
 }
 
 //REDUCER
@@ -65,36 +74,14 @@ const productReducer = (
         isLoading: false,
         selected: action.singleProduct
       }
+    case DELETE_PRODUCT:
+      return {
+        ...state,
+        all: state.all.filter(product => product.id !== action.id)
+      }
     default:
       return state
   }
 }
 
 export default productReducer
-/*
-import axios from 'axios';
- // Action Type
-const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
- const initialState = {
-	products: []
-};
- //Action Creator
- const removeProduct = () => ({ type: REMOVE_PRODUCT });
- // Thunk Creator
- export const removedProduct = () => async (dispatch) => {
-	try {
-		await axios.delete('/api/:productId');
-		dispatch(removeProduct());
-	} catch (err) {
-		console.error(err);
-	}
-};
-// Reducer
-export default function(state = initialState, action) {
-	switch (action.type) {
-		case REMOVE_PRODUCT:
-			return state.products;
-		default:
-			return state;
-	}
-}*/

@@ -20,13 +20,34 @@ router.get('/:productId', async (req, res, next) => {
     next(err)
   }
 })
-/*
+
+// router.delete('/:productId', async (req, res, next) => {
+// 	try {
+// 		const id = req.params.productId;
+// 		await Product.destroy({ where: { id } });
+// 		res.status(204).end();
+// 	} catch (err) {
+// 		next(err);
+// 	}
+// });
+
 router.delete('/:productId', async (req, res, next) => {
-	try {
-		const id = req.params.productId;
-		await Product.destroy({ where: { id } });
-		res.status(204).end();
-	} catch (err) {
-		next(err);
-	}
-});*/
+  try {
+    // Delete the assciated students with this campus;
+    // await Student.destroy({
+    // 	where: { campusId: req.params.campusId }
+    // });
+
+    const numAffectedRows = await Product.destroy({
+      where: {id: req.params.productId}
+    })
+
+    if (!numAffectedRows) {
+      res.sendStatus(404)
+      return
+    }
+    res.status(204).json()
+  } catch (err) {
+    next(err)
+  }
+})
