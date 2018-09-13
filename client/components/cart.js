@@ -59,6 +59,7 @@ class Cart extends Component {
 
         <div className="current-order-cart">
           <h3>CURRENT ORDER</h3>
+          {/* {currentOrder && currentOrder.length ? ( */}
           <ul>
             {currentOrder &&
               currentOrder.products.map(product => (
@@ -79,39 +80,51 @@ class Cart extends Component {
                   </span>
                 </li>
               ))}
+            <h4>
+              Total: {currentOrder && findTotalPrice(currentOrder.products)}{' '}
+            </h4>
           </ul>
-          <h4>
-            Total: {currentOrder && findTotalPrice(currentOrder.products)}{' '}
-          </h4>
+          {/* ): (<p>~~~</p>) } */}
         </div>
 
         <div className="past-order-cart">
           <h3>PAST ORDER(S)</h3>
-          <ul>
-            {pastOrders &&
-              pastOrders.map(order => (
-                <li key={order.id}>
-                  <h3>ORDER {order.tracking}</h3>
-                  <ul>
-                    {order.products &&
-                      order.products.map(product => (
-                        <li key={product.id}>
-                          <NavLink to={`/products/${product.id}`}>
-                            {product.title}
-                          </NavLink>
-                          <img
-                            src={`/${product.imageUrl}`}
-                            width="100px"
-                            height="100px"
-                          />
-                          {product.price}
-                        </li>
-                      ))}
-                  </ul>
-                  <h4>Total: XXX </h4>
-                </li>
-              ))}
-          </ul>
+          {user && user.id !== undefined ? (
+            pastOrders && pastOrders.length ? (
+              <ul>
+                {pastOrders &&
+                  pastOrders.map(order => (
+                    <li key={order.id}>
+                      <h3>ORDER {order.tracking}</h3>
+                      <ul>
+                        {order.products &&
+                          order.products.map(product => (
+                            <li key={product.id}>
+                              <NavLink to={`/products/${product.id}`}>
+                                {product.title}
+                              </NavLink>
+                              <img
+                                src={`/${product.imageUrl}`}
+                                width="100px"
+                                height="100px"
+                              />
+                              {product.price}
+                            </li>
+                          ))}
+                      </ul>
+                      <h4>
+                        Total:{' '}
+                        {order.products && findTotalPrice(order.products)}
+                      </h4>
+                    </li>
+                  ))}
+              </ul>
+            ) : (
+              <p>~~~no past orders yet!~~~</p>
+            )
+          ) : (
+            <p>~~~login or sign up to view past orders!~~~</p>
+          )}
         </div>
       </div>
     )
