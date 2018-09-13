@@ -23,7 +23,7 @@ class SingleProduct extends Component {
     return (
       <div>
         <h1>{product.title}</h1>
-        <img src={product.imageUrl} />
+        <img src={`/${product.imageUrl}`} />
 
         <h3>Tea details...</h3>
         <p>price: {product.price}</p>
