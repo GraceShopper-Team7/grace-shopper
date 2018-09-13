@@ -7,6 +7,10 @@ const GET_SINGLE_PRODUCT_FROM_SERVER = 'GET_SINGLE_PRODUCT_FROM_SERVER'
 
 const DELETE_PRODUCT = 'DELETE_PRODUCT'
 
+const EDIT_PRODUCT = 'EDIT_PRODUCT'
+
+// const GET_REVIEWS = 'GET_REVIEWS';
+
 //ACTION CREATORS
 export const setProductsInStore = function(products) {
   return {
@@ -25,6 +29,12 @@ const deleteProduct = id => ({
   type: DELETE_PRODUCT,
   id
 })
+// const getReviews = function(singleProduct) {
+// 	return {
+// 		type: GET_REVIEWS,
+// 		singleProduct
+// 	};
+// };
 //THUNK CREATORS
 export const fetchProducts = () => {
   return async dispatch => {
@@ -37,7 +47,14 @@ export const fetchProducts = () => {
     dispatch(action)
   }
 }
-
+// export const fetchReviewsForSingleProduct = (productId) => {
+// 	return async (dispatch) => {
+// 		let res = await axios.get(`/api/products/${productId}`);
+// 		let reviews = res.data;
+// 		const action = getReviews(reviews);
+// 		dispatch(action);
+// 	};
+// };
 export const fetchSingleProduct = productId => {
   return async dispatch => {
     let res = await axios.get(`/api/products/${productId}`)
@@ -57,7 +74,8 @@ const productReducer = (
     all: [],
     selected: {},
     isLoading: false,
-    hasErrored: false
+    hasErrored: false,
+    reviews: []
   },
   action
 ) => {
@@ -79,6 +97,11 @@ const productReducer = (
         ...state,
         all: state.all.filter(product => product.id !== action.id)
       }
+    // case GET_REVIEWS:
+    // 	return {
+    // 		...state,
+    // 		reviews: ac
+    // 	};
     default:
       return state
   }

@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Product} = require('../db/models')
+const {Product, Review} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -10,34 +10,29 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
-
 router.get('/:productId', async (req, res, next) => {
   try {
     const id = req.params.productId
-    const product = await Product.findById(id)
+    const product = await Product.findById(id, {
+      include: [
+        {
+          model: Review,
+          required: false
+        }
+      ]
+    })
+    if (!product) {
+      res.sendStatus(404)
+      return
+    }
     res.json(product)
   } catch (err) {
     next(err)
   }
 })
 
-// router.delete('/:productId', async (req, res, next) => {
-// 	try {
-// 		const id = req.params.productId;
-// 		await Product.destroy({ where: { id } });
-// 		res.status(204).end();
-// 	} catch (err) {
-// 		next(err);
-// 	}
-// });
-
 router.delete('/:productId', async (req, res, next) => {
   try {
-    // Delete the assciated students with this campus;
-    // await Student.destroy({
-    // 	where: { campusId: req.params.campusId }
-    // });
-
     const numAffectedRows = await Product.destroy({
       where: {id: req.params.productId}
     })
