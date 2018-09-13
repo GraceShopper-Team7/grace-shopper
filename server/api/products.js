@@ -21,23 +21,17 @@ router.get('/:productId', async (req, res, next) => {
   }
 })
 
-// router.delete('/:productId', async (req, res, next) => {
-// 	try {
-// 		const id = req.params.productId;
-// 		await Product.destroy({ where: { id } });
-// 		res.status(204).end();
-// 	} catch (err) {
-// 		next(err);
-// 	}
-// });
+router.post('/', async (req, res, next) => {
+  try {
+    const product = await Product.create(req.body)
+    res.status(201).json(product)
+  } catch (err) {
+    next(err)
+  }
+})
 
 router.delete('/:productId', async (req, res, next) => {
   try {
-    // Delete the assciated students with this campus;
-    // await Student.destroy({
-    // 	where: { campusId: req.params.campusId }
-    // });
-
     const numAffectedRows = await Product.destroy({
       where: {id: req.params.productId}
     })
