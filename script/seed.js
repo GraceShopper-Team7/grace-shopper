@@ -105,6 +105,61 @@ async function seed() {
       categoryId: 1,
       ingredients: ['sun dried fig', 'hazel', 'four leaf clover'],
       inventoryQty: 2
+    },
+    {
+      title: 'Electricitea',
+      //imageUrl: 'img3.jpg',
+      price: 678,
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      typeId: 4,
+      categoryId: 1,
+      ingredients: ['black pepper', 'crushed fireflies', 'ginger'],
+      inventoryQty: 50
+    },
+    {
+      title: 'Toxicitea',
+      //imageUrl: 'img3.jpg',
+      price: 678,
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      typeId: 3,
+      categoryId: 1,
+      ingredients: ['hemlock', 'rattlesnake venom', 'fennel'],
+      inventoryQty: 968
+    },
+    {
+      title: 'Puritea',
+      //imageUrl: 'img3.jpg',
+      price: 1111,
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      typeId: 2,
+      categoryId: 1,
+      ingredients: ['pearl', 'cotton', 'lemon'],
+      inventoryQty: 14
+    },
+    {
+      title: 'Expressivitea',
+      //imageUrl: 'img3.jpg',
+      price: 1111,
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      typeId: 1,
+      categoryId: 1,
+      ingredients: ['juniper berry', 'tea tree oil', 'acorn essence'],
+      inventoryQty: 16
+    },
+    {
+      title: 'High Tea',
+      //imageUrl: 'img3.jpg',
+      price: 420,
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      typeId: 2,
+      categoryId: 1,
+      ingredients: ['canabis bud', 'mountain yam', 'sea mist'],
+      inventoryQty: 420
     }
   ]
   // const categories = [
@@ -184,7 +239,7 @@ async function seed() {
 
   const orders = [
     {
-      status: 'ordered',
+      status: 'created',
       tracking: 'GS4536',
       stripeToken: 'tok_1AH2kcF89KLdg',
       userId: 1
@@ -193,16 +248,16 @@ async function seed() {
       status: 'shipped',
       tracking: 'GS3474',
       stripeToken: 'tok_Efu42LDeF89KL',
-      userId: 2
+      userId: 1
     },
     {
       status: 'delivered',
       tracking: 'GS1000',
       stripeToken: 'tok_i56WoP90BgDt4',
-      userId: 3
+      userId: 1
     },
     {
-      status: 'delivered',
+      status: 'created',
       tracking: 'GS8965',
       stripeToken: 'tok_i45GJk68NOe90',
       userId: 2
@@ -211,21 +266,57 @@ async function seed() {
       status: 'ordered',
       tracking: 'GS1078',
       stripeToken: 'tok_yO98JgHTR10dJ',
-      userId: 4
+      userId: 3
     }
   ]
   const ordersProducts = [
     {
-      quantity: 5,
+      quantity: 1,
       price: 124,
-      orderId: 2,
+      orderId: 1,
       productId: 1
     },
     {
-      quantity: 20,
+      quantity: 2,
       price: 306,
-      orderId: 1,
+      orderId: 2,
       productId: 2
+    },
+    {
+      quantity: 3,
+      price: 224,
+      orderId: 3,
+      productId: 3
+    },
+    {
+      quantity: 4,
+      price: 406,
+      orderId: 4,
+      productId: 4
+    },
+    {
+      quantity: 5,
+      price: 724,
+      orderId: 5,
+      productId: 5
+    },
+    {
+      quantity: 6,
+      price: 806,
+      orderId: 1,
+      productId: 6
+    },
+    {
+      quantity: 6,
+      price: 806,
+      orderId: 4,
+      productId: 7
+    },
+    {
+      quantity: 6,
+      price: 806,
+      orderId: 5,
+      productId: 8
     }
   ]
 

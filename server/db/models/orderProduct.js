@@ -16,6 +16,11 @@ const OrderProduct = db.define('orderProduct', {
     validate: {
       notEmpty: true
     }
+  },
+  imageUrl: {
+    type: Sequelize.STRING,
+    defaultValue: 'default.jpg'
+    //allowNull: false
   }
 })
 
