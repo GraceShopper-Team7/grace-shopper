@@ -1,21 +1,24 @@
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import React, {Component} from 'react'
-import {fetchProducts} from '../store/product'
+import {fetchProducts, removeProduct} from '../store/product'
 
 class ProductList extends Component {
   constructor(props) {
     super(props)
-    console.log(props)
+    this.handleClick = this.handleClick.bind(this)
+    // console.log(props);
   }
 
   componentDidMount() {
     this.props.loadProducts()
   }
+  handleClick(product) {
+    this.props.deleteProduct(product.id)
+  }
 
   render() {
     const products = this.props.products || []
-    console.log(this.props)
     if (products.length > 0) {
       return (
         <div>
@@ -26,7 +29,7 @@ class ProductList extends Component {
               <li key={product.id}>
                 <Link to={`/products/${product.id}`}>
                   <img
-                    src={product.imageUrl}
+                    src={`/${product.imageUrl}`}
                     alt=""
                     width="100px"
                     height="100px"
@@ -35,6 +38,14 @@ class ProductList extends Component {
                   <p>{product.rating}</p>
                   <p>{product.price}</p>
                 </Link>
+                <button
+                  type="submit"
+                  value={product}
+                  onClick={() => this.handleClick(product)}
+                  className="btn"
+                >
+                  Delete
+                </button>
               </li>
             ))}
           </ul>
@@ -50,7 +61,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  loadProducts: () => dispatch(fetchProducts())
+  loadProducts: () => dispatch(fetchProducts()),
+  deleteProduct: id => dispatch(removeProduct(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductList)
