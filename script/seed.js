@@ -17,7 +17,7 @@ async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const Roles = [
+  const roles = [
     {
       role: 'admin'
     },
@@ -25,7 +25,7 @@ async function seed() {
       role: 'customer'
     }
   ]
-  const Users = [
+  const users = [
     {
       firstName: 'Joe',
       lastName: 'Thomas',
@@ -72,7 +72,7 @@ async function seed() {
       roleId: 2
     }
   ]
-  const Products = [
+  const products = [
     {
       title: 'Invisibilitea',
       //imageUrl: 'img1.jpg',
@@ -107,7 +107,7 @@ async function seed() {
       inventoryQty: 2
     }
   ]
-  // const Categories = [
+  // const categories = [
   // 	{
   // 		name: 'tea bag',
   // 		description:
@@ -124,7 +124,7 @@ async function seed() {
   // 			'Iced tea (or ice tea) is a form of cold tea. Though usually served in a glass with ice, it can refer to any tea that has been chilled or cooled. It may be sweetened with sugar, syrup and/or apple slices.'
   // 	}
   // ];
-  const Types = [
+  const types = [
     {
       name: 'black tea',
       caffeineStrength: 'strong'
@@ -143,7 +143,7 @@ async function seed() {
       categoryId: 2
     }
   ]
-  const Addresses = [
+  const addresses = [
     {
       address: '41 Par Harbor Way',
       city: 'Salem',
@@ -182,7 +182,7 @@ async function seed() {
     }
   ]
 
-  const Orders = [
+  const orders = [
     {
       status: 'ordered',
       tracking: 'GS4536',
@@ -214,7 +214,7 @@ async function seed() {
       userId: 4
     }
   ]
-  const OrdersProducts = [
+  const ordersProducts = [
     {
       quantity: 5,
       price: 124,
@@ -229,7 +229,7 @@ async function seed() {
     }
   ]
 
-  const Reviews = [
+  const reviews = [
     {
       rating: 4,
       content: 'The most delicious things to touch my tongue.',
@@ -263,7 +263,7 @@ async function seed() {
     }
   ]
 
-  // const TypesCategories = [
+  // const typesCategories = [
   // 	{
   // 		typeId: 1,
   // 		categoryId: 2
@@ -277,36 +277,36 @@ async function seed() {
   // 		categoryId: 1
   // 	}
   // ];
-  for (let i = 0; i < Roles.length; i++) {
-    await Role.create(Roles[i])
+  for (let i = 0; i < roles.length; i++) {
+    await Role.create(roles[i])
   }
-  for (let i = 0; i < Types.length; i++) {
-    await Type.create(Types[i])
+  for (let i = 0; i < types.length; i++) {
+    await Type.create(types[i])
   }
-  // for (let i = 0; i < Categories.length; i++) {
-  // 	await Category.create(Categories[i]);
+  // for (let i = 0; i < categories.length; i++) {
+  // 	await Category.create(categories[i]);
   // }
-  for (let i = 0; i < Users.length; i++) {
-    await User.create(Users[i])
+  for (let i = 0; i < users.length; i++) {
+    await User.create(users[i])
   }
-  for (let i = 0; i < Addresses.length; i++) {
-    await Address.create(Addresses[i])
+  for (let i = 0; i < addresses.length; i++) {
+    await Address.create(addresses[i])
   }
-  for (let i = 0; i < Orders.length; i++) {
-    await Order.create(Orders[i])
+  for (let i = 0; i < orders.length; i++) {
+    await Order.create(orders[i])
   }
-  for (let i = 0; i < Products.length; i++) {
-    await Product.create(Products[i])
+  for (let i = 0; i < products.length; i++) {
+    await Product.create(products[i])
   }
-  for (let i = 0; i < Reviews.length; i++) {
-    await Review.create(Reviews[i])
+  for (let i = 0; i < reviews.length; i++) {
+    await Review.create(reviews[i])
   }
-  for (let i = 0; i < OrdersProducts.length; i++) {
-    await OrderProduct.create(OrdersProducts[i])
+  for (let i = 0; i < ordersProducts.length; i++) {
+    await OrderProduct.create(ordersProducts[i])
   }
 
-  // for (let i = 0; i < TypesCategories.length; i++) {
-  // 	await db.TypeCategory.create(TypesCategories[i]);
+  // for (let i = 0; i < typesCategories.length; i++) {
+  // 	await db.TypeCategory.create(typesCategories[i]);
   // }
 
   // await Category.addTypes(Types);
