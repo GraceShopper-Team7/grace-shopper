@@ -4,10 +4,12 @@ import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import productReducer from './product'
+import reviewReducer from './review'
 
 const reducer = combineReducers({
   user,
-  products: productReducer
+  products: productReducer,
+  reviews: reviewReducer
   //cart: cartReducer
 })
 const middleware = composeWithDevTools(

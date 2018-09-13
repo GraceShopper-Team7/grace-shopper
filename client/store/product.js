@@ -8,8 +8,6 @@ const GET_NEW_PRODUCT = 'GET_NEW_PRODUCT'
 
 const EDIT_PRODUCT = 'EDIT_PRODUCT'
 
-// const GET_REVIEWS = 'GET_REVIEWS';
-
 //ACTION CREATORS
 const setProductsInStore = function(products) {
   return {
@@ -28,12 +26,6 @@ const deleteProduct = id => ({
   type: DELETE_PRODUCT,
   id
 })
-// const getReviews = function(singleProduct) {
-// 	return {
-// 		type: GET_REVIEWS,
-// 		singleProduct
-// 	};
-// };
 
 const getNewProduct = product => ({
   type: GET_NEW_PRODUCT,
@@ -51,14 +43,6 @@ export const fetchProducts = () => {
     dispatch(action)
   }
 }
-// export const fetchReviewsForSingleProduct = (productId) => {
-// 	return async (dispatch) => {
-// 		let res = await axios.get(`/api/products/${productId}`);
-// 		let reviews = res.data;
-// 		const action = getReviews(reviews);
-// 		dispatch(action);
-// 	};
-// };
 export const fetchSingleProduct = productId => {
   return async dispatch => {
     let res = await axios.get(`/api/products/${productId}`)
@@ -109,11 +93,6 @@ const productReducer = (
         ...state,
         all: state.all.filter(product => product.id !== action.id)
       }
-    // case GET_REVIEWS:
-    // 	return {
-    // 		...state,
-    // 		reviews: ac
-    // 	};
     default:
       return state
   }
