@@ -6,7 +6,6 @@ import FormControl from '@material-ui/core/FormControl'
 import TextField from '@material-ui/core/TextField'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
-//import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import React, {Component} from 'react'
 import {addProduct} from '../store/product'
@@ -50,7 +49,6 @@ class AddProduct extends Component {
   }
 
   render() {
-    //const {classes} = this.props
     return (
       <form onSubmit={this.handleSubmit}>
         <TextField
@@ -72,9 +70,6 @@ class AddProduct extends Component {
         <FormControl>
           <InputLabel htmlFor="adornment-amount">Price</InputLabel>
           <Input
-            //id="adornment-amount"
-            //value={this.state.amount}
-            //onChange={this.handleChange('amount')}
             onChange={this.handleChange}
             name="price"
             startAdornment={<InputAdornment position="start">$</InputAdornment>}
@@ -112,11 +107,6 @@ class AddProduct extends Component {
             value={this.state.typeId}
             onChange={this.handleChange}
             name="typeId"
-            /*
-            inputProps={{
-              name: 'typeId',
-              id: 'type-simple'
-            }}*/
           >
             <MenuItem value={1}>Black</MenuItem>
             <MenuItem value={2}>Green</MenuItem>
@@ -132,11 +122,7 @@ class AddProduct extends Component {
     )
   }
 }
-/*
-AddProduct.propTypes = {
-  classes: PropTypes.object.isRequired
-}
-*/
+
 const mapDispatch = dispatch => ({
   submitProduct: product => dispatch(addProduct(product))
 })
