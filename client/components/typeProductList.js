@@ -2,45 +2,45 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {NavLink} from 'react-router-dom'
 import {fetchProducts} from '../store/product'
-import {fetchOrderProducts} from '../store/cart'
+import {addProductToOrderProducts} from '../store/cart'
 
 class TypeProductList extends Component {
   constructor() {
     super()
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.addNewOrderProduct = this.addNewOrderProduct.bind(this)
   }
 
   componentDidMount() {
     this.props.fetchInitialProducts()
-    this.props.fetchInitialOrderProducts()
+    //this.props.fetchInitialOrderProducts()
   }
 
-  handleSubmit(event) {
+  addNewOrderProduct(product, user) {
     event.preventDefault()
+    this.props.addProductToOrderProducts(product, user)
 
-    //needs to add item to the cart in the store
-    //needs to decrement the inventory quantity in store & db
-
-    //example:
-    // const {name, newMessageEntry} = this.props
-    // const content = newMessageEntry
-    // const {channelId} = this.props
-    // this.props.postMessage({name, content, channelId})
+    //check if there is a 'created' order in the Orders table
+    //if not a make a new 'create' order
+    //add item to OrderProducts table, orderId as the 'created' order
+    //delete 1 from inventory quantity in products table
   }
 
   render() {
-    console.log('TypeProductList_this.props: ', this.props)
+    //console.log('TypeProductList_this.props: ', this.props)
     const typeId = Number(this.props.match.params.typeId)
-    console.log('typeId: ', typeId)
+    //console.log('typeId: ', typeId)
 
     const products = this.props.products.all
     const filteredProducts = products.filter(
       product => product.typeId === typeId
     )
+    console.log('P*R*O*D*U*C*T*S: ', filteredProducts)
     if (filteredProducts.length < 1) {
       return <h4>no teas here yet!</h4>
     }
 
+    const user = this.props.user
+    console.log('U*S*E*R: ', user)
     return (
       <div className="type-list">
         <ul>
@@ -55,10 +55,14 @@ class TypeProductList extends Component {
                   width="100px"
                   height="100px"
                 />
-                {product.price}
+                <p>Price: {product.price}</p>
+                <p>Inventory Quantity: {product.inventoryQty}</p>
                 <span>
                   {' '}
-                  <button type="submit" onClick={this.handleSubmit}>
+                  <button
+                    type="submit"
+                    onClick={() => this.addNewOrderProduct(product, user)}
+                  >
                     Add to Cart!
                   </button>
                   {/* once ready we add the following:
@@ -76,14 +80,17 @@ class TypeProductList extends Component {
 const mapStateToProps = state => {
   return {
     products: state.products,
-    cart: state.cart
+    user: state.user
+    //cart: state.cart
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     fetchInitialProducts: () => dispatch(fetchProducts()),
-    fetchInitialOrderProducts: () => dispatch(fetchOrderProducts())
+    //fetchInitialOrderProducts: () => dispatch(fetchOrderProducts())
+    addProductToOrderProducts: (product, user) =>
+      dispatch(addProductToOrderProducts(product, user))
   }
 }
 

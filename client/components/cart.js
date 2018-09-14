@@ -1,33 +1,26 @@
 import {connect} from 'react-redux'
 import React, {Component} from 'react'
-import {NavLink} from 'react-router-dom'
-import {fetchOrderProducts} from '../store/cart'
+import {NavLink, withRouter} from 'react-router-dom'
+import {fetchOrderProducts, removeProductFromOrderProducts} from '../store/cart'
 
 class Cart extends Component {
   componentDidMount() {
     this.props.fetchInitialOrderProducts()
+    this.removeProductFromCart = this.removeProductFromCart.bind(this)
+  }
+
+  removeProductFromCart(product) {
+    this.props.removeProductFromOrderProducts(product)
   }
 
   render() {
-    console.log('this.props-render: ', this.props)
-
     let orders = this.props.cart.all
     const user = this.props.user
-    console.log('*****ORDERS', orders)
-    console.log('USER: ', user)
-
     orders = orders.filter(order => order.userId === user.id)
-    console.log('FILTERED ORDERS: ', orders)
 
     let currentOrders = orders.filter(order => order.status === 'created')
     let pastOrders = orders.filter(order => order.status !== 'created')
-    console.log('CURRENT ORDERS: ', currentOrders)
-    console.log('*****PAST ORDERS: ', pastOrders)
-
     let currentOrder = currentOrders[0]
-    console.log('CURRENT ORDER: ', currentOrder)
-    let pastOrderProductArrs = pastOrders.map(order => order.products)
-    console.log('*****PastOrderProduct as Objects: ', pastOrderProductArrs)
 
     let findTotalPrice = function findTotalPrice(productsArray) {
       let total = 0
@@ -36,20 +29,6 @@ class Cart extends Component {
       })
       return total
     }
-    // const priceArray = orders
-    //   .map(function(order) {
-    //     return order.products
-    //   })
-    //   .map(function(productArr) {
-    //     return productArr
-    //     // .forEach(product => {
-    //     //   return product.price
-    //     // })
-    //   })
-    // console.log('priceArray: ', priceArray)
-
-    // const totalPrice = priceArray.reduce((a, b) => a + b, 0)
-    // console.log('totalPrice: ', totalPrice)
 
     return (
       <div>
@@ -72,11 +51,16 @@ class Cart extends Component {
                     width="100px"
                     height="100px"
                   />
-                  {product.price}
+                  <p>Quantity: {product.orderProduct.quantity}</p>
+                  <p>Price: {product.price}</p>
                   <span>
                     {' '}
-                    {/* once ready we add the following:
-                      -delete from cart button */}
+                    <button
+                      type="submit"
+                      onClick={() => this.removeProductFromCart(product)}
+                    >
+                      Remove from Cart!
+                    </button>
                   </span>
                 </li>
               ))}
@@ -139,9 +123,14 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-  return {fetchInitialOrderProducts: () => dispatch(fetchOrderProducts())}
+  return {
+    fetchInitialOrderProducts: () => dispatch(fetchOrderProducts()),
+    removeProductFromOrderProducts: product => {
+      dispatch(removeProductFromOrderProducts(product))
+    }
+  }
 }
 
 const ConnectedCart = connect(mapStateToProps, mapDispatchToProps)(Cart)
 
-export default ConnectedCart
+export default withRouter(ConnectedCart)
