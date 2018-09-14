@@ -70,7 +70,7 @@ router.post('/', async (req, res, next) => {
         status: 'created'
       }
     })
-    console.log('ORDERID******************: ', openOrderForUser.dataValues.id)
+    console.log('ORDERID*****: ', openOrderForUser.dataValues.id)
 
     const addQuantity = product.quantity
     const newProductQty = await Product.findById(product.id)
