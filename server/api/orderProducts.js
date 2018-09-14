@@ -72,6 +72,10 @@ router.post('/', async (req, res, next) => {
     })
     console.log('ORDERID******************: ', openOrderForUser.dataValues.id)
 
+    const addQuantity = product.quantity
+    const newProductQty = await Product.findById(product.id)
+    await newProductQty.decrement('inventoryQty', {by: addQuantity})
+
     if (openOrderForUser) {
       const checkOrderProduct = await OrderProduct.findOne({
         where: {
