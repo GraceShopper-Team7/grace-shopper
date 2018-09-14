@@ -16,7 +16,7 @@ const initialState = {
 class AddProduct extends Component {
   constructor(props) {
     super(props)
-    this.state = {...initialState}
+    this.state = initialState
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }
