@@ -22,16 +22,13 @@ class EditProduct extends Component {
   }
 
   handleChange(evt) {
-    if (evt.target.name === 'ingredients') {
-      this.setState({[evt.target.name]: evt.target.value.split(', ')})
-    } else {
-      this.setState({[evt.target.name]: evt.target.value})
-    }
+    evt.target.name === 'ingredients'
+      ? this.setState({[evt.target.name]: evt.target.value.split(', ')})
+      : this.setState({[evt.target.name]: evt.target.value})
   }
 
   handleSubmit(evt) {
     evt.preventDefault()
-    console.log(this.state)
     this.props.changeProduct(this.props.product.id, {
       ...this.state
     })
