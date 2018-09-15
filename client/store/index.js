@@ -11,7 +11,6 @@ const reducer = combineReducers({
   user,
   products: productReducer,
   reviews: reviewReducer,
-  //cart: cartReducer
   cart: cartReducer
 })
 const middleware = composeWithDevTools(
