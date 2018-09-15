@@ -1,69 +1,65 @@
 import Button from '@material-ui/core/Button'
-import Input from '@material-ui/core/Input'
 import InputLabel from '@material-ui/core/InputLabel'
-import InputAdornment from '@material-ui/core/InputAdornment'
 import FormControl from '@material-ui/core/FormControl'
 import TextField from '@material-ui/core/TextField'
 import {connect} from 'react-redux'
 import React, {Component} from 'react'
 import {addReview} from '../store/review'
 
-export class AddReview extends Component {
+const initialState = {
+  rating: 0,
+  content: ''
+}
+class AddReview extends Component {
   constructor() {
     super()
+    this.state = {...initialState}
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
-
+  handleChange(event) {
+    this.setState({[event.target.name]: event.target.value})
+  }
   handleSubmit(event) {
     event.preventDefault()
-    const firstName = event.target.firstName.value
-    const lastName = event.target.lastName.value
-    const email = event.target.email.value
-    this.props
-      .submitStudent({
-        firstName,
-        lastName,
-        email
-      })
-      .then(() => {
-        this.props.history.push('/students')
-      })
+    this.props.submitReview(this.props.match.params.productId, {...this.state})
+    this.props.history.push(`/products`)
   }
 
   render() {
     return (
-      <form id="new-student-form" onSubmit={this.handleSubmit}>
-        <div>
-          <label>First name:</label>
-          <input
-            type="text"
-            name="firstName"
-            placeholder="Enter first name here"
+      <form onSubmit={this.handleSubmit}>
+        <FormControl>
+          <InputLabel>Rating</InputLabel>
+          <TextField
+            name="rating"
+            onChange={this.handleChange}
+            margin="normal"
           />
-          <br />
-          <label>Last name:</label>
-          <input
-            type="text"
-            name="lastName"
-            placeholder="Enter last name here"
+        </FormControl>
+
+        <br />
+        <FormControl>
+          <InputLabel>Review</InputLabel>
+          <TextField
+            name="content"
+            onChange={this.handleChange}
+            margin="normal"
           />
-          <br />
-          <label>Email:</label>
-          <input type="text" name="email" placeholder="Enter email here" />
-          <br />
-          <span>
-            <button type="submit" className="btn">
-              Add Student
-            </button>
-          </span>
-        </div>
+        </FormControl>
+        <br />
+
+        <Button variant="contained" color="primary" type="submit">
+          Submit
+        </Button>
       </form>
     )
   }
 }
-
 const mapDispatch = dispatch => ({
-  submitReview: review => dispatch(addReview(review))
+  submitReview: (productId, review) => {
+    const singleReview = {productId, review}
+    dispatch(addReview(singleReview))
+  }
 })
-
 export default connect(null, mapDispatch)(AddReview)

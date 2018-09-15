@@ -15,7 +15,10 @@ const gotNewReview = review => {
 
 export const addReview = review => {
   return async dispatch => {
-    let res = await axios.post('/api/reviews/', review)
+    let res = await axios.post(
+      `/api/products/${review.productId}/addreview`,
+      review
+    )
     let newReview = res.data
     const action = gotNewReview(newReview)
     dispatch(action)
@@ -29,7 +32,13 @@ const initialState = {
 const reviewReducer = (state = initialState, action) => {
   switch (action.type) {
     case GOT_NEW_REVIEW:
-      return {...state, reviews: [...state.reviews, action.review]}
+      return {
+        ...state,
+        reviews: state.reviews.map(review => {
+          if (review.productId === action.review.productId) return action.review
+          return review
+        })
+      }
     default:
       return state
   }

@@ -1,12 +1,11 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {fetchSingleProduct} from '../store/product'
 
 class SingleProduct extends Component {
   componentDidMount() {
     const productId = Number(this.props.match.params.id)
-    // console.log('this.props-mount: ', this.props)
-    // console.log('productId-mount: ', productId)
     this.props.fetchSingleProduct(productId)
   }
 
@@ -34,6 +33,7 @@ class SingleProduct extends Component {
           {product.ingredients && product.ingredients[1]},{' '}
           {product.ingredients && product.ingredients[2]}
         </p>
+        <Link to={`/products/${product.id}/addreview`}>Write a Review</Link>
         {reviews.length > 0 ? (
           <div>
             <br />

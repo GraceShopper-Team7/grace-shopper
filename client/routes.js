@@ -2,11 +2,19 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome, ProductList, AddProduct} from './components'
+import {
+  Login,
+  Signup,
+  UserHome,
+  ProductList,
+  AddProduct,
+  AddReview
+} from './components'
 import {me} from './store'
 import ConnectedTypeProductList from './components/typeProductList'
 import ConnectedSingleProduct from './components/singleProduct'
 import ConnectedCart from './components/cart'
+
 /**
  * COMPONENT
  */
@@ -26,7 +34,12 @@ class Routes extends Component {
         <Route path="/types/:typeId" component={ConnectedTypeProductList} />
         <Route exact path="/products" component={ProductList} />
         <Route path="/products/add" component={AddProduct} />
-        <Route path="/products/:id" component={ConnectedSingleProduct} />
+        <Route
+          exact
+          path="/products/:productId/addreview"
+          component={AddReview}
+        />
+        <Route exact path="/products/:id" component={ConnectedSingleProduct} />
 
         <Route path="/products" component={ProductList} />
 
