@@ -11,10 +11,10 @@ const Order = db.define('order', {
   },
   tracking: {
     type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      isAlphanumeric: true
-    }
+    allowNull: false
+    // validate: {
+    //   isAlphanumeric: true
+    // }
   },
   stripeToken: {
     type: Sequelize.STRING,

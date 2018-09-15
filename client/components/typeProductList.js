@@ -1,42 +1,35 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {NavLink} from 'react-router-dom'
-import {fetchProducts} from '../store/product'
-import {fetchOrderProducts} from '../store/cart'
+import {
+  fetchProducts,
+  decreaseQuantityAfterAddingToCart
+} from '../store/product'
+import {addProductToOrderProducts} from '../store/cart'
 
 class TypeProductList extends Component {
   constructor() {
     super()
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.addNewOrderProduct = this.addNewOrderProduct.bind(this)
   }
 
   componentDidMount() {
     this.props.fetchInitialProducts()
-    this.props.fetchInitialOrderProducts()
   }
 
-  handleSubmit(event) {
-    event.preventDefault()
-
-    //needs to add item to the cart in the store
-    //needs to decrement the inventory quantity in store & db
-
-    //example:
-    // const {name, newMessageEntry} = this.props
-    // const content = newMessageEntry
-    // const {channelId} = this.props
-    // this.props.postMessage({name, content, channelId})
+  addNewOrderProduct(product, user) {
+    this.props.addProductToOrderProducts(product, user)
   }
 
   render() {
-    console.log('TypeProductList_this.props: ', this.props)
     const typeId = Number(this.props.match.params.typeId)
-    console.log('typeId: ', typeId)
-
     const products = this.props.products.all
+    const user = this.props.user
+
     const filteredProducts = products.filter(
       product => product.typeId === typeId
     )
+
     if (filteredProducts.length < 1) {
       return <h4>no teas here yet!</h4>
     }
@@ -55,15 +48,16 @@ class TypeProductList extends Component {
                   width="100px"
                   height="100px"
                 />
-                {product.price}
+                <p>Price: {product.price}</p>
+                <p>Inventory Quantity: {product.inventoryQty}</p>
                 <span>
                   {' '}
-                  <button type="submit" onClick={this.handleSubmit}>
+                  <button
+                    type="submit"
+                    onClick={() => this.addNewOrderProduct(product, user)}
+                  >
                     Add to Cart!
                   </button>
-                  {/* once ready we add the following:
-                      -add to cart button component
-                      -delete button component (admin) */}
                 </span>
               </li>
             ))}
@@ -76,14 +70,17 @@ class TypeProductList extends Component {
 const mapStateToProps = state => {
   return {
     products: state.products,
-    cart: state.cart
+    user: state.user
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     fetchInitialProducts: () => dispatch(fetchProducts()),
-    fetchInitialOrderProducts: () => dispatch(fetchOrderProducts())
+    addProductToOrderProducts: async (product, user) => {
+      await dispatch(addProductToOrderProducts(product, user))
+      await dispatch(decreaseQuantityAfterAddingToCart(product))
+    }
   }
 }
 

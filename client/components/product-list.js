@@ -35,8 +35,9 @@ class ProductList extends Component {
                     height="100px"
                   />
                   <h3>{product.title}</h3>
-                  <p>{product.rating}</p>
-                  <p>{product.price}</p>
+
+                  <p>Price: {product.price}</p>
+                  <p>Inventory Quantity: {product.inventoryQty}</p>
                 </Link>
                 <button
                   type="submit"

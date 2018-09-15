@@ -272,49 +272,49 @@ async function seed() {
   const ordersProducts = [
     {
       quantity: 1,
-      price: 124,
+      price: 183,
       orderId: 1,
       productId: 1
     },
     {
       quantity: 2,
-      price: 306,
+      price: 1528,
       orderId: 2,
       productId: 2
     },
     {
       quantity: 3,
-      price: 224,
+      price: 2997,
       orderId: 3,
       productId: 3
     },
     {
       quantity: 4,
-      price: 406,
+      price: 2712,
       orderId: 4,
       productId: 4
     },
     {
       quantity: 5,
-      price: 724,
+      price: 3390,
       orderId: 5,
       productId: 5
     },
     {
       quantity: 6,
-      price: 806,
+      price: 6666,
       orderId: 1,
       productId: 6
     },
     {
-      quantity: 6,
-      price: 806,
+      quantity: 2,
+      price: 2222,
       orderId: 4,
       productId: 7
     },
     {
-      quantity: 6,
-      price: 806,
+      quantity: 1,
+      price: 420,
       orderId: 5,
       productId: 8
     }
