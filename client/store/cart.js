@@ -3,8 +3,8 @@ import axios from 'axios'
 //ACTIONS
 const GET_ORDERPRODUCTS_FROM_SERVER = 'GET_ORDERPRODUCTS_FROM_SERVER'
 
-// const ADD_PRODUCT_TO_ORDERPRODUCTS_TABLE_IN_SERVER =
-//   'ADD_PRODUCT_TO_ORDERPRODUCTS_TABLE_IN_SERVER'
+const ADD_PRODUCT_TO_ORDERPRODUCTS_TABLE_IN_SERVER =
+  'ADD_PRODUCT_TO_ORDERPRODUCTS_TABLE_IN_SERVER'
 
 const REMOVE_PRODUCT_FROM_ORDERPRODUCTS_TABLE_IN_SERVER =
   'REMOVE_PRODUCT_FROM_ORDERPRODUCTS_TABLE_IN_SERVER'
@@ -18,12 +18,12 @@ const setOrderProductsInStore = function(currentOrder, pastOrders) {
   }
 }
 
-// const addProductToOrderProductTableInServer = function(product) {
-//   return {
-//     type: ADD_PRODUCT_TO_ORDERPRODUCTS_TABLE_IN_SERVER,
-//     product
-//   }
-// }
+const addProductToOrderProductTableInServer = function(product) {
+  return {
+    type: ADD_PRODUCT_TO_ORDERPRODUCTS_TABLE_IN_SERVER,
+    product
+  }
+}
 
 const removeProductFromOrderProductTableInServer = function(product) {
   return {
@@ -52,17 +52,16 @@ export const fetchOrderProducts = user => {
   }
 }
 
-// export const addProductToOrderProducts = (product, user) => {
-//   return async dispatch => {
-//     //dispatch(setIsLoading())
-//     let res = await axios.post('/api/orderProducts', {product, user})
-//     let newOrderProduct = res.data
-//     const action = addProductToOrderProductTableInServer(newOrderProduct)
-//     dispatch(action)
-//   }
-// }
+export const addProductToOrderProducts = (product, user) => {
+  return async dispatch => {
+    //dispatch(setIsLoading())
+    let res = await axios.post('/api/orderProducts', {product, user})
+    let newOrderProduct = res.data
+    const action = addProductToOrderProductTableInServer(newOrderProduct)
+    dispatch(action)
+  }
+}
 
-// ////--you stopped here
 export const removeProductFromOrderProducts = product => {
   return async dispatch => {
     //dispatch(setIsLoading())
@@ -98,11 +97,13 @@ const cartReducer = (state = initialState, action) => {
         },
         pastOrdersArr: action.pastOrders
       }
-    // case ADD_PRODUCT_TO_ORDERPRODUCTS_TABLE_IN_SERVER:
-    //   return {
-    //     ...state,
-    //     all: [...state.all, action.product]
-    //   }
+    case ADD_PRODUCT_TO_ORDERPRODUCTS_TABLE_IN_SERVER:
+      return {
+        ...state,
+        currentOrder: {
+          products: [...state.currentOrder.products, action.product]
+        }
+      }
     case REMOVE_PRODUCT_FROM_ORDERPRODUCTS_TABLE_IN_SERVER:
       return {
         ...state,
@@ -113,7 +114,6 @@ const cartReducer = (state = initialState, action) => {
         }
       }
     default:
-      //console.log('action.product: ', action.product)
       return state
   }
 }

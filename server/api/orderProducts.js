@@ -100,8 +100,25 @@ router.post('/', async (req, res, next) => {
               productId: product.id,
               orderId: openOrderForUser.dataValues.id
             }
+            // include: [
+            //   {
+            //     model: Product
+            //   }
+            // ]
           }
         )
+        //example
+        // const products = await Order.findAll({
+        //   where: {
+        //     userId
+        //   },
+        //   include: [
+        //     {
+        //       model: Product
+        //     }
+        //   ]
+        // })
+
         console.log('newOrderProduct: ', newOrderProduct)
         res.json(newOrderProduct)
       } else {

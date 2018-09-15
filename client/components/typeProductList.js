@@ -1,7 +1,10 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {NavLink} from 'react-router-dom'
-import {fetchProducts} from '../store/product'
+import {
+  fetchProducts,
+  decreaseQuantityAfterAddingToCart
+} from '../store/product'
 import {addProductToOrderProducts} from '../store/cart'
 
 class TypeProductList extends Component {
@@ -12,31 +15,29 @@ class TypeProductList extends Component {
 
   componentDidMount() {
     this.props.fetchInitialProducts()
-    //this.props.fetchInitialOrderProducts()
+    // this.props.fetchInitialOrderProducts()
   }
 
   addNewOrderProduct(product, user) {
     event.preventDefault()
     this.props.addProductToOrderProducts(product, user)
-
-    //check if there is a 'created' order in the Orders table
-    //if not a make a new 'create' order
-    //add item to OrderProducts table, orderId as the 'created' order
-    //delete 1 from inventory quantity in products table
+    //this.props.updateProductQuantity(product)
+    //^^the updateProductQuantity is happeing before the addProductToOrderProducts completes so the inventory quantity is no rerendering without refresh
   }
 
-  render() {
-    console.log('TypeProductList_this.props: ', this.props)
-    const typeId = Number(this.props.match.params.typeId)
-    //console.log('typeId: ', typeId)
+  // componentDidUpdate(prevProps) {
+  //   if (this.props.products.all !== prevProps.products.all)
+  //
+  // }
 
+  render() {
+    const typeId = Number(this.props.match.params.typeId)
     const products = this.props.products.all
+
     const filteredProducts = products.filter(
       product => product.typeId === typeId
     )
-    console.log('TypeProductList_this.props: ', this.props)
 
-    console.log('P*R*O*D*U*C*T*S: ', filteredProducts)
     if (filteredProducts.length < 1) {
       return <h4>no teas here yet!</h4>
     }
@@ -67,9 +68,6 @@ class TypeProductList extends Component {
                   >
                     Add to Cart!
                   </button>
-                  {/* once ready we add the following:
-                      -add to cart button component
-                      -delete button component (admin) */}
                 </span>
               </li>
             ))}
@@ -90,9 +88,11 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchInitialProducts: () => dispatch(fetchProducts()),
-    //fetchInitialOrderProducts: () => dispatch(fetchOrderProducts())
     addProductToOrderProducts: (product, user) =>
-      dispatch(addProductToOrderProducts(product, user))
+      dispatch(addProductToOrderProducts(product, user)),
+    updateProductQuantity: product =>
+      dispatch(decreaseQuantityAfterAddingToCart(product))
+    //updateProductQuantity: () => dispatch(fetchProducts())
   }
 }
 

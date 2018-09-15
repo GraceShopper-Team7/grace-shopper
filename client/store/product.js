@@ -6,6 +6,7 @@ const GET_SINGLE_PRODUCT_FROM_SERVER = 'GET_SINGLE_PRODUCT_FROM_SERVER'
 const DELETE_PRODUCT = 'DELETE_PRODUCT'
 const GET_NEW_PRODUCT = 'GET_NEW_PRODUCT'
 const EDIT_PRODUCT = 'EDIT_PRODUCT'
+const CHANGE_QUANTITY = 'CHANGE_QUANTITY'
 
 //ACTION CREATORS
 const setProductsInStore = function(products) {
@@ -35,6 +36,11 @@ const getNewProduct = product => ({
 const editProduct = product => ({
   type: EDIT_PRODUCT,
   product
+})
+
+const getUpdateProductQuantityAfterAddingToCart = updatedProduct => ({
+  type: CHANGE_QUANTITY,
+  updatedProduct
 })
 
 //THUNK CREATORS
@@ -77,6 +83,12 @@ export const updateProduct = product => async dispatch => {
   dispatch(editProduct(updatedProduct))
 }
 
+export const decreaseQuantityAfterAddingToCart = product => async dispatch => {
+  let res = await axios.get(`/api/products/${product.id}`)
+  let updatedProduct = res.data
+  dispatch(getUpdateProductQuantityAfterAddingToCart(updatedProduct))
+}
+
 //REDUCER
 const productReducer = (
   state = {
@@ -87,6 +99,7 @@ const productReducer = (
   },
   action
 ) => {
+  console.log('action: ', action)
   switch (action.type) {
     case GET_PRODUCTS_FROM_SERVER:
       return {
@@ -114,6 +127,16 @@ const productReducer = (
           if (product.id === action.product.id) return action.product
           return product
         })
+      }
+    case CHANGE_QUANTITY:
+      return {
+        ...state,
+        all: [
+          ...state.all.filter(
+            product => product.id !== action.updatedProduct.id
+          ),
+          action.updatedProduct
+        ]
       }
     default:
       return state

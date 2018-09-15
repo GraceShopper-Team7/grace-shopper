@@ -37,7 +37,7 @@ class Cart extends Component {
       })
       return total
     }
-
+    console.log('currentOrderProducts: ', currentOrderProducts)
     return (
       <div>
         <div className="header-cart">
