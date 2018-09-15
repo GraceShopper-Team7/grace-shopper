@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Product} = require('../db/models')
+const {Product, Review} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -10,17 +10,38 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
-
 router.get('/:productId', async (req, res, next) => {
   try {
     const id = req.params.productId
-    const product = await Product.findById(id)
+    const product = await Product.findById(id, {
+      include: [
+        {
+          model: Review,
+          required: false
+        }
+      ]
+    })
+    if (!product) {
+      res.sendStatus(404)
+      return
+    }
     res.json(product)
   } catch (err) {
     next(err)
   }
 })
-
+router.post('/:productId/addreview', async (req, res, next) => {
+  try {
+    const addReview = await Review.create({
+      rating: req.body.review.rating,
+      content: req.body.review.content,
+      productId: req.params.productId
+    })
+    res.status(201).json(addReview)
+  } catch (err) {
+    next(err)
+  }
+})
 router.post('/', async (req, res, next) => {
   try {
     const product = await Product.create(req.body)

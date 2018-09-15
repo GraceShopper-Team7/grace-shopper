@@ -1,19 +1,19 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {fetchSingleProduct} from '../store/product'
 import EditProduct from './edit-product'
 
 class SingleProduct extends Component {
   componentDidMount() {
     const productId = Number(this.props.match.params.id)
-    console.log('this.props-mount: ', this.props)
-    console.log('productId-mount: ', productId)
     this.props.fetchSingleProduct(productId)
   }
 
   render() {
     console.log('this.props-render: ', this.props)
     const product = this.props.singleProduct
+    const reviews = product.reviews || []
     console.log('product-render: ', product)
 
     if (!product) {
@@ -34,6 +34,23 @@ class SingleProduct extends Component {
           {product.ingredients && product.ingredients[1]},{' '}
           {product.ingredients && product.ingredients[2]}
         </p>
+        <Link to={`/products/${product.id}/addreview`}>Write a Review</Link>
+        {reviews.length > 0 ? (
+          <div>
+            <br />
+            <hr />
+            <h2 align="center">Customers Reviews</h2>
+            <hr />
+            {reviews.map(review => (
+              <p key={review.id}>
+                <label>Rating : {review.rating}</label>
+                <label>Review : {review.content}</label>
+              </p>
+            ))}
+          </div>
+        ) : (
+          <div>There is no review for this Product.</div>
+        )}
         {/* once ready we add the following:
           -add to cart button component
           -delete button component (admin) */}

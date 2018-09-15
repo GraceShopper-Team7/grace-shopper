@@ -8,12 +8,14 @@ import {
   UserHome,
   ProductList,
   AddProduct,
+  AddReview,
   Home
 } from './components'
 import {me} from './store'
 import ConnectedTypeProductList from './components/typeProductList'
 import ConnectedSingleProduct from './components/singleProduct'
 import ConnectedCart from './components/cart'
+
 /**
  * COMPONENT
  */
@@ -34,7 +36,12 @@ class Routes extends Component {
         <Route path="/types/:typeId" component={ConnectedTypeProductList} />
         <Route exact path="/products" component={ProductList} />
         <Route path="/products/add" component={AddProduct} />
-        <Route path="/products/:id" component={ConnectedSingleProduct} />
+        <Route
+          exact
+          path="/products/:productId/addreview"
+          component={AddReview}
+        />
+        <Route exact path="/products/:id" component={ConnectedSingleProduct} />
 
         <Route path="/products" component={ProductList} />
 
