@@ -38,7 +38,6 @@ export const fetchOrderProducts = user => {
     //dispatch(setIsLoading())
     let res = await axios.get(`/api/orderProducts/${user.id}`)
     let orders = res.data
-    console.log('OORRDDEERRSS: ', orders)
     let currentOrder = orders.filter(function(order) {
       return order.status === 'created'
     })
@@ -65,11 +64,9 @@ export const addProductToOrderProducts = (product, user) => {
 export const removeProductFromOrderProducts = product => {
   return async dispatch => {
     //dispatch(setIsLoading())
-    //let res = await axios.delete(`/api/orderProducts/${product.id}`, product)
-    //let deletedOrderProduct = res.data
+
     await axios.delete(`/api/orderProducts/${product.id}`, product)
     const action = removeProductFromOrderProductTableInServer(product)
-    //console.log('deletedOrderProduct: ', deletedOrderProduct)
     dispatch(action)
   }
 }
@@ -79,6 +76,7 @@ const initialState = {
     products: []
   },
   pastOrdersArr: []
+  // products: state.products
   // selected: {},
   // isLoading: false,
   // hasErrored: false

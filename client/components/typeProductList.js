@@ -5,7 +5,8 @@ import {
   fetchProducts,
   decreaseQuantityAfterAddingToCart
 } from '../store/product'
-import {addProductToOrderProducts} from '../store/cart'
+import {fetchOrderProducts, addProductToOrderProducts} from '../store/cart'
+//import {me} from '../store/user'
 
 class TypeProductList extends Component {
   constructor() {
@@ -15,20 +16,20 @@ class TypeProductList extends Component {
 
   componentDidMount() {
     this.props.fetchInitialProducts()
-    // this.props.fetchInitialOrderProducts()
+    //this.props.fetchInitialUser()
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.user !== prevProps.user)
+      this.props.fetchInitialOrderProducts(this.props.user)
   }
 
   addNewOrderProduct(product, user) {
     event.preventDefault()
     this.props.addProductToOrderProducts(product, user)
-    //this.props.updateProductQuantity(product)
-    //^^the updateProductQuantity is happeing before the addProductToOrderProducts completes so the inventory quantity is no rerendering without refresh
+    //this.props.decreaseQuantityAfterAddingToCart(product)
+    //^^the updateProductQuantity is happening before the addProductToOrderProducts completes so the inventory quantity is not rerendering without refresh
   }
-
-  // componentDidUpdate(prevProps) {
-  //   if (this.props.products.all !== prevProps.products.all)
-  //
-  // }
 
   render() {
     const typeId = Number(this.props.match.params.typeId)
@@ -43,7 +44,6 @@ class TypeProductList extends Component {
     }
 
     const user = this.props.user
-    console.log('U*S*E*R: ', user)
     return (
       <div className="type-list">
         <ul>
@@ -80,19 +80,21 @@ class TypeProductList extends Component {
 const mapStateToProps = state => {
   return {
     products: state.products,
-    user: state.user
-    //cart: state.cart
+    user: state.user,
+    cart: state.cart
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
+    //fetchInitialUser: () => dispatch(me()),
     fetchInitialProducts: () => dispatch(fetchProducts()),
-    addProductToOrderProducts: (product, user) =>
-      dispatch(addProductToOrderProducts(product, user)),
-    updateProductQuantity: product =>
-      dispatch(decreaseQuantityAfterAddingToCart(product))
-    //updateProductQuantity: () => dispatch(fetchProducts())
+    fetchInitialOrderProducts: user => dispatch(fetchOrderProducts(user)),
+
+    addProductToOrderProducts: async (product, user) => {
+      await dispatch(addProductToOrderProducts(product, user))
+      await dispatch(decreaseQuantityAfterAddingToCart(product))
+    }
   }
 }
 

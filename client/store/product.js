@@ -51,7 +51,6 @@ export const fetchProducts = () => {
     let res = await axios.get('/api/products')
     let products = res.data
     const action = setProductsInStore(products)
-    console.log("I'm done fetching..., let's dispatch to the store")
     dispatch(action)
   }
 }

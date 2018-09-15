@@ -59,7 +59,7 @@ class Cart extends Component {
                     width="100px"
                     height="100px"
                   />
-                  <p>Quantity: {product.orderProduct.quantity}</p>
+                  {/* <p>Quantity: {product.orderProduct.quantity}</p> */}
                   <p>Price: {product.price}</p>
                   <span>
                     {' '}
