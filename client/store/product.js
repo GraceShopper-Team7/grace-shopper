@@ -7,8 +7,6 @@ const DELETE_PRODUCT = 'DELETE_PRODUCT'
 const GET_NEW_PRODUCT = 'GET_NEW_PRODUCT'
 const EDIT_PRODUCT = 'EDIT_PRODUCT'
 
-const EDIT_PRODUCT = 'EDIT_PRODUCT'
-
 //ACTION CREATORS
 const setProductsInStore = function(products) {
   return {
