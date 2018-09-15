@@ -54,7 +54,6 @@ export const fetchProducts = () => {
     dispatch(action)
   }
 }
-
 export const fetchSingleProduct = productId => {
   return async dispatch => {
     let res = await axios.get(`/api/products/${productId}`)
@@ -94,7 +93,8 @@ const productReducer = (
     all: [],
     selected: {},
     isLoading: false,
-    hasErrored: false
+    hasErrored: false,
+    reviews: []
   },
   action
 ) => {
