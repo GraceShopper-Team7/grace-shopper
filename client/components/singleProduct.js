@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchSingleProduct} from '../store/product'
+import EditProduct from './edit-product'
 
 class SingleProduct extends Component {
   componentDidMount() {
@@ -53,6 +54,7 @@ class SingleProduct extends Component {
         {/* once ready we add the following:
           -add to cart button component
           -delete button component (admin) */}
+        <EditProduct product={product} history={this.props.history} />
       </div>
     )
   }

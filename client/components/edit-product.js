@@ -1,14 +1,6 @@
-import Button from '@material-ui/core/Button'
-import Input from '@material-ui/core/Input'
-import InputLabel from '@material-ui/core/InputLabel'
-import InputAdornment from '@material-ui/core/InputAdornment'
-import FormControl from '@material-ui/core/FormControl'
-import TextField from '@material-ui/core/TextField'
-import Select from '@material-ui/core/Select'
-import MenuItem from '@material-ui/core/MenuItem'
 import {connect} from 'react-redux'
 import React, {Component} from 'react'
-import {addProduct} from '../store/product'
+import {updateProduct} from '../store/product'
 import ProductForm from './product-form'
 
 const initialState = {
@@ -21,7 +13,7 @@ const initialState = {
   typeId: 0
 }
 
-class AddProduct extends Component {
+class EditProduct extends Component {
   constructor(props) {
     super(props)
     this.state = initialState
@@ -37,13 +29,10 @@ class AddProduct extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault()
-    this.props
-      .submitProduct({
-        ...this.state
-      })
-      .then(() => {
-        this.props.history.push('/products')
-      })
+    this.props.changeProduct(this.props.product.id, {
+      ...this.state
+    })
+    this.props.history.push('/products')
   }
 
   render() {
@@ -57,8 +46,11 @@ class AddProduct extends Component {
   }
 }
 
-const mapDispatch = dispatch => ({
-  submitProduct: product => dispatch(addProduct(product))
+const mapDispatchToProps = dispatch => ({
+  changeProduct: (id, product) => {
+    const editedProduct = {id, product}
+    dispatch(updateProduct(editedProduct))
+  }
 })
 
-export default connect(null, mapDispatch)(AddProduct)
+export default connect(null, mapDispatchToProps)(EditProduct)

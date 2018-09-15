@@ -5,6 +5,7 @@ const GET_PRODUCTS_FROM_SERVER = 'GET_PRODUCTS_FROM_SERVER'
 const GET_SINGLE_PRODUCT_FROM_SERVER = 'GET_SINGLE_PRODUCT_FROM_SERVER'
 const DELETE_PRODUCT = 'DELETE_PRODUCT'
 const GET_NEW_PRODUCT = 'GET_NEW_PRODUCT'
+const EDIT_PRODUCT = 'EDIT_PRODUCT'
 
 const EDIT_PRODUCT = 'EDIT_PRODUCT'
 
@@ -22,6 +23,7 @@ const getSingleProductFromServer = function(singleProduct) {
     singleProduct
   }
 }
+
 const deleteProduct = id => ({
   type: DELETE_PRODUCT,
   id
@@ -31,6 +33,12 @@ const getNewProduct = product => ({
   type: GET_NEW_PRODUCT,
   product
 })
+
+const editProduct = product => ({
+  type: EDIT_PRODUCT,
+  product
+})
+
 //THUNK CREATORS
 export const fetchProducts = () => {
   return async dispatch => {
@@ -60,6 +68,14 @@ export const addProduct = product => async dispatch => {
 export const removeProduct = productId => async dispatch => {
   await axios.delete(`/api/products/${productId}`)
   dispatch(deleteProduct(productId))
+}
+
+export const updateProduct = product => async dispatch => {
+  const {data: updatedProduct} = await axios.put(
+    `/api/products/${product.id}`,
+    product
+  )
+  dispatch(editProduct(updatedProduct))
 }
 
 //REDUCER
@@ -92,6 +108,14 @@ const productReducer = (
       return {
         ...state,
         all: state.all.filter(product => product.id !== action.id)
+      }
+    case EDIT_PRODUCT:
+      return {
+        ...state,
+        all: state.all.map(product => {
+          if (product.id === action.product.id) return action.product
+          return product
+        })
       }
     default:
       return state

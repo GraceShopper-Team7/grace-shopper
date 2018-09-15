@@ -51,6 +51,26 @@ router.post('/', async (req, res, next) => {
   }
 })
 
+router.put('/:productId', async (req, res, next) => {
+  try {
+    const [numAffectedRows, [updatedProduct]] = await Product.update(
+      req.body.product,
+      {
+        where: {id: req.params.productId},
+        returning: true,
+        fields: Object.keys(req.body.product)
+      }
+    )
+    if (!numAffectedRows) {
+      res.sendStatus(404)
+      return
+    }
+    res.json(updatedProduct)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.delete('/:productId', async (req, res, next) => {
   try {
     const numAffectedRows = await Product.destroy({
