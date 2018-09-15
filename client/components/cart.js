@@ -33,11 +33,24 @@ class Cart extends Component {
     let findTotalPrice = function(productsArray) {
       let total = 0
       productsArray.forEach(product => {
-        total += product.price
+        total += product.price * product.orderProduct.quantity
       })
       return total
     }
-    console.log('currentOrderProducts: ', currentOrderProducts)
+
+    let findProductTotal = function(price, qty) {
+      return price * qty
+    }
+    console.log('$$$$currentOrderProducts$$$$: ', currentOrderProducts)
+
+    currentOrderProducts = currentOrderProducts.filter(function(product) {
+      return product.id
+    })
+
+    // if (currentOrderProducts.indexOf([]) !== -1) {
+    //   return <h3>one moment please</h3>
+    // }
+
     return (
       <div>
         <div className="header-cart">
@@ -48,7 +61,7 @@ class Cart extends Component {
           <h3>CURRENT ORDER</h3>
 
           <ul>
-            {currentOrderProducts &&
+            {currentOrderProducts[0] &&
               currentOrderProducts.map(product => (
                 <li key={product.id}>
                   <NavLink to={`/products/${product.id}`}>
@@ -59,8 +72,15 @@ class Cart extends Component {
                     width="100px"
                     height="100px"
                   />
-                  {/* <p>Quantity: {product.orderProduct.quantity}</p> */}
-                  <p>Price: {product.price}</p>
+                  <p>Quantity: {product.orderProduct.quantity}</p>
+                  <p>Price per product: {product.price}</p>
+                  <p>
+                    Product Total:{' '}
+                    {findProductTotal(
+                      product.price,
+                      product.orderProduct.quantity
+                    )}
+                  </p>
                   <span>
                     {' '}
                     <button
@@ -73,7 +93,7 @@ class Cart extends Component {
                 </li>
               ))}
             <h4>
-              Total:{' '}
+              Cart Total:{' '}
               {currentOrderProducts && findTotalPrice(currentOrderProducts)}{' '}
             </h4>
           </ul>

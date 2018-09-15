@@ -46,6 +46,12 @@ export const fetchOrderProducts = user => {
     })
     console.log('currentOrder: ', currentOrder)
     console.log('pastOrders: ', pastOrders)
+
+    if (currentOrder.length === 0) {
+      currentOrder = [{products: []}]
+      console.log('newCurrentOrder: ', currentOrder)
+    }
+
     const action = setOrderProductsInStore(currentOrder, pastOrders)
     dispatch(action)
   }

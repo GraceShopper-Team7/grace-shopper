@@ -5,8 +5,7 @@ import {
   fetchProducts,
   decreaseQuantityAfterAddingToCart
 } from '../store/product'
-import {fetchOrderProducts, addProductToOrderProducts} from '../store/cart'
-//import {me} from '../store/user'
+import {addProductToOrderProducts} from '../store/cart'
 
 class TypeProductList extends Component {
   constructor() {
@@ -16,24 +15,16 @@ class TypeProductList extends Component {
 
   componentDidMount() {
     this.props.fetchInitialProducts()
-    //this.props.fetchInitialUser()
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.user !== prevProps.user)
-      this.props.fetchInitialOrderProducts(this.props.user)
   }
 
   addNewOrderProduct(product, user) {
-    event.preventDefault()
     this.props.addProductToOrderProducts(product, user)
-    //this.props.decreaseQuantityAfterAddingToCart(product)
-    //^^the updateProductQuantity is happening before the addProductToOrderProducts completes so the inventory quantity is not rerendering without refresh
   }
 
   render() {
     const typeId = Number(this.props.match.params.typeId)
     const products = this.props.products.all
+    const user = this.props.user
 
     const filteredProducts = products.filter(
       product => product.typeId === typeId
@@ -43,7 +34,6 @@ class TypeProductList extends Component {
       return <h4>no teas here yet!</h4>
     }
 
-    const user = this.props.user
     return (
       <div className="type-list">
         <ul>
@@ -80,17 +70,13 @@ class TypeProductList extends Component {
 const mapStateToProps = state => {
   return {
     products: state.products,
-    user: state.user,
-    cart: state.cart
+    user: state.user
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    //fetchInitialUser: () => dispatch(me()),
     fetchInitialProducts: () => dispatch(fetchProducts()),
-    fetchInitialOrderProducts: user => dispatch(fetchOrderProducts(user)),
-
     addProductToOrderProducts: async (product, user) => {
       await dispatch(addProductToOrderProducts(product, user))
       await dispatch(decreaseQuantityAfterAddingToCart(product))
