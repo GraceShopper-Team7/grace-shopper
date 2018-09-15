@@ -2,11 +2,21 @@ import {connect} from 'react-redux'
 import React, {Component} from 'react'
 import {NavLink, withRouter} from 'react-router-dom'
 import {fetchOrderProducts, removeProductFromOrderProducts} from '../store/cart'
+import {me} from '../store/user'
 
 class Cart extends Component {
-  componentDidMount() {
-    this.props.fetchInitialOrderProducts()
+  constructor() {
+    super()
     this.removeProductFromCart = this.removeProductFromCart.bind(this)
+  }
+
+  componentDidMount() {
+    this.props.fetchInitialUser()
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.user !== prevProps.user)
+      this.props.fetchInitialOrderProducts(this.props.user)
   }
 
   removeProductFromCart(product) {
@@ -14,15 +24,13 @@ class Cart extends Component {
   }
 
   render() {
-    let orders = this.props.cart.all
+    const orders = this.props.cart
     const user = this.props.user
-    orders = orders.filter(order => order.userId === user.id)
 
-    let currentOrders = orders.filter(order => order.status === 'created')
-    let pastOrders = orders.filter(order => order.status !== 'created')
-    let currentOrder = currentOrders[0]
+    let currentOrderProducts = orders.currentOrder.products
+    let pastOrders = orders.pastOrdersArr
 
-    let findTotalPrice = function findTotalPrice(productsArray) {
+    let findTotalPrice = function(productsArray) {
       let total = 0
       productsArray.forEach(product => {
         total += product.price
@@ -38,10 +46,10 @@ class Cart extends Component {
 
         <div className="current-order-cart">
           <h3>CURRENT ORDER</h3>
-          {/* {currentOrder && currentOrder.length ? ( */}
+
           <ul>
-            {currentOrder &&
-              currentOrder.products.map(product => (
+            {currentOrderProducts &&
+              currentOrderProducts.map(product => (
                 <li key={product.id}>
                   <NavLink to={`/products/${product.id}`}>
                     {product.title}
@@ -65,10 +73,10 @@ class Cart extends Component {
                 </li>
               ))}
             <h4>
-              Total: {currentOrder && findTotalPrice(currentOrder.products)}{' '}
+              Total:{' '}
+              {currentOrderProducts && findTotalPrice(currentOrderProducts)}{' '}
             </h4>
           </ul>
-          {/* ): (<p>~~~</p>) } */}
         </div>
 
         <div className="past-order-cart">
@@ -124,7 +132,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchInitialOrderProducts: () => dispatch(fetchOrderProducts()),
+    fetchInitialUser: () => dispatch(me()),
+    fetchInitialOrderProducts: user => dispatch(fetchOrderProducts(user)),
     removeProductFromOrderProducts: product => {
       dispatch(removeProductFromOrderProducts(product))
     }

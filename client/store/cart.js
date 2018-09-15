@@ -3,28 +3,29 @@ import axios from 'axios'
 //ACTIONS
 const GET_ORDERPRODUCTS_FROM_SERVER = 'GET_ORDERPRODUCTS_FROM_SERVER'
 
-const ADD_PRODUCT_TO_ORDERPRODUCTS_TABLE_IN_SERVER =
-  'ADD_PRODUCT_TO_ORDERPRODUCTS_TABLE_IN_SERVER'
+// const ADD_PRODUCT_TO_ORDERPRODUCTS_TABLE_IN_SERVER =
+//   'ADD_PRODUCT_TO_ORDERPRODUCTS_TABLE_IN_SERVER'
 
 const REMOVE_PRODUCT_FROM_ORDERPRODUCTS_TABLE_IN_SERVER =
   'REMOVE_PRODUCT_FROM_ORDERPRODUCTS_TABLE_IN_SERVER'
 
 //ACTION CREATORS
-export const setOrderProductsInStore = function(products) {
+const setOrderProductsInStore = function(currentOrder, pastOrders) {
   return {
     type: GET_ORDERPRODUCTS_FROM_SERVER,
-    products
+    currentOrder,
+    pastOrders
   }
 }
 
-export const addProductToOrderProductTableInServer = function(product) {
-  return {
-    type: ADD_PRODUCT_TO_ORDERPRODUCTS_TABLE_IN_SERVER,
-    product
-  }
-}
+// const addProductToOrderProductTableInServer = function(product) {
+//   return {
+//     type: ADD_PRODUCT_TO_ORDERPRODUCTS_TABLE_IN_SERVER,
+//     product
+//   }
+// }
 
-export const removeProductFromOrderProductTableInServer = function(product) {
+const removeProductFromOrderProductTableInServer = function(product) {
   return {
     type: REMOVE_PRODUCT_FROM_ORDERPRODUCTS_TABLE_IN_SERVER,
     product
@@ -32,71 +33,87 @@ export const removeProductFromOrderProductTableInServer = function(product) {
 }
 
 //THUNK CREATORS
-export const fetchOrderProducts = () => {
+export const fetchOrderProducts = user => {
   return async dispatch => {
     //dispatch(setIsLoading())
-    let res = await axios.get('/api/orderProducts')
-    let products = res.data
-    const action = setOrderProductsInStore(products)
+    let res = await axios.get(`/api/orderProducts/${user.id}`)
+    let orders = res.data
+    console.log('OORRDDEERRSS: ', orders)
+    let currentOrder = orders.filter(function(order) {
+      return order.status === 'created'
+    })
+    let pastOrders = orders.filter(function(order) {
+      return order.status !== 'created'
+    })
+    console.log('currentOrder: ', currentOrder)
+    console.log('pastOrders: ', pastOrders)
+    const action = setOrderProductsInStore(currentOrder, pastOrders)
     dispatch(action)
   }
 }
 
-export const addProductToOrderProducts = (product, user) => {
-  return async dispatch => {
-    //dispatch(setIsLoading())
-    //should this be post?!?! maybe not!!!
-    //take that product to create new orderProduct entry
-    let res = await axios.post('/api/orderProducts', {product, user})
-    let newOrderProduct = res.data
-    const action = addProductToOrderProductTableInServer(newOrderProduct)
-    dispatch(action)
-  }
-}
+// export const addProductToOrderProducts = (product, user) => {
+//   return async dispatch => {
+//     //dispatch(setIsLoading())
+//     let res = await axios.post('/api/orderProducts', {product, user})
+//     let newOrderProduct = res.data
+//     const action = addProductToOrderProductTableInServer(newOrderProduct)
+//     dispatch(action)
+//   }
+// }
 
+// ////--you stopped here
 export const removeProductFromOrderProducts = product => {
   return async dispatch => {
     //dispatch(setIsLoading())
-    //should this be post?!?! maybe not!!!
-    //take that product to create new orderProduct entry
-    let res = await axios.delete(`/api/orderProducts/${product.id}`, product)
-    let deletedOrderProduct = res.data
-    const action = removeProductFromOrderProductTableInServer(
-      deletedOrderProduct
-    )
+    //let res = await axios.delete(`/api/orderProducts/${product.id}`, product)
+    //let deletedOrderProduct = res.data
+    await axios.delete(`/api/orderProducts/${product.id}`, product)
+    const action = removeProductFromOrderProductTableInServer(product)
+    //console.log('deletedOrderProduct: ', deletedOrderProduct)
     dispatch(action)
   }
 }
 
-//REDUCER
-const cartReducer = (
-  state = {
-    all: []
-    // selected: {},
-    // isLoading: false,
-    // hasErrored: false
+const initialState = {
+  currentOrder: {
+    products: []
   },
-  action
-) => {
+  pastOrdersArr: []
+  // selected: {},
+  // isLoading: false,
+  // hasErrored: false
+  //
+}
+
+//REDUCER
+const cartReducer = (state = initialState, action) => {
+  console.log('action: ', action)
   switch (action.type) {
     case GET_ORDERPRODUCTS_FROM_SERVER:
       return {
         ...state,
-        all: action.products
+        currentOrder: {
+          products: action.currentOrder[0].products
+        },
+        pastOrdersArr: action.pastOrders
       }
-    case ADD_PRODUCT_TO_ORDERPRODUCTS_TABLE_IN_SERVER:
-      return {
-        ...state,
-        all: [...state.all, action.product]
-      }
+    // case ADD_PRODUCT_TO_ORDERPRODUCTS_TABLE_IN_SERVER:
+    //   return {
+    //     ...state,
+    //     all: [...state.all, action.product]
+    //   }
     case REMOVE_PRODUCT_FROM_ORDERPRODUCTS_TABLE_IN_SERVER:
       return {
         ...state,
-        all: state.all.filter(function(elem) {
-          return elem.id !== action.product.id
-        })
+        currentOrder: {
+          products: state.currentOrder.products.filter(function(product) {
+            return product.id !== action.product.id
+          })
+        }
       }
     default:
+      //console.log('action.product: ', action.product)
       return state
   }
 }

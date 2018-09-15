@@ -3,9 +3,14 @@ const {Order, Product, OrderProduct} = require('../db/models')
 module.exports = router
 const Sequelize = require('sequelize')
 
-router.get('/', async (req, res, next) => {
+router.get('/:userId', async (req, res, next) => {
   try {
+    const userId = req.params.userId
+
     const products = await Order.findAll({
+      where: {
+        userId
+      },
       include: [
         {
           model: Product
@@ -50,7 +55,7 @@ router.delete('/:productId', async (req, res, next) => {
       const newProductQty = await Product.findById(productId)
       await newProductQty.increment('inventoryQty', {by: removeQuantity})
 
-      res.json(removedProduct)
+      res.json()
     }
   } catch (err) {
     next(err)
@@ -70,11 +75,10 @@ router.post('/', async (req, res, next) => {
         status: 'created'
       }
     })
-    console.log('ORDERID*****: ', openOrderForUser.dataValues.id)
+    //console.log('ORDERID*****: ', openOrderForUser.dataValues.id)
 
     const addQuantity = product.quantity
     const newProductQty = await Product.findById(product.id)
-    await newProductQty.decrement('inventoryQty', {by: addQuantity})
 
     if (openOrderForUser) {
       const checkOrderProduct = await OrderProduct.findOne({
@@ -83,6 +87,8 @@ router.post('/', async (req, res, next) => {
           orderId: openOrderForUser.dataValues.id
         }
       })
+
+      await newProductQty.decrement('inventoryQty', {by: addQuantity})
 
       if (checkOrderProduct) {
         const newOrderProduct = await OrderProduct.update(
@@ -108,9 +114,28 @@ router.post('/', async (req, res, next) => {
         console.log('newOrderProduct: ', newOrderProduct)
         res.json(newOrderProduct)
       }
+    } else {
+      const createNewOrderForUser = await Order.create({
+        userId: user.id,
+        status: 'created',
+        tracking: 'we will generateupon checkout321',
+        stripeToken: 'this will be generated'
+      })
+      console.log('createNewOrderForUser: ', createNewOrderForUser)
+      await newProductQty.decrement('inventoryQty', {by: addQuantity})
+      const newOrderProduct = await OrderProduct.create({
+        quantity: 1,
+        price: product.price,
+        orderId: createNewOrderForUser.id,
+        productId: product.id
+      })
+      console.log('newOrderProduct: ', newOrderProduct)
+      res.json(newOrderProduct)
     }
   } catch (err) {
-    console.log('GOT IN HERE, the post route for adding product to cart!')
+    console.log(
+      'ERROR: GOT IN HERE, the post route for adding product to cart!'
+    )
     console.error(err)
     next(err)
   }

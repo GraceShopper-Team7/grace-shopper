@@ -26,7 +26,7 @@ class TypeProductList extends Component {
   }
 
   render() {
-    //console.log('TypeProductList_this.props: ', this.props)
+    console.log('TypeProductList_this.props: ', this.props)
     const typeId = Number(this.props.match.params.typeId)
     //console.log('typeId: ', typeId)
 
@@ -34,6 +34,8 @@ class TypeProductList extends Component {
     const filteredProducts = products.filter(
       product => product.typeId === typeId
     )
+    console.log('TypeProductList_this.props: ', this.props)
+
     console.log('P*R*O*D*U*C*T*S: ', filteredProducts)
     if (filteredProducts.length < 1) {
       return <h4>no teas here yet!</h4>
