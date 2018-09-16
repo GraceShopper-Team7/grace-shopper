@@ -7,7 +7,6 @@ class ProductList extends Component {
   constructor(props) {
     super(props)
     this.handleClick = this.handleClick.bind(this)
-    // console.log(props);
   }
 
   componentDidMount() {
