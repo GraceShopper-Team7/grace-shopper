@@ -75,7 +75,12 @@ const ProductForm = props => {
         </Select>
       </FormControl>
       <br />
-      <Button variant="contained" color="primary" type="submit">
+      <Button
+        variant="contained"
+        color="primary"
+        type="submit"
+        disabled={!props.title}
+      >
         Submit
       </Button>
     </form>

@@ -8,6 +8,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormControl from '@material-ui/core/FormControl'
 import {fetchAddresses, selectAddress} from '../store/address'
 import {me} from '../store/user'
+import AddressForm from './address-form'
 
 const styles = theme => ({
   root: {
@@ -30,7 +31,6 @@ class AddressList extends React.Component {
     if (this.props.addresses.length === 0 && this.props.user.id) {
       this.props.loadAddresses(this.props.user.id)
     }
-    console.log(this.props.addresses)
   }
 
   handleChange = event => {
@@ -60,7 +60,14 @@ class AddressList extends React.Component {
                 } ${address.country}`}
               />
             ))}
+            <FormControlLabel
+              key="new"
+              value="new"
+              control={<Radio />}
+              label="New Address"
+            />
           </RadioGroup>
+          {this.props.selected === 'new' ? <AddressForm /> : <p />}
         </FormControl>
       </div>
     )
