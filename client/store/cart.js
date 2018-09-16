@@ -79,6 +79,7 @@ export const removeProductFromOrderProducts = product => {
 
 const initialState = {
   currentOrder: {
+    id: null,
     products: []
   },
   pastOrdersArr: []
@@ -97,6 +98,7 @@ const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         currentOrder: {
+          id: action.currentOrder[0].id,
           products: action.currentOrder[0].products
         },
         pastOrdersArr: action.pastOrders
@@ -105,6 +107,7 @@ const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         currentOrder: {
+          id: state.currentOrder.id,
           products: [...state.currentOrder.products, action.product]
         }
       }
@@ -112,6 +115,7 @@ const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         currentOrder: {
+          id: state.currentOrder.id,
           products: state.currentOrder.products.filter(function(product) {
             return product.id !== action.product.id
           })
