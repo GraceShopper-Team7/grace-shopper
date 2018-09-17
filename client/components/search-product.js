@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {NavLink} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import {fetchProducts} from '../store/product'
 
 class SearchProduct extends Component {
@@ -8,33 +8,48 @@ class SearchProduct extends Component {
     super(props)
   }
 
-  componentDidMount() {}
-
+  componentDidMount() {
+    console.log('Inside Searched Products')
+    this.props.loadProducts()
+  }
   render() {
+    console.log('Search String from store ', this.props)
     const searchString = this.props.searchString
     console.log('Search String from store ', searchString)
-    const products = this.props.products.all
-    const value = this.props.value
-    const filteredProducts = products.filter(product => product.title === value)
-    if (filteredProducts.length < 1) {
-      return <h4>No Teas found...!</h4>
-    }
-    return (
+    const products = this.props.allProducts || []
+    const filteredProducts = products.filter(
+      product => product.title === searchString
+    )
+
+    return filteredProducts.length > 0 ? (
       <div>
-        <ul />
+        <h1>Teas</h1>
+        <ul>
+          {filteredProducts.map(product => (
+            <li key={product.id}>
+              <h3>{product.title}</h3>
+              <p>Price: {product.price}</p>
+              <p>Inventory Quantity: {product.inventoryQty}</p>
+              ) : (
+              <p />
+              )}
+            </li>
+          ))}
+        </ul>
       </div>
+    ) : (
+      <div>Empty Inventory!</div>
     )
   }
 }
-const mapStateToProps = state => {
-  return {
-    searchString: state.searchString,
-    allProducts: state.all
-  }
-}
-// const mapDispatchToProps = (dispatch) => {
-// 	// return {
-// 	// 	loadProducts: () => dispatch(fetchProducts())
-// 	// };
-// };
-export default connect(mapStateToProps, null)(SearchProduct)
+
+const mapStateToProps = state => ({
+  searchString: state.searchString,
+  allProducts: state.products.all
+})
+
+const mapDispatchToProps = dispatch => ({
+  loadProducts: () => dispatch(fetchProducts())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchProduct)

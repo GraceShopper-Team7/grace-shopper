@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {logout} from '../store'
@@ -14,7 +14,7 @@ import SearchIcon from '@material-ui/icons/Search'
 import {Tab} from '@material-ui/core'
 import Tabs from '@material-ui/core/Tabs'
 import {findProduct} from '../store/product'
-import axios from 'axios'
+import {withRouter} from 'react-router'
 
 const styles = theme => ({
   root: {
@@ -79,7 +79,6 @@ const styles = theme => ({
 class Navbar extends Component {
   constructor(props) {
     super(props)
-    console.log('>>>', props)
     this.state = {searchString: ''}
     this.handleInput = this.handleInput.bind(this)
     this.handleKeyUp = this.handleKeyUp.bind(this)
@@ -91,8 +90,9 @@ class Navbar extends Component {
     if (event.charCode === 13 || event.key === 'Enter') {
       event.preventDefault()
       this.setState({searchString: ''})
-      console.log('<><>', this.props)
+
       this.props.findProduct(event.target.value)
+      this.props.history.push('/products/searchedProducts')
       // this.props.findProduct(this.state.searchString);
       // } else if (this.props.cancelOnEscape && (e.charCode === 27 || e.key === 'Escape')) {
       // 	this.handleCancel();
@@ -164,7 +164,6 @@ class Navbar extends Component {
  * CONTAINER
  */
 const mapState = state => {
-  console.log('state in navbar', state)
   return {
     isAdmin: state.user.roleId === 1,
     isLoggedIn: !!state.user.id,
@@ -181,7 +180,7 @@ const mapDispatch = dispatch => {
     // loadProduct: (productId) => dispatch(fetchSingleProduct(productId))
   }
 }
-const withStyleNavbar = withStyles(styles)(Navbar)
+const withStyleNavbar = withStyles(styles)(withRouter(Navbar))
 export default connect(mapState, mapDispatch)(withStyleNavbar)
 
 /**
@@ -193,85 +192,3 @@ Navbar.propTypes = {
   classes: PropTypes.object.isRequired,
   findProduct: PropTypes.func
 }
-
-// const Navbar = (props) => {
-// 	const { classes } = props;
-// 	const { isLoggedIn } = props;
-// 	const { handleClick } = props;
-// 	return (
-// 		<div className={classes.root}>
-// 			<AppBar position="static">
-// 				<Toolbar>
-// 					<div>
-// 						<Tabs>
-// 							<Tab label="Logo" href="/" />
-// 						</Tabs>
-// 					</div>
-// 					{isLoggedIn ? (
-// 						<div>
-// 							{/* The navbar will show these links after you log in */}
-// 							<Tab label="Home" href="/home" />
-// 							<Tab label="Logout" onClick={handleClick} href="#" />
-// 						</div>
-// 					) : (
-// 						<div>
-// 							{/* The navbar will show these links before you log in */}
-// 							<Tab label="Login" href="/login" />
-// 							<Tab label="Sign Up" href="/signup" />
-// 						</div>
-// 					)}
-// 					<Tabs>
-// 						<Tab label="All Teas" href="/products" />
-// 						<Tab label="Black Tea" href="/types/1" />
-// 						<Tab label="Green Tea" href="/types/2" />
-// 						<Tab label="White Tea" href="/types/3" />
-// 						<Tab label="Herbal Tea" href="/types/4" />
-// 						<Tab label="Cart" href="/cart" />
-// 					</Tabs>
-
-// 					<div className={classes.grow} />
-// 					<div className={classes.search}>
-// 						<div className={classes.searchIcon}>
-// 							<SearchIcon />
-// 						</div>
-// 						<Input
-// 							placeholder="Search…"
-// 							disableUnderline
-// 							classes={{
-// 								root: classes.inputRoot,
-// 								input: classes.inputInput
-// 							}}
-// 						/>
-// 					</div>
-// 				</Toolbar>
-// 			</AppBar>
-// 		</div>
-// 	);
-// };
-// /**
-//  * CONTAINER
-//  */
-// const mapState = (state) => {
-// 	return {
-// 		isLoggedIn: !!state.user.id
-// 	};
-// };
-
-// const mapDispatch = (dispatch) => {
-// 	return {
-// 		handleClick() {
-// 			dispatch(logout());
-// 		}
-// 	};
-// };
-// const withStyleNavbar = withStyles(styles)(Navbar);
-// export default connect(mapState, mapDispatch)(withStyleNavbar);
-
-// /**
-//  * PROP TYPES
-//  */
-// Navbar.propTypes = {
-// 	handleClick: PropTypes.func.isRequired,
-// 	isLoggedIn: PropTypes.bool.isRequired,
-// 	classes: PropTypes.object.isRequired
-// };

@@ -70,9 +70,8 @@ export const fetchSingleProduct = productId => {
 }
 export const findProduct = searchString => {
   return async dispatch => {
-    const products = await axios.get('/api/searchedProducts')
-    console.log(':::', products)
-    // history.push('/products');
+    let res = await axios.get('/api/products')
+    let products = res.data
     dispatch(getSearchedProduct(searchString))
   }
 }

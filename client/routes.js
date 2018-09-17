@@ -39,6 +39,11 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         <Route path="/types/:typeId" component={ConnectedTypeProductList} />
         <Route exact path="/products" component={ProductList} />
+        <Route
+          exact
+          path="/products/searchedProducts"
+          component={SearchProduct}
+        />
         <Route path="/products/add" component={AddProduct} />
         <Route
           exact
@@ -48,8 +53,7 @@ class Routes extends Component {
         <Route exact path="/products/:id" component={ConnectedSingleProduct} />
 
         <Route path="/products" component={ProductList} />
-        <Route path="/searchedProducts" component={SearchProduct} />
-
+        <Route path="/products/searchedProducts" component={SearchProduct} />
         <Route path="/cart" component={ConnectedCart} />
         <Route path="/products/:id" component={ConnectedSingleProduct} />
         {isLoggedIn && (
