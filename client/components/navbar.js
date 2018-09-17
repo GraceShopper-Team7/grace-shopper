@@ -110,11 +110,6 @@ class Navbar extends Component {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <div>
-              <Tabs>
-                <Tab label="Logo" href="/" />
-              </Tabs>
-            </div>
             {isLoggedIn ? (
               <div>
                 {/* The navbar will show these links after you log in */}
@@ -128,6 +123,13 @@ class Navbar extends Component {
                 <Tab label="Sign Up" href="/signup" />
               </div>
             )}
+          </Toolbar>
+          <Toolbar>
+            <div>
+              <Tabs>
+                <Tab label="Logo" href="/" />
+              </Tabs>
+            </div>
             <Tabs>
               <Tab label="All Teas" href="/products" />
               <Tab label="Black Tea" href="/types/1" />

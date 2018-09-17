@@ -78,8 +78,8 @@ class AddReview extends Component {
 }
 const mapDispatch = dispatch => ({
   submitReview: (productId, userId, review) => {
-    const singleReview = {productId, userId, review}
-    dispatch(addReview(singleReview))
+    // const singleReview = { productId, userId, review };
+    dispatch(addReview({productId, userId, review}))
   }
 })
 
