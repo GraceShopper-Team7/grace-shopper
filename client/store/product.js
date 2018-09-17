@@ -6,7 +6,7 @@ const GET_SINGLE_PRODUCT_FROM_SERVER = 'GET_SINGLE_PRODUCT_FROM_SERVER'
 const DELETE_PRODUCT = 'DELETE_PRODUCT'
 const GET_NEW_PRODUCT = 'GET_NEW_PRODUCT'
 const EDIT_PRODUCT = 'EDIT_PRODUCT'
-
+const SEARCH_PRODUCT = 'SEARCH_PRODUCT'
 //ACTION CREATORS
 const setProductsInStore = function(products) {
   return {
@@ -14,7 +14,12 @@ const setProductsInStore = function(products) {
     products
   }
 }
-
+const getSearchedProduct = function(searchString) {
+  return {
+    type: SEARCH_PRODUCT,
+    searchString
+  }
+}
 const getSingleProductFromServer = function(singleProduct) {
   return {
     type: GET_SINGLE_PRODUCT_FROM_SERVER,
@@ -57,7 +62,14 @@ export const fetchSingleProduct = productId => {
     dispatch(action)
   }
 }
-
+export const findProduct = searchString => {
+  return async dispatch => {
+    const products = await axios.get('/api/searchedProducts')
+    console.log(':::', products)
+    // history.push('/products');
+    dispatch(getSearchedProduct(searchString))
+  }
+}
 export const addProduct = product => async dispatch => {
   const {data: newProduct} = await axios.post('/api/products', product)
   dispatch(getNewProduct(newProduct))
@@ -83,7 +95,8 @@ const productReducer = (
     selected: {},
     isLoading: false,
     hasErrored: false,
-    reviews: []
+    reviews: [],
+    searchString: ''
   },
   action
 ) => {
@@ -114,6 +127,11 @@ const productReducer = (
           if (product.id === action.product.id) return action.product
           return product
         })
+      }
+    case SEARCH_PRODUCT:
+      return {
+        ...state,
+        searchString: action.searchString
       }
     default:
       return state

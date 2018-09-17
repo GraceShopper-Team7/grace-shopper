@@ -3,14 +3,21 @@ import InputLabel from '@material-ui/core/InputLabel'
 import FormControl from '@material-ui/core/FormControl'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
+import {withStyles} from '@material-ui/core/styles'
+import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import React, {Component} from 'react'
 import {addReview} from '../store/review'
-import {throws} from 'assert'
 
 const initialState = {
   rating: 0,
   content: ''
+}
+const styles = {
+  root: {
+    width: '100%',
+    maxWidth: 500
+  }
 }
 class AddReview extends Component {
   constructor() {
@@ -29,37 +36,43 @@ class AddReview extends Component {
       this.props.user.id,
       {...this.state}
     )
-    this.props.history.push(`/products`)
+    // this.props.history.push(`/products`);
   }
 
   render() {
-    // console.log('PROPS IN ADD REVIEW', this.props);
+    const {classes} = this.props
+    console.log('In Add Review', this.props)
     return (
-      <form onSubmit={this.handleSubmit}>
-        <FormControl>
-          <InputLabel>Rating</InputLabel>
-          <TextField
-            name="rating"
-            onChange={this.handleChange}
-            margin="normal"
-          />
-        </FormControl>
+      <div className={classes.root}>
+        <Typography variant="display2" gutterBottom>
+          {this.props.singleProduct.title}
+        </Typography>
+        <form onSubmit={this.handleSubmit}>
+          <FormControl>
+            <InputLabel>Rating</InputLabel>
+            <TextField
+              name="rating"
+              onChange={this.handleChange}
+              margin="normal"
+            />
+          </FormControl>
 
-        <br />
-        <FormControl>
-          <InputLabel>Review</InputLabel>
-          <TextField
-            name="content"
-            onChange={this.handleChange}
-            margin="normal"
-          />
-        </FormControl>
-        <br />
+          <br />
+          <FormControl>
+            <InputLabel>Review</InputLabel>
+            <TextField
+              name="content"
+              onChange={this.handleChange}
+              margin="normal"
+            />
+          </FormControl>
+          <br />
 
-        <Button variant="contained" color="primary" type="submit">
-          Submit
-        </Button>
-      </form>
+          <Button variant="contained" color="primary" type="submit">
+            Submit
+          </Button>
+        </form>
+      </div>
     )
   }
 }
@@ -76,4 +89,13 @@ const mapStateToProps = state => {
     user: state.user
   }
 }
-export default connect(mapStateToProps, mapDispatch)(AddReview)
+AddReview.propTypes = {
+  classes: PropTypes.object.isRequired
+}
+
+const withStyleAddReview = withStyles(styles)(AddReview)
+export default connect(mapStateToProps, mapDispatch)(withStyleAddReview)
+
+// const connectedAddReview = connect(mapStateToProps, mapDispatch)(AddReview);
+// // const connectedAddReviewWithStyle = withStyles(styles)(connectedAddReview);
+// export default connectedAddReview;
