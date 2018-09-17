@@ -54,7 +54,9 @@ class SingleProduct extends Component {
         {/* once ready we add the following:
           -add to cart button component
           -delete button component (admin) */}
-        <EditProduct product={product} history={this.props.history} />
+        {this.props.user.roleId === 1 && (
+          <EditProduct product={product} history={this.props.history} />
+        )}
       </div>
     )
   }
@@ -62,7 +64,8 @@ class SingleProduct extends Component {
 
 const mapStateToProps = state => {
   return {
-    singleProduct: state.products.selected
+    singleProduct: state.products.selected,
+    user: state.user
   }
 }
 
