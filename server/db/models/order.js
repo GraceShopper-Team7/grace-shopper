@@ -10,16 +10,10 @@ const Order = db.define('order', {
     }
   },
   tracking: {
-    type: Sequelize.STRING,
-    validate: {
-      notEmpty: true
-    }
+    type: Sequelize.STRING
   },
   stripeToken: {
-    type: Sequelize.STRING,
-    validate: {
-      notEmpty: true
-    }
+    type: Sequelize.STRING
   }
 })
 
