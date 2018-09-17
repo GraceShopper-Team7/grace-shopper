@@ -1,128 +1,217 @@
+import {connect} from 'react-redux'
 import React from 'react'
 import PropTypes from 'prop-types'
-import {withStyles} from '@material-ui/core/styles'
+import withStyles from '@material-ui/core/styles/withStyles'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import Paper from '@material-ui/core/Paper'
 import Stepper from '@material-ui/core/Stepper'
 import Step from '@material-ui/core/Step'
 import StepLabel from '@material-ui/core/StepLabel'
-import StepContent from '@material-ui/core/StepContent'
 import Button from '@material-ui/core/Button'
-import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import AddressList from './address-list'
-import TakeMoney from './take-money'
+import EmailForm from './email-form'
+import Review from './checkout-order-review'
+import StripeCheckout from 'react-stripe-checkout'
+import axios from 'axios'
+import {me} from '../store/user'
+import {fetchOrderProducts} from '../store/cart'
 
 const styles = theme => ({
-  root: {
-    width: '90%'
+  appBar: {
+    position: 'relative'
+  },
+  layout: {
+    width: 'auto',
+    marginLeft: theme.spacing.unit * 2,
+    marginRight: theme.spacing.unit * 2,
+    [theme.breakpoints.up(600 + theme.spacing.unit * 2 * 2)]: {
+      width: 600,
+      marginLeft: 'auto',
+      marginRight: 'auto'
+    }
+  },
+  paper: {
+    marginTop: theme.spacing.unit * 3,
+    marginBottom: theme.spacing.unit * 3,
+    padding: theme.spacing.unit * 2,
+    [theme.breakpoints.up(600 + theme.spacing.unit * 3 * 2)]: {
+      marginTop: theme.spacing.unit * 6,
+      marginBottom: theme.spacing.unit * 6,
+      padding: theme.spacing.unit * 3
+    }
+  },
+  stepper: {
+    padding: `${theme.spacing.unit * 3}px 0 ${theme.spacing.unit * 5}px`
+  },
+  buttons: {
+    display: 'flex',
+    justifyContent: 'flex-end'
   },
   button: {
-    marginTop: theme.spacing.unit,
-    marginRight: theme.spacing.unit
-  },
-  actionsContainer: {
-    marginBottom: theme.spacing.unit * 2
-  },
-  resetContainer: {
-    padding: theme.spacing.unit * 3
+    marginTop: theme.spacing.unit * 3,
+    marginLeft: theme.spacing.unit
   }
 })
 
-function getSteps() {
-  return ['Choose a shipping address', 'Confirm the email', 'Place order']
-}
+const steps = ['Shipping address', 'Confirm email', 'Review your order']
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <AddressList />
-    case 1:
-      return `Insert your email`
-    case 2:
-      return ``
-    default:
-      return 'Unknown step'
-  }
-}
-
-class VerticalLinearStepper extends React.Component {
-  state = {
-    activeStep: 0
-  }
-
-  handleNext = () => {
-    this.setState(state => ({
-      activeStep: state.activeStep + 1
-    }))
-  }
-
-  handleBack = () => {
-    this.setState(state => ({
-      activeStep: state.activeStep - 1
-    }))
+class Checkout extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      activeStep: 0
+    }
   }
 
   componentDidMount() {
-    console.log('loc state', this.props.location.state)
+    this.props.loadOrders(this.props.user)
+  }
+
+  handleNext = () => {
+    const {activeStep} = this.state
+    this.setState({
+      activeStep: activeStep + 1
+    })
+  }
+
+  handleBack = () => {
+    const {activeStep} = this.state
+    this.setState({
+      activeStep: activeStep - 1
+    })
+  }
+
+  handleReset = () => {
+    this.setState({
+      activeStep: 0
+    })
+  }
+
+  onToken = async token => {
+    await axios.post('/api/cart', {
+      token,
+      amount: this.props.location.state.amount,
+      orderId: this.props.location.state.orderId
+    })
+    this.handleNext()
+  }
+
+  getStepContent(step) {
+    switch (step) {
+      case 0:
+        return (
+          <div>
+            <AddressList />
+          </div>
+        )
+      case 1:
+        return <EmailForm email={this.props.user.email} />
+      case 2:
+        return <Review />
+      default:
+        throw new Error('Unknown step')
+    }
   }
 
   render() {
     const {classes} = this.props
-    const steps = getSteps()
     const {activeStep} = this.state
+    console.log('State in checkout:', this.state)
+    console.log('Props in Checkout', this.props)
 
     return (
-      <div className={classes.root}>
-        <Stepper activeStep={activeStep} orientation="vertical">
-          {steps.map((label, index) => {
-            return (
-              <Step key={label}>
-                <StepLabel>{label}</StepLabel>
-                <StepContent>
-                  <Typography>{getStepContent(index)}</Typography>
-                  <div className={classes.actionsContainer}>
-                    <div>
+      <React.Fragment>
+        <CssBaseline />
+        <main className={classes.layout}>
+          <Paper className={classes.paper}>
+            <Typography variant="display1" align="center">
+              Checkout
+            </Typography>
+            <Stepper activeStep={activeStep} className={classes.stepper}>
+              {steps.map(label => (
+                <Step key={label}>
+                  <StepLabel>{label}</StepLabel>
+                </Step>
+              ))}
+            </Stepper>
+
+            <React.Fragment>
+              {activeStep === steps.length ? (
+                <React.Fragment>
+                  <Typography variant="headline" gutterBottom>
+                    Thank you for your order.
+                  </Typography>
+                  <Typography variant="subheading">
+                    Your order number is #{this.props.location.state.orderId}.
+                    We have emailed your order confirmation, and will send you
+                    an update when your order has shipped.
+                  </Typography>
+                </React.Fragment>
+              ) : (
+                <React.Fragment>
+                  {this.getStepContent(activeStep)}
+                  <div className={classes.buttons}>
+                    {activeStep !== 0 && (
                       <Button
-                        disabled={activeStep === 0}
                         onClick={this.handleBack}
                         className={classes.button}
                       >
                         Back
                       </Button>
-                      {activeStep === steps.length - 1 ? (
-                        <TakeMoney
-                          amount={this.props.location.state.amount}
-                          orderId={this.props.location.state.orderId}
-                          history={this.props.history}
-                        />
-                      ) : (
+                    )}
+                    {activeStep === steps.length - 1 ? (
+                      <StripeCheckout
+                        token={this.onToken}
+                        amount={this.props.location.state.amount}
+                        stripeKey="pk_test_2eOKaGIWB9JWB9j6YyqmKMdf"
+                      >
                         <Button
                           variant="contained"
-                          color="primary"
-                          onClick={this.handleNext}
                           className={classes.button}
+                          color="primary"
                         >
-                          Next
+                          Pay
                         </Button>
-                      )}
-                    </div>
+                      </StripeCheckout>
+                    ) : (
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={this.handleNext}
+                        className={classes.button}
+                      >
+                        Next
+                      </Button>
+                    )}
                   </div>
-                </StepContent>
-              </Step>
-            )
-          })}
-        </Stepper>
-        {activeStep === steps.length && (
-          <Paper square elevation={0} className={classes.resetContainer}>
-            <Typography>All steps completed - you&quot;re finished</Typography>
+                </React.Fragment>
+              )}
+            </React.Fragment>
           </Paper>
-        )}
-      </div>
+        </main>
+      </React.Fragment>
     )
   }
 }
 
-VerticalLinearStepper.propTypes = {
-  classes: PropTypes.object
+Checkout.propTypes = {
+  classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(VerticalLinearStepper)
+const mapStateToProps = state => ({
+  //cart: state.cart,
+  user: state.user
+})
+
+const mapDispatchToProps = dispatch => {
+  return {
+    loadUser: () => dispatch(me()),
+    loadOrders: user => dispatch(fetchOrderProducts(user))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withStyles(styles)(Checkout)
+)
+//export default withStyles(styles)(Checkout)

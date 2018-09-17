@@ -102,7 +102,8 @@ class Cart extends Component {
               pathname: '/checkout',
               state: {
                 amount: findTotalPrice(currentOrderProducts),
-                orderId: orders.currentOrder.id
+                orderId: orders.currentOrder.id,
+                user: this.props.user
               }
             }}
           >
