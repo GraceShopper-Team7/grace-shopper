@@ -36,7 +36,7 @@ class ProductList extends Component {
                 <p>Price: {product.price}</p>
                 <p>Inventory Quantity: {product.inventoryQty}</p>
               </Link>
-              {this.props.user.roleId === 1 ? (
+              {this.props.user.roleId === 1 && (
                 <button
                   type="submit"
                   value={product}
@@ -44,8 +44,6 @@ class ProductList extends Component {
                 >
                   Delete
                 </button>
-              ) : (
-                <p />
               )}
             </li>
           ))}
