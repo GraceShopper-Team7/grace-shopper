@@ -104,6 +104,7 @@ class Navbar extends Component {
   render() {
     const {classes} = this.props
     const {isLoggedIn} = this.props
+    const {isAdmin} = this.props
     const {handleClick} = this.props
     const {searchString} = this.state
     return (
@@ -115,6 +116,7 @@ class Navbar extends Component {
                 {/* The navbar will show these links after you log in */}
                 <Tab label="Home" href="/home" />
                 <Tab label="Logout" onClick={handleClick} href="#" />
+                {isAdmin && <Tab label="Admin" href="/admin" />}
               </div>
             ) : (
               <div>
@@ -191,6 +193,7 @@ export default connect(mapState, mapDispatch)(withStyleNavbar)
 Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
+  isAdmin: PropTypes.bool.isRequired,
   classes: PropTypes.object.isRequired,
   findProduct: PropTypes.func
 }
