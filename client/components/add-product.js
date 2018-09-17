@@ -29,13 +29,9 @@ class AddProduct extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault()
-    this.props
-      .submitProduct({
-        ...this.state
-      })
-      .then(() => {
-        this.props.history.push('/products')
-      })
+    this.props.submitProduct({...this.state}).then(() => {
+      this.props.history.push('/products')
+    })
   }
 
   render() {

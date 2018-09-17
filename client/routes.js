@@ -14,6 +14,7 @@ import {
   AddProduct,
   AddReview,
   Home,
+  SearchProduct,
   Checkout
 } from './components'
 import {me} from './store'
@@ -39,6 +40,17 @@ class Routes extends Component {
         <Route path="/types/:typeId" component={ConnectedTypeProductList} />
         <Route exact path="/products" component={ProductList} />
         <Route path="/products/add" component={AddProduct} />
+        <Route
+          exact
+          path="/products/:productId/addreview"
+          component={AddReview}
+        />
+        <Route exact path="/products/:id" component={ConnectedSingleProduct} />
+
+        <Route path="/products" component={ProductList} />
+        <Route path="/searchedProducts" component={SearchProduct} />
+
+        <Route path="/cart" component={ConnectedCart} />
         <Route path="/products/:id" component={ConnectedSingleProduct} />
         {isLoggedIn && (
           <Switch>

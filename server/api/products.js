@@ -30,12 +30,13 @@ router.get('/:productId', async (req, res, next) => {
     next(err)
   }
 })
-router.post('/:productId/addreview', async (req, res, next) => {
+router.post('/:productId/:userId/addreview', async (req, res, next) => {
   try {
     const addReview = await Review.create({
       rating: req.body.review.rating,
       content: req.body.review.content,
-      productId: req.params.productId
+      productId: req.params.productId,
+      userId: req.params.userId
     })
     res.status(201).json(addReview)
   } catch (err) {
