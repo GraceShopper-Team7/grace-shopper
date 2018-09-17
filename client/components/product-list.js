@@ -18,7 +18,6 @@ class ProductList extends Component {
 
   render() {
     const products = this.props.products || []
-    console.log(this.props)
     return products.length > 0 ? (
       <div>
         <h1>Teas</h1>

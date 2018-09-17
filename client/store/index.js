@@ -2,6 +2,7 @@ import {createStore, combineReducers, applyMiddleware} from 'redux'
 import createLogger from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
+import admin from './admin'
 import addresses from './address'
 import user, {REMOVE_USER} from './user'
 import productReducer from './product'
@@ -10,6 +11,7 @@ import cartReducer from './cart'
 
 const reducer = combineReducers({
   addresses,
+  admin,
   user,
   products: productReducer,
   reviews: reviewReducer,
