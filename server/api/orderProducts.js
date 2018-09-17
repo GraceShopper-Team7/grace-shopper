@@ -135,7 +135,7 @@ router.post('/', async (req, res, next) => {
       const createNewOrderForUser = await Order.create({
         userId: user.id,
         status: 'created',
-        tracking: 'we will generateupon checkout321',
+        tracking: '',
         stripeToken: 'this will be generated'
       })
       console.log('createNewOrderForUser: ', createNewOrderForUser)

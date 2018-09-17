@@ -1,14 +1,11 @@
-import React, {Component} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
-const Navbar = ({handleClick, isLoggedIn, user}) => (
+const Navbar = ({handleClick, isAdmin, isLoggedIn, user}) => (
   <div>
-    <Link to="/">
-      <h1>Tea Shop Logo</h1>
-    </Link>
     <nav>
       {isLoggedIn ? (
         <div>
@@ -17,6 +14,7 @@ const Navbar = ({handleClick, isLoggedIn, user}) => (
           <a href="#" onClick={handleClick}>
             Logout
           </a>
+          {isAdmin && <Link to="/admin">Admin</Link>}
         </div>
       ) : (
         <div>
@@ -25,7 +23,10 @@ const Navbar = ({handleClick, isLoggedIn, user}) => (
           <Link to="/signup">Sign Up</Link>
         </div>
       )}
-      <Link to="/products">ALL TEAS</Link>
+      <Link to="/">
+        <h1>Tea Shop Logo</h1>
+      </Link>
+      <Link to="/products">TEAS</Link>
       <Link to="/types/1">
         <span>BLACK TEAS</span>
       </Link>
@@ -52,6 +53,7 @@ const Navbar = ({handleClick, isLoggedIn, user}) => (
  */
 const mapState = state => {
   return {
+    isAdmin: state.user.roleId === 1,
     isLoggedIn: !!state.user.id,
     user: state.user
   }
