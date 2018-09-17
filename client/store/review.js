@@ -13,12 +13,12 @@ const gotNewReview = review => {
 
 //thunk creator
 
-export const addReview = review => {
+export const addReview = ({productId, userId, review}) => {
   return async dispatch => {
-    let res = await axios.post(
-      `/api/products/${review.productId}/addreview`,
+    let res = await axios.post(`/api/products/${productId}/addreview`, {
+      userId,
       review
-    )
+    })
     let newReview = res.data
     const action = gotNewReview(newReview)
     dispatch(action)

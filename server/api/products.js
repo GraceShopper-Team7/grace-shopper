@@ -10,6 +10,15 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+router.get('/searchedProducts', async (req, res, next) => {
+  try {
+    console.log('api route', req)
+    const products = await Product.findAll()
+    res.json(products)
+  } catch (err) {
+    next(err)
+  }
+})
 router.get('/:productId', async (req, res, next) => {
   try {
     const id = req.params.productId
@@ -35,7 +44,8 @@ router.post('/:productId/addreview', async (req, res, next) => {
     const addReview = await Review.create({
       rating: req.body.review.rating,
       content: req.body.review.content,
-      productId: req.params.productId
+      productId: req.params.productId,
+      userId: req.body.userId
     })
     res.status(201).json(addReview)
   } catch (err) {
