@@ -5,7 +5,10 @@ const Product = db.define('product', {
   title: {
     type: Sequelize.STRING,
     unique: true,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   },
   imageUrl: {
     type: Sequelize.STRING,
@@ -14,7 +17,10 @@ const Product = db.define('product', {
   },
   price: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      min: 0
+    }
   },
   description: {
     type: Sequelize.TEXT,
@@ -25,7 +31,10 @@ const Product = db.define('product', {
   },
   inventoryQty: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      min: 0
+    }
   }
 })
 

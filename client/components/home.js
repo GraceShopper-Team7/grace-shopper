@@ -38,6 +38,7 @@ const tileData = [
     cols: 2
   }
 ]
+
 const styles = theme => ({
   root: {
     display: 'flex',

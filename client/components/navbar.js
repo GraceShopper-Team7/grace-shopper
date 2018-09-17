@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {logout} from '../store'
@@ -166,7 +166,9 @@ class Navbar extends Component {
 const mapState = state => {
   console.log('state in navbar', state)
   return {
-    isLoggedIn: !!state.user.id
+    isAdmin: state.user.roleId === 1,
+    isLoggedIn: !!state.user.id,
+    user: state.user
   }
 }
 

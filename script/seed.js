@@ -205,7 +205,7 @@ async function seed() {
       state: 'SC',
       country: 'USA',
       zipcode: '29676',
-      isPrimary: false,
+      isPrimary: true,
       userId: 1
     },
     {
@@ -240,8 +240,6 @@ async function seed() {
   const orders = [
     {
       status: 'created',
-      tracking: 'GS4536',
-      stripeToken: 'tok_1AH2kcF89KLdg',
       userId: 1
     },
     {
@@ -257,14 +255,12 @@ async function seed() {
       userId: 1
     },
     {
-      status: 'created',
-      tracking: 'GS8965',
+      status: 'ordered',
       stripeToken: 'tok_i45GJk68NOe90',
       userId: 2
     },
     {
       status: 'ordered',
-      tracking: 'GS1078',
       stripeToken: 'tok_yO98JgHTR10dJ',
       userId: 3
     }
@@ -272,49 +268,49 @@ async function seed() {
   const ordersProducts = [
     {
       quantity: 1,
-      price: 124,
+      price: 183,
       orderId: 1,
       productId: 1
     },
     {
       quantity: 2,
-      price: 306,
+      price: 1528,
       orderId: 2,
       productId: 2
     },
     {
       quantity: 3,
-      price: 224,
+      price: 2997,
       orderId: 3,
       productId: 3
     },
     {
       quantity: 4,
-      price: 406,
+      price: 2712,
       orderId: 4,
       productId: 4
     },
     {
       quantity: 5,
-      price: 724,
+      price: 3390,
       orderId: 5,
       productId: 5
     },
     {
       quantity: 6,
-      price: 806,
+      price: 6666,
       orderId: 1,
       productId: 6
     },
     {
-      quantity: 6,
-      price: 806,
+      quantity: 2,
+      price: 2222,
       orderId: 4,
       productId: 7
     },
     {
-      quantity: 6,
-      price: 806,
+      quantity: 1,
+      price: 420,
       orderId: 5,
       productId: 8
     }

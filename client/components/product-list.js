@@ -18,44 +18,47 @@ class ProductList extends Component {
 
   render() {
     const products = this.props.products || []
-    if (products.length > 0) {
-      return (
-        <div>
-          <h1>Teas</h1>
-          <Link to="/products/add">Add Product</Link>
-          <ul>
-            {products.map(product => (
-              <li key={product.id}>
-                <Link to={`/products/${product.id}`}>
-                  <img
-                    src={`/${product.imageUrl}`}
-                    alt=""
-                    width="100px"
-                    height="100px"
-                  />
-                  <h3>{product.title}</h3>
-                  <p>{product.rating}</p>
-                  <p>{product.price}</p>
-                </Link>
+    return products.length > 0 ? (
+      <div>
+        <h1>Teas</h1>
+        <Link to="/products/add">Add Product</Link>
+        <ul>
+          {products.map(product => (
+            <li key={product.id}>
+              <Link to={`/products/${product.id}`}>
+                <img
+                  src={`/${product.imageUrl}`}
+                  alt=""
+                  width="100px"
+                  height="100px"
+                />
+                <h3>{product.title}</h3>
+                <p>Price: {product.price}</p>
+                <p>Inventory Quantity: {product.inventoryQty}</p>
+              </Link>
+              {this.props.user.roleId === 1 ? (
                 <button
                   type="submit"
                   value={product}
                   onClick={() => this.handleClick(product)}
-                  className="btn"
                 >
                   Delete
                 </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )
-    }
-    return <div>There are no products in the database.</div>
+              ) : (
+                <p />
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    ) : (
+      <div>Empty Inventory!</div>
+    )
   }
 }
 
 const mapStateToProps = state => ({
+  user: state.user,
   products: state.products.all
 })
 

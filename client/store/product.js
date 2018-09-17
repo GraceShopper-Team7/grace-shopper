@@ -7,6 +7,8 @@ const DELETE_PRODUCT = 'DELETE_PRODUCT'
 const GET_NEW_PRODUCT = 'GET_NEW_PRODUCT'
 const EDIT_PRODUCT = 'EDIT_PRODUCT'
 const SEARCH_PRODUCT = 'SEARCH_PRODUCT'
+const CHANGE_QUANTITY = 'CHANGE_QUANTITY'
+
 //ACTION CREATORS
 const setProductsInStore = function(products) {
   return {
@@ -42,6 +44,11 @@ const editProduct = product => ({
   product
 })
 
+const getUpdateProductQuantityAfterAddingToCart = updatedProduct => ({
+  type: CHANGE_QUANTITY,
+  updatedProduct
+})
+
 //THUNK CREATORS
 export const fetchProducts = () => {
   return async dispatch => {
@@ -50,7 +57,6 @@ export const fetchProducts = () => {
     let res = await axios.get('/api/products')
     let products = res.data
     const action = setProductsInStore(products)
-    console.log("I'm done fetching..., let's dispatch to the store")
     dispatch(action)
   }
 }
@@ -88,6 +94,12 @@ export const updateProduct = product => async dispatch => {
   dispatch(editProduct(updatedProduct))
 }
 
+export const decreaseQuantityAfterAddingToCart = product => async dispatch => {
+  let res = await axios.get(`/api/products/${product.id}`)
+  let updatedProduct = res.data
+  dispatch(getUpdateProductQuantityAfterAddingToCart(updatedProduct))
+}
+
 //REDUCER
 const productReducer = (
   state = {
@@ -100,6 +112,7 @@ const productReducer = (
   },
   action
 ) => {
+  console.log('action: ', action)
   switch (action.type) {
     case GET_PRODUCTS_FROM_SERVER:
       return {
@@ -132,6 +145,16 @@ const productReducer = (
       return {
         ...state,
         searchString: action.searchString
+      }
+    case CHANGE_QUANTITY:
+      return {
+        ...state,
+        all: [
+          ...state.all.filter(
+            product => product.id !== action.updatedProduct.id
+          ),
+          action.updatedProduct
+        ]
       }
     default:
       return state

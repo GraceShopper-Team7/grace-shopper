@@ -11,11 +11,11 @@ const OrderProduct = db.define('orderProduct', {
     }
   },
   price: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
+    type: Sequelize.INTEGER
+    // allowNull: false,
+    // validate: {
+    //   notEmpty: true
+    // }
   },
   imageUrl: {
     type: Sequelize.STRING,
