@@ -15,7 +15,6 @@ const gotNewReview = review => {
 
 export const addReview = ({productId, userId, review}) => {
   return async dispatch => {
-    console.log('Review in thunk', {productId, userId, review})
     let res = await axios.post(`/api/products/${productId}/addreview`, {
       userId,
       review
