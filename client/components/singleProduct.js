@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchSingleProduct} from '../store/product'
 import EditProduct from './edit-product'
-
+import {Tab} from '@material-ui/core'
 class SingleProduct extends Component {
   componentDidMount() {
     const productId = Number(this.props.match.params.id)
@@ -34,6 +34,7 @@ class SingleProduct extends Component {
           {product.ingredients && product.ingredients[1]},{' '}
           {product.ingredients && product.ingredients[2]}
         </p>
+        {/* <Tab label="Write a Review" href={`/products/${product.id}/addreview`} /> */}
         <Link to={`/products/${product.id}/addreview`}>Write a Review</Link>
         {reviews.length > 0 ? (
           <div>
