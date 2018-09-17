@@ -73,7 +73,11 @@ class Admin extends Component {
             <Button onClick={this.handleCancel} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.handleSend} color="primary">
+            <Button
+              onClick={this.handleSend}
+              color="primary"
+              disabled={!this.state.tracking}
+            >
               Send
             </Button>
           </DialogActions>
