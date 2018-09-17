@@ -205,7 +205,7 @@ async function seed() {
       state: 'SC',
       country: 'USA',
       zipcode: '29676',
-      isPrimary: false,
+      isPrimary: true,
       userId: 1
     },
     {
@@ -240,8 +240,6 @@ async function seed() {
   const orders = [
     {
       status: 'created',
-      tracking: 'GS4536',
-      stripeToken: 'tok_1AH2kcF89KLdg',
       userId: 1
     },
     {
@@ -257,14 +255,12 @@ async function seed() {
       userId: 1
     },
     {
-      status: 'created',
-      tracking: 'GS8965',
+      status: 'ordered',
       stripeToken: 'tok_i45GJk68NOe90',
       userId: 2
     },
     {
       status: 'ordered',
-      tracking: 'GS1078',
       stripeToken: 'tok_yO98JgHTR10dJ',
       userId: 3
     }
