@@ -116,7 +116,6 @@ const styles = theme => ({
     }
   }
 })
-// const Navbar = (props) =>
 class Navbar extends Component {
   constructor(props) {
     super(props)
@@ -134,12 +133,6 @@ class Navbar extends Component {
 
       this.props.findProduct(event.target.value)
       this.props.history.push('/products/searchedProducts')
-      // this.props.findProduct(this.state.searchString);
-      // } else if (this.props.cancelOnEscape && (e.charCode === 27 || e.key === 'Escape')) {
-      // 	this.handleCancel();
-      // }
-      // if (this.props.onKeyUp) {
-      // 	this.props.onKeyUp(e);
     }
   }
 
@@ -285,7 +278,6 @@ const mapDispatch = dispatch => {
       dispatch(logout())
     },
     findProduct: searchString => dispatch(findProduct(searchString))
-    // loadProduct: (productId) => dispatch(fetchSingleProduct(productId))
   }
 }
 const withStyleNavbar = withStyles(styles)(withRouter(Navbar))

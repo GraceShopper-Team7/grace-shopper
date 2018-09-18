@@ -37,7 +37,7 @@ class AddReview extends Component {
       this.props.user.id,
       {...this.state}
     )
-    // this.props.history.push(`/products`);
+    this.props.history.push(`/products`)
   }
 
   render() {

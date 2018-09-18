@@ -6,7 +6,7 @@
 export {default as Navbar} from './navbar'
 export {default as UserHome} from './user-home'
 export {Login} from './auth-form'
-export {Signup} from './sign-up'
+export {default as Signup} from './sign-up'
 export {default as ProductList} from './product-list'
 export {default as AddProduct} from './add-product'
 export {default as AddReview} from './add-review'

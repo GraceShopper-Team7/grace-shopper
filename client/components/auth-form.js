@@ -143,7 +143,7 @@ const mapDispatch = dispatch => {
 const withStyleAuthForm = withStyles(styles)(AuthForm)
 export const Login = connect(mapLogin, mapDispatch)(withStyleAuthForm)
 
-export const Signup = connect(mapSignup, mapDispatch)(withStyleAuthForm)
+// export const Signup = connect(mapSignup, mapDispatch)(withStyleAuthForm)
 
 /**
  * PROP TYPES
