@@ -3,7 +3,8 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchSingleProduct} from '../store/product'
 import EditProduct from './edit-product'
-import {Tab} from '@material-ui/core'
+import GradeIcon from '@material-ui/icons/Grade'
+
 class SingleProduct extends Component {
   componentDidMount() {
     const productId = Number(this.props.match.params.id)
@@ -11,10 +12,15 @@ class SingleProduct extends Component {
   }
 
   render() {
-    console.log('this.props-render: ', this.props)
     const product = this.props.singleProduct
     const reviews = product.reviews || []
-    console.log('product-render: ', product)
+    const rating = Math.floor(
+      reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length
+    )
+    let grades = []
+    for (let i = 0; i < rating; ++i) {
+      grades.push(<GradeIcon />)
+    }
 
     if (!product) {
       return <h1>this tea does not exist yet!</h1>
@@ -24,8 +30,8 @@ class SingleProduct extends Component {
       <div>
         <h1>{product.title}</h1>
         <img src={`/${product.imageUrl}`} width="100px" height="100px" />
-
         <h3>Tea details...</h3>
+        <p>{grades}</p>
         <p>price: {product.price}</p>
         <p>current inventory: {product.inventoryQty}</p>
         <p>description: {product.description}</p>
