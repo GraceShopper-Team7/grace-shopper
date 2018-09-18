@@ -1,8 +1,58 @@
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
 import React, {Component} from 'react'
 import {fetchProducts, removeProduct} from '../store/product'
 import ProductDisplay from './product-display'
+import PropTypes from 'prop-types'
+import {withStyles} from '@material-ui/core/styles'
+import Grid from '@material-ui/core/Grid'
+
+const styles = theme => ({
+  appBar: {
+    position: 'relative'
+  },
+  icon: {
+    marginRight: theme.spacing.unit * 2
+  },
+  heroUnit: {
+    backgroundColor: theme.palette.background.paper
+  },
+  heroContent: {
+    maxWidth: 600,
+    margin: '0 auto',
+    padding: `${theme.spacing.unit * 8}px 0 ${theme.spacing.unit * 6}px`
+  },
+  heroButtons: {
+    marginTop: theme.spacing.unit * 4
+  },
+  layout: {
+    width: 'auto',
+    marginLeft: theme.spacing.unit * 3,
+    marginRight: theme.spacing.unit * 3,
+    [theme.breakpoints.up(1100 + theme.spacing.unit * 3 * 2)]: {
+      width: 1100,
+      marginLeft: 'auto',
+      marginRight: 'auto'
+    }
+  },
+  cardGrid: {
+    padding: `${theme.spacing.unit * 8}px 0`
+  },
+  card: {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  cardMedia: {
+    paddingTop: '56.25%' // 16:9
+  },
+  cardContent: {
+    flexGrow: 1
+  },
+  footer: {
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing.unit * 6
+  }
+})
 
 class ProductList extends Component {
   constructor(props) {
@@ -18,17 +68,14 @@ class ProductList extends Component {
   }
 
   render() {
+    const {classes} = this.props
     const products = this.props.products || []
     const user = this.props.user
     return products.length > 0 ? (
-      <div>
-        <h1>Teas</h1>
-        {this.props.user.roleId === 1 && (
-          <Link to="/products/add">Add Product</Link>
-        )}
-        <ul>
+      <div className={classes.root}>
+        <Grid container spacing={40}>
           {products.map(product => (
-            <li key={product.id}>
+            <Grid item key={product.id} sm={6} md={4} lg={3}>
               <ProductDisplay
                 product={product}
                 handleClick={this.handleClick}
@@ -42,9 +89,9 @@ class ProductList extends Component {
                   Delete
                 </button>
               )}
-            </li>
+            </Grid>
           ))}
-        </ul>
+        </Grid>
       </div>
     ) : (
       <div>Empty Inventory!</div>
@@ -62,4 +109,11 @@ const mapDispatchToProps = dispatch => ({
   deleteProduct: id => dispatch(removeProduct(id))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductList)
+const withStyleProductList = withStyles(styles)(ProductList)
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withStyleProductList
+)
+
+ProductList.propTypes = {
+  classes: PropTypes.object.isRequired
+}
