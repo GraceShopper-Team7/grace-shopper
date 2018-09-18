@@ -1,7 +1,6 @@
 import Button from '@material-ui/core/Button'
 import InputLabel from '@material-ui/core/InputLabel'
 import FormControl from '@material-ui/core/FormControl'
-import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import {withStyles} from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
@@ -42,7 +41,6 @@ class AddReview extends Component {
 
   render() {
     const {classes} = this.props
-    console.log('In Add Review', this.props)
     return (
       <div className={classes.root}>
         <Typography variant="display2" gutterBottom>
@@ -75,7 +73,6 @@ class AddReview extends Component {
 }
 const mapDispatch = dispatch => ({
   submitReview: (productId, userId, review) => {
-    // const singleReview = { productId, userId, review };
     dispatch(addReview({productId, userId, review}))
   }
 })
@@ -92,7 +89,3 @@ AddReview.propTypes = {
 
 const withStyleAddReview = withStyles(styles)(AddReview)
 export default connect(mapStateToProps, mapDispatch)(withStyleAddReview)
-
-// const connectedAddReview = connect(mapStateToProps, mapDispatch)(AddReview);
-// // const connectedAddReviewWithStyle = withStyles(styles)(connectedAddReview);
-// export default connectedAddReview;

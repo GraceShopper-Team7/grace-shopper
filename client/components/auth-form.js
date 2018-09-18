@@ -120,15 +120,6 @@ const mapLogin = state => {
     error: state.user.error
   }
 }
-
-const mapSignup = state => {
-  return {
-    name: 'signup',
-    displayName: 'Sign Up',
-    error: state.user.error
-  }
-}
-
 const mapDispatch = dispatch => {
   return {
     handleSubmit(evt) {
@@ -142,8 +133,6 @@ const mapDispatch = dispatch => {
 }
 const withStyleAuthForm = withStyles(styles)(AuthForm)
 export const Login = connect(mapLogin, mapDispatch)(withStyleAuthForm)
-
-// export const Signup = connect(mapSignup, mapDispatch)(withStyleAuthForm)
 
 /**
  * PROP TYPES

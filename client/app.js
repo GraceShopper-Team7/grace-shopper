@@ -1,11 +1,9 @@
 import React, {Component} from 'react'
-import {Route, NavLink, Switch, withRouter} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 import {withStyles} from '@material-ui/core/styles'
 import {Navbar} from './components'
 import Routes from './routes'
 
-// import ConnectedSingleProduct from './singleProduct'
-//
 const styles = theme => ({
   root: {
     width: 'auto',

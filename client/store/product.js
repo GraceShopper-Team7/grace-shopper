@@ -70,8 +70,7 @@ export const fetchSingleProduct = productId => {
 }
 export const findProduct = searchString => {
   return async dispatch => {
-    let res = await axios.get('/api/products')
-    let products = res.data
+    await axios.get('/api/products')
     dispatch(getSearchedProduct(searchString))
   }
 }
@@ -111,7 +110,6 @@ const productReducer = (
   },
   action
 ) => {
-  console.log('action: ', action)
   switch (action.type) {
     case GET_PRODUCTS_FROM_SERVER:
       return {

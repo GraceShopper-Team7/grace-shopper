@@ -64,7 +64,6 @@ class Signup extends Component {
   }
   handleSubmit(evt) {
     evt.preventDefault()
-    console.log('inside handle submit', this.props.name)
     this.props.submitUser({...this.state}).then(() => {
       this.props.history.push('/')
     })
