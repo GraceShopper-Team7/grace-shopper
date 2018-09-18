@@ -10,9 +10,7 @@ const SET_USER = 'SET_USER'
 /**
  * INITIAL STATE
  */
-const defaultUser = {
-  user: {}
-}
+const defaultUser = {}
 
 /**
  * ACTION CREATORS
@@ -79,8 +77,7 @@ export default function(state = defaultUser, action) {
       return defaultUser
     case SET_USER:
       return {
-        ...state,
-        user: action.user
+        state: action.user
       }
     default:
       return state
