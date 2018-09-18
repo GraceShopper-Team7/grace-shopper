@@ -7,6 +7,57 @@ import {
 } from '../store/product'
 import {addProductToOrderProducts} from '../store/cart'
 import ProductDisplay from './product-display'
+import {withStyles} from '@material-ui/core/styles'
+import Grid from '@material-ui/core/Grid'
+import PropTypes from 'prop-types'
+
+const styles = theme => ({
+  appBar: {
+    position: 'relative'
+  },
+  icon: {
+    marginRight: theme.spacing.unit * 2
+  },
+  heroUnit: {
+    backgroundColor: theme.palette.background.paper
+  },
+  heroContent: {
+    maxWidth: 600,
+    margin: '0 auto',
+    padding: `${theme.spacing.unit * 8}px 0 ${theme.spacing.unit * 6}px`
+  },
+  heroButtons: {
+    marginTop: theme.spacing.unit * 4
+  },
+  layout: {
+    width: 'auto',
+    marginLeft: theme.spacing.unit * 3,
+    marginRight: theme.spacing.unit * 3,
+    [theme.breakpoints.up(1100 + theme.spacing.unit * 3 * 2)]: {
+      width: 1100,
+      marginLeft: 'auto',
+      marginRight: 'auto'
+    }
+  },
+  cardGrid: {
+    padding: `${theme.spacing.unit * 8}px 0`
+  },
+  card: {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  cardMedia: {
+    paddingTop: '56.25%' // 16:9
+  },
+  cardContent: {
+    flexGrow: 1
+  },
+  footer: {
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing.unit * 6
+  }
+})
 
 class TypeProductList extends Component {
   constructor() {
@@ -30,34 +81,34 @@ class TypeProductList extends Component {
     const filteredProducts = products.filter(
       product => product.typeId === typeId
     )
-
-    if (filteredProducts.length < 1) {
-      return <h4>no teas here yet!</h4>
-    }
-
-    return (
-      <div className="type-list">
-        <ul>
-          {filteredProducts &&
-            filteredProducts.map(product => (
-              <li key={product.id}>
-                <ProductDisplay
-                  product={product}
-                  handleClick={this.handleClick}
-                />
-                <span>
-                  {' '}
-                  <button
-                    type="submit"
-                    onClick={() => this.addNewOrderProduct(product, user)}
-                  >
-                    Add to Cart!
-                  </button>
-                </span>
-              </li>
-            ))}
-        </ul>
+    const {classes} = this.props
+    return products.length > 0 ? (
+      <div className={classes.root}>
+        <Grid container spacing={40}>
+          {filteredProducts.map(product => (
+            <Grid item key={product.id} sm={6} md={4} lg={3}>
+              <ProductDisplay
+                product={product}
+                handleClick={this.handleClick}
+                user={user}
+                addToCart={this.addNewOrderProduct}
+              />
+              {/*
+              {user.roleId === 1 && (
+                <button
+                  type="submit"
+                  value={product}
+                  onClick={() => this.handleClick(product)}
+                >
+                  Delete
+                </button>
+              )}*/}
+            </Grid>
+          ))}
+        </Grid>
       </div>
+    ) : (
+      <div>Empty Inventory!</div>
     )
   }
 }
@@ -79,8 +130,13 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
+const withStyleTypeProductList = withStyles(styles)(TypeProductList)
 const ConnectedTypeProductList = connect(mapStateToProps, mapDispatchToProps)(
-  TypeProductList
+  withStyleTypeProductList
 )
 
 export default ConnectedTypeProductList
+
+TypeProductList.propTypes = {
+  classes: PropTypes.object.isRequired
+}

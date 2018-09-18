@@ -229,4 +229,3 @@ const mapDispatchToProps = dispatch => {
 export default connect(mapStateToProps, mapDispatchToProps)(
   withStyles(styles)(Checkout)
 )
-//export default withStyles(styles)(Checkout)
