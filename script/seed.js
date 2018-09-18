@@ -75,23 +75,21 @@ async function seed() {
   const products = [
     {
       title: 'Invisibilitea',
-      //imageUrl: 'img1.jpg',
+      imageUrl: 'INVISIBILITEA.PNG',
       price: 183,
       description:
         'feeling a bit conspicuous? drink this tea to fade in the background for a moment or so. Fragrant and subtle flavors with soft floral notes.',
       typeId: 1,
-      categoryId: 2,
       ingredients: ['honeysuckle', 'unicorn tears', 'leprechaun yawns'],
       inventoryQty: 56
     },
     {
       title: 'Honestea',
-      //imageUrl: 'img2.jpg',
+      imageUrl: 'HONESTEA.PNG',
       price: 764,
       description:
         'trying to catch someone in a lie? brew the culprit a bit of Honestea. this black tea will sniff out the whitest of lies.',
       typeId: 2,
-      categoryId: 2,
       ingredients: ['licorice', 'fairy dust', 'cobwebs'],
       inventoryQty: 88
     },
@@ -100,9 +98,8 @@ async function seed() {
       //imageUrl: 'img3.jpg',
       price: 999,
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        'Like a black swan, this tea is hard stuff to find. If it is in stock, gab it while you can--you will not regret it. Smooth and sweet with a bit of bite.',
       typeId: 3,
-      categoryId: 1,
       ingredients: ['sun dried fig', 'hazel', 'four leaf clover'],
       inventoryQty: 2
     },
@@ -111,42 +108,38 @@ async function seed() {
       //imageUrl: 'img3.jpg',
       price: 678,
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        'Put somes pep in your step and edge to your soul. Impossibly incandescent.Slimy and suave like an electric eel. Ginger and firefly flavors blend to give a unique rounding out to this tea',
       typeId: 4,
-      categoryId: 1,
       ingredients: ['black pepper', 'crushed fireflies', 'ginger'],
       inventoryQty: 50
     },
     {
       title: 'Toxicitea',
-      //imageUrl: 'img3.jpg',
+      imageUrl: 'TOXICITEA.PNG',
       price: 678,
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
       typeId: 3,
-      categoryId: 1,
       ingredients: ['hemlock', 'rattlesnake venom', 'fennel'],
       inventoryQty: 968
     },
     {
       title: 'Puritea',
-      //imageUrl: 'img3.jpg',
+      imageUrl: 'PURITEA.PNG',
       price: 1111,
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        'Tast the angelic, innocent and clean qualities of the tea. Even just a whiff will give your soul short refuge from all your sins. The acidity of the lemon plays with the spiky texture of the crushed pearl. Warning: this tea has a particular flavor and may give you cottonmouth. ',
       typeId: 2,
-      categoryId: 1,
       ingredients: ['pearl', 'cotton', 'lemon'],
       inventoryQty: 14
     },
     {
       title: 'Expressivitea',
-      //imageUrl: 'img3.jpg',
+      imageUrl: 'EXPRESSIVITEA.PNG',
       price: 1111,
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        'Free your souls and let your flag--however it looks, feels,sounds-FLY! Free yourself on inhibitions and find the courage to let go of your inhibitions. Give this tea to your uptight friend (you know the one)...or your mother. This flavor is fresh, clear and a bit earthy.',
       typeId: 1,
-      categoryId: 1,
       ingredients: ['juniper berry', 'tea tree oil', 'acorn essence'],
       inventoryQty: 16
     },
@@ -155,11 +148,130 @@ async function seed() {
       //imageUrl: 'img3.jpg',
       price: 420,
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        'A crowd pleaser, this special tea may still be illegal in some states. Please drink with care. The plant is carefully cultivated and hearvested annually on the April full moon at the 20th hour. Will cause languid attitudes and laid back behaviors in most. ',
       typeId: 2,
-      categoryId: 1,
       ingredients: ['canabis bud', 'mountain yam', 'sea mist'],
       inventoryQty: 420
+    },
+    {
+      title: 'Vitalitea',
+      //imageUrl: 'img3.jpg',
+      price: 778,
+      description:
+        'Banish your lethargic behavior, weak breathing and downcast outlook with a cup of Vitalitea. Feel as strong an ox, as invicible as a bull--as pulsing as a beating heart in love. Tangy and metallic notes permeated this tea.',
+      typeId: 3,
+      ingredients: ['freckled banana peel', 'marrow', 'rose hips'],
+      inventoryQty: 50
+    },
+    {
+      title: 'Obscenitea',
+      imageUrl: 'OBSCENITEA.PNG',
+      price: 659,
+      description:
+        'For your worst enemy, or just your frenemey. Help show the world who they really are. Brew them a cup of this and you will have them spewing @#%$, *@$% & @%^&%s all week long. Be sure to brew for ten minutes in 89.9 degree water.',
+      typeId: 1,
+      ingredients: ['brass', 'hibiscus', 'distilled acid rain salt'],
+      inventoryQty: 50
+    },
+    {
+      title: 'Invincibilitea',
+      //imageUrl: 'img3.jpg',
+      price: 5988,
+      description:
+        '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      typeId: 2,
+      ingredients: ['lotus blossom', 'fine coral', 'pheonix egg'],
+      inventoryQty: 50
+    },
+    {
+      title: 'Eccentricitea',
+      //imageUrl: 'img3.jpg',
+      price: 7988,
+      description:
+        '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      typeId: 2,
+      ingredients: ['hibiscus', 'ground pebble', 'river currents'],
+      inventoryQty: 50
+    },
+    {
+      title: 'Tranquilitea',
+      //imageUrl: 'img3.jpg',
+      price: 7988,
+      description:
+        '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      typeId: 3,
+      ingredients: ['soft fern', 'stream silt', 'blackberry currant'],
+      inventoryQty: 50
+    },
+    {
+      title: 'Responsibilitea',
+      //imageUrl: 'img3.jpg',
+      price: 1076,
+      description:
+        '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      typeId: 1,
+      ingredients: ['flint', 'lemongrass', 'dried orange peel'],
+      inventoryQty: 50
+    },
+    {
+      title: 'Paradoxicalitea',
+      //imageUrl: 'img3.jpg',
+      price: 1076,
+      description:
+        '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      typeId: 2,
+      ingredients: ['manuka honey', 'dandelion', 'cloud whisp'],
+      inventoryQty: 50
+    },
+    {
+      title: 'Creativitea',
+      //imageUrl: 'img3.jpg',
+      price: 3057,
+      description:
+        '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      typeId: 3,
+      ingredients: ['puka whiskers', 'lavender', 'pine cone bits'],
+      inventoryQty: 50
+    },
+    {
+      title: 'Integritea',
+      //imageUrl: 'img3.jpg',
+      price: 3057,
+      description:
+        '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      typeId: 3,
+      ingredients: ['lava powder', 'shaved snake skin', 'raspberry leaf'],
+      inventoryQty: 50
+    },
+    {
+      title: 'Conformitea',
+      imageUrl: 'CONFORMITEA.PNG',
+      price: 3057,
+      description:
+        '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      typeId: 1,
+      ingredients: ['sheeps wool', 'vermillion thread', 'red ant legs'],
+      inventoryQty: 50
+    },
+    {
+      title: 'Impossibilitea',
+      //imageUrl: 'img3.jpg',
+      price: 3057,
+      description:
+        '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      typeId: 2,
+      ingredients: ['royal jelly', 'gold dust', 'sun beam'],
+      inventoryQty: 50
+    },
+    {
+      title: 'Tealeportation',
+      //imageUrl: 'img3.jpg',
+      price: 3057,
+      description:
+        '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      typeId: 2,
+      ingredients: ['dove feather', 'puffed corn kernel', 'mountain shadow'],
+      inventoryQty: 50
     }
   ]
   // const categories = [
