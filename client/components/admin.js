@@ -1,5 +1,6 @@
 import {connect} from 'react-redux'
 import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
 import {fetchOrders, shipOrder} from '../store/admin'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
@@ -43,6 +44,7 @@ class Admin extends Component {
     const orders = this.props.orders || []
     return orders.length > 0 ? (
       <div>
+        <Link to="/products/add">Add Product</Link>
         <h1>Orders</h1>
         <ul>
           {orders.map(order => (

@@ -2,7 +2,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import React, {Component} from 'react'
 import {fetchProducts, removeProduct} from '../store/product'
-import AllProducts from './product-display'
+import ProductDisplay from './product-display'
 
 class ProductList extends Component {
   constructor(props) {
@@ -23,11 +23,16 @@ class ProductList extends Component {
     return products.length > 0 ? (
       <div>
         <h1>Teas</h1>
-        <Link to="/products/add">Add Product</Link>
+        {this.props.user.roleId === 1 && (
+          <Link to="/products/add">Add Product</Link>
+        )}
         <ul>
           {products.map(product => (
             <li key={product.id}>
-              <AllProducts product={product} handleClick={this.handleClick} />
+              <ProductDisplay
+                product={product}
+                handleClick={this.handleClick}
+              />
               {user.roleId === 1 && (
                 <button
                   type="submit"

@@ -4,12 +4,22 @@ module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    const products = await Product.findAll()
+    //const products = await Product.findAll()
+    const products = await Product.findAll({
+      include: [
+        {
+          model: Review,
+          required: false
+        }
+      ]
+    })
+
     res.json(products)
   } catch (err) {
     next(err)
   }
 })
+
 router.get('/searchedProducts', async (req, res, next) => {
   try {
     console.log('api route', req)
@@ -19,6 +29,7 @@ router.get('/searchedProducts', async (req, res, next) => {
     next(err)
   }
 })
+
 router.get('/:productId', async (req, res, next) => {
   try {
     const id = req.params.productId
@@ -39,6 +50,7 @@ router.get('/:productId', async (req, res, next) => {
     next(err)
   }
 })
+
 router.post('/:productId/addreview', async (req, res, next) => {
   try {
     const addReview = await Review.create({
@@ -52,6 +64,7 @@ router.post('/:productId/addreview', async (req, res, next) => {
     next(err)
   }
 })
+
 router.post('/', async (req, res, next) => {
   try {
     const product = await Product.create(req.body)
