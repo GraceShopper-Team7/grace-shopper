@@ -8,6 +8,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import React, {Component} from 'react'
 import {addReview} from '../store/review'
+import {Input} from '@material-ui/core'
 
 const initialState = {
   rating: 0,
@@ -50,17 +51,13 @@ class AddReview extends Component {
         <form onSubmit={this.handleSubmit}>
           <FormControl>
             <InputLabel>Rating</InputLabel>
-            <TextField
-              name="rating"
-              onChange={this.handleChange}
-              margin="normal"
-            />
+            <Input name="rating" onChange={this.handleChange} margin="normal" />
           </FormControl>
 
           <br />
           <FormControl>
             <InputLabel>Review</InputLabel>
-            <TextField
+            <Input
               name="content"
               onChange={this.handleChange}
               margin="normal"
