@@ -6,7 +6,7 @@ import {
   decreaseQuantityAfterAddingToCart
 } from '../store/product'
 import {addProductToOrderProducts} from '../store/cart'
-import AllProducts from './product-display'
+import ProductDisplay from './product-display'
 
 class TypeProductList extends Component {
   constructor() {
@@ -41,7 +41,10 @@ class TypeProductList extends Component {
           {filteredProducts &&
             filteredProducts.map(product => (
               <li key={product.id}>
-                <AllProducts product={product} handleClick={this.handleClick} />
+                <ProductDisplay
+                  product={product}
+                  handleClick={this.handleClick}
+                />
                 <span>
                   {' '}
                   <button
