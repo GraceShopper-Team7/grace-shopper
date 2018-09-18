@@ -41,6 +41,15 @@ const styles = theme => ({
       backgroundColor: 'transparent'
     }
   },
+  header: {
+    textTransform: 'capitalize',
+    backgroundColor: 'transparent',
+    '&:hover': {
+      backgroundColor: 'transparent'
+    },
+    fontFamily: 'Lobster',
+    fontSize: '28pt'
+  },
   grow: {
     flexGrow: 1
   },
@@ -179,7 +188,15 @@ class Navbar extends Component {
             noWrap
             className={classes.toolbarTitle}
           >
-            Deja Brew
+            <Button
+              size="large"
+              href="/"
+              disableFocusRipple
+              disableRipple
+              className={classes.header}
+            >
+              Deja Brew
+            </Button>
           </Typography>
           <IconButton href="/cart">
             <CartIcon />
