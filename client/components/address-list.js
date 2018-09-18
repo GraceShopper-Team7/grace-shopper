@@ -7,7 +7,6 @@ import RadioGroup from '@material-ui/core/RadioGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormControl from '@material-ui/core/FormControl'
 import {fetchAddresses, selectAddress} from '../store/address'
-import {me} from '../store/user'
 import AddressForm from './address-form'
 
 const styles = theme => ({
@@ -23,12 +22,22 @@ const styles = theme => ({
 })
 
 class AddressList extends React.Component {
-  componentDidMount() {
-    this.props.loadUser()
+  constructor() {
+    super()
+    this.state = {}
   }
 
-  componentDidUpdate() {
-    if (this.props.addresses.length === 0 && this.props.user.id) {
+  componentDidMount() {
+    if (this.props.isFetching && this.props.user.id) {
+      this.props.loadAddresses(this.props.user.id)
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      (prevProps.user !== this.props.user || this.props.isFetching) &&
+      this.props.user.id
+    ) {
       this.props.loadAddresses(this.props.user.id)
     }
   }
@@ -38,6 +47,9 @@ class AddressList extends React.Component {
   }
 
   render() {
+    if (this.props.isFetching) {
+      return <div>Loading addresses!</div>
+    }
     const {classes} = this.props
     const addresses = this.props.addresses || []
     return (
@@ -79,15 +91,16 @@ AddressList.propTypes = {
 }
 
 const mapStateToProps = state => {
+  console.log('state in addresS', state)
   return {
     user: state.user,
     addresses: state.user.id ? state.addresses.all : [],
-    selected: state.addresses.selected
+    selected: state.addresses.selected,
+    isFetching: state.addresses.isFetching
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  loadUser: () => dispatch(me()),
   loadAddresses: userId => dispatch(fetchAddresses(userId)),
   selectAddress: addrId => dispatch(selectAddress(addrId))
 })
