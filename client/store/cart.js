@@ -82,7 +82,8 @@ const initialState = {
     id: null,
     products: []
   },
-  pastOrdersArr: []
+  pastOrdersArr: [],
+  isFetchingCart: true
   // products: state.products
   // selected: {},
   // isLoading: false,
@@ -97,6 +98,7 @@ const cartReducer = (state = initialState, action) => {
     case GET_ORDERPRODUCTS_FROM_SERVER:
       return {
         ...state,
+        isFetchingCart: false,
         currentOrder: {
           id: action.currentOrder[0].id,
           products: action.currentOrder[0].products

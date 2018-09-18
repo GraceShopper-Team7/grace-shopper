@@ -29,7 +29,8 @@ export const selectAddress = id => dispatch => {
 
 const initialState = {
   all: [],
-  selected: null
+  selected: null,
+  isFetching: true
 }
 
 export default function(state = initialState, action) {
@@ -37,7 +38,12 @@ export default function(state = initialState, action) {
     case GOT_ADDRESSES: {
       const addresses = action.addresses
       const selected = addresses.length === 0 ? null : addresses[0].id
-      return {...state, all: addresses, selected: selected}
+      return {
+        ...state,
+        all: addresses,
+        selected: selected,
+        isFetching: false
+      }
     }
     case SELECT_ADDRESS:
       return {...state, selected: action.id}

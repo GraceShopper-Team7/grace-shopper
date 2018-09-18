@@ -97,18 +97,7 @@ class Cart extends Component {
               {currentOrderProducts && findTotalPrice(currentOrderProducts)}{' '}
             </h4>
           </ul>
-          <NavLink
-            to={{
-              pathname: '/checkout',
-              state: {
-                amount: findTotalPrice(currentOrderProducts),
-                orderId: orders.currentOrder.id,
-                user: this.props.user
-              }
-            }}
-          >
-            Checkout
-          </NavLink>
+          <NavLink to="/checkout">Checkout</NavLink>
         </div>
 
         <div className="past-order-cart">

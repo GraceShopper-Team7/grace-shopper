@@ -64,8 +64,10 @@ class Checkout extends React.Component {
     }
   }
 
-  componentDidMount() {
-    this.props.loadOrders(this.props.user)
+  componentDidUpdate(prevProps) {
+    if (this.props.user !== prevProps.user) {
+      this.props.loadOrders(this.props.user)
+    }
   }
 
   handleNext = () => {
@@ -88,11 +90,20 @@ class Checkout extends React.Component {
     })
   }
 
+  amount = () => {
+    if (!this.props || !this.props.cart) {
+      return 0
+    }
+    return this.props.cart.currentOrder.products.reduce((sum, prod) => {
+      return sum + prod.orderProduct.price * prod.orderProduct.quantity
+    }, 0)
+  }
+
   onToken = async token => {
     await axios.post('/api/cart', {
       token,
-      amount: this.props.location.state.amount,
-      orderId: this.props.location.state.orderId
+      amount: this.amount(),
+      orderId: this.props.cart.currentOrder.id
     })
     this.handleNext()
   }
@@ -115,10 +126,11 @@ class Checkout extends React.Component {
   }
 
   render() {
+    if (this.props.isFetching) {
+      return <span>Fetching cart data</span>
+    }
     const {classes} = this.props
     const {activeStep} = this.state
-    console.log('State in checkout:', this.state)
-    console.log('Props in Checkout', this.props)
 
     return (
       <React.Fragment>
@@ -143,9 +155,9 @@ class Checkout extends React.Component {
                     Thank you for your order.
                   </Typography>
                   <Typography variant="subheading">
-                    Your order number is #{this.props.location.state.orderId}.
-                    We have emailed your order confirmation, and will send you
-                    an update when your order has shipped.
+                    Your order number is #{this.props.cart.currentOrder.id}. We
+                    have emailed your order confirmation, and will send you an
+                    update when your order has shipped.
                   </Typography>
                 </React.Fragment>
               ) : (
@@ -163,7 +175,7 @@ class Checkout extends React.Component {
                     {activeStep === steps.length - 1 ? (
                       <StripeCheckout
                         token={this.onToken}
-                        amount={this.props.location.state.amount}
+                        amount={this.amount()}
                         stripeKey="pk_test_2eOKaGIWB9JWB9j6YyqmKMdf"
                       >
                         <Button
@@ -199,10 +211,13 @@ Checkout.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-const mapStateToProps = state => ({
-  //cart: state.cart,
-  user: state.user
-})
+const mapStateToProps = state => {
+  return {
+    isFetching: state.cart.isFetchingCart,
+    cart: state.cart,
+    user: state.user
+  }
+}
 
 const mapDispatchToProps = dispatch => {
   return {
