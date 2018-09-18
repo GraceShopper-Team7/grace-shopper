@@ -1,11 +1,12 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {NavLink} from 'react-router-dom'
+
 import {
   fetchProducts,
   decreaseQuantityAfterAddingToCart
 } from '../store/product'
 import {addProductToOrderProducts} from '../store/cart'
+import AllProducts from './product-display'
 
 class TypeProductList extends Component {
   constructor() {
@@ -40,16 +41,7 @@ class TypeProductList extends Component {
           {filteredProducts &&
             filteredProducts.map(product => (
               <li key={product.id}>
-                <NavLink to={`/products/${product.id}`}>
-                  {product.title}
-                </NavLink>
-                <img
-                  src={`/${product.imageUrl}`}
-                  width="100px"
-                  height="100px"
-                />
-                <p>Price: {product.price}</p>
-                <p>Inventory Quantity: {product.inventoryQty}</p>
+                <AllProducts product={product} handleClick={this.handleClick} />
                 <span>
                   {' '}
                   <button

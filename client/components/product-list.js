@@ -2,6 +2,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import React, {Component} from 'react'
 import {fetchProducts, removeProduct} from '../store/product'
+import AllProducts from './product-display'
 
 class ProductList extends Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class ProductList extends Component {
 
   render() {
     const products = this.props.products || []
+    const user = this.props.user
     return products.length > 0 ? (
       <div>
         <h1>Teas</h1>
@@ -25,18 +27,8 @@ class ProductList extends Component {
         <ul>
           {products.map(product => (
             <li key={product.id}>
-              <Link to={`/products/${product.id}`}>
-                <img
-                  src={`/${product.imageUrl}`}
-                  alt=""
-                  width="100px"
-                  height="100px"
-                />
-                <h3>{product.title}</h3>
-                <p>Price: {product.price}</p>
-                <p>Inventory Quantity: {product.inventoryQty}</p>
-              </Link>
-              {this.props.user.roleId === 1 && (
+              <AllProducts product={product} handleClick={this.handleClick} />
+              {user.roleId === 1 && (
                 <button
                   type="submit"
                   value={product}

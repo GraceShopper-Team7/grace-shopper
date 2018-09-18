@@ -30,21 +30,18 @@ class SearchProduct extends Component {
               <h3>{product.title}</h3>
               <p>Price: {product.price}</p>
               <p>Inventory Quantity: {product.inventoryQty}</p>
-              ) : (
-              <p />
-              )}
             </li>
           ))}
         </ul>
       </div>
     ) : (
-      <div>Empty Inventory!</div>
+      <div>Product Not Found!!!!!</div>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  searchString: state.searchString,
+  searchString: state.products.searchString,
   allProducts: state.products.all
 })
 
