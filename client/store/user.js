@@ -6,7 +6,7 @@ import history from '../history'
  */
 const GET_USER = 'GET_USER'
 export const REMOVE_USER = 'REMOVE_USER'
-
+const SET_USER = 'SET_USER'
 /**
  * INITIAL STATE
  */
@@ -17,7 +17,10 @@ const defaultUser = {}
  */
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
-
+const setUser = user => ({
+  type: SET_USER,
+  user
+})
 /**
  * THUNK CREATORS
  */
@@ -37,7 +40,6 @@ export const auth = (email, password, method) => async dispatch => {
   } catch (authError) {
     return dispatch(getUser({error: authError}))
   }
-
   try {
     dispatch(getUser(res.data))
     history.push('/home')
@@ -45,7 +47,15 @@ export const auth = (email, password, method) => async dispatch => {
     console.error(dispatchOrHistoryErr)
   }
 }
-
+export const signupthunk = user => async dispatch => {
+  let res
+  try {
+    res = await axios.post('/auth/signup', user)
+    dispatch(setUser(res.data))
+  } catch (err) {
+    console.error(err)
+  }
+}
 export const logout = () => async dispatch => {
   try {
     await axios.post('/auth/logout')
@@ -65,6 +75,10 @@ export default function(state = defaultUser, action) {
       return action.user
     case REMOVE_USER:
       return defaultUser
+    case SET_USER:
+      return {
+        state: action.user
+      }
     default:
       return state
   }

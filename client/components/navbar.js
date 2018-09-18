@@ -2,15 +2,8 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {logout} from '../store'
-import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Button from '@material-ui/core/Button'
-import {NavLink} from 'react-router-dom'
-import Menu from '@material-ui/core/Menu'
-import GridList from '@material-ui/core/GridList'
-import GridListTile from '@material-ui/core/GridListTile'
-import MenuItem from '@material-ui/core/MenuItem'
-import ToolbarGroup from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import Input from '@material-ui/core/Input'
@@ -18,8 +11,6 @@ import {fade} from '@material-ui/core/styles/colorManipulator'
 import {withStyles} from '@material-ui/core/styles'
 import SearchIcon from '@material-ui/icons/Search'
 import CartIcon from '@material-ui/icons/ShoppingCart'
-import {Tab} from '@material-ui/core'
-import Tabs from '@material-ui/core/Tabs'
 import {findProduct} from '../store/product'
 import {withRouter} from 'react-router'
 
@@ -116,7 +107,6 @@ const styles = theme => ({
     }
   }
 })
-// const Navbar = (props) =>
 class Navbar extends Component {
   constructor(props) {
     super(props)
@@ -134,12 +124,6 @@ class Navbar extends Component {
 
       this.props.findProduct(event.target.value)
       this.props.history.push('/products/searchedProducts')
-      // this.props.findProduct(this.state.searchString);
-      // } else if (this.props.cancelOnEscape && (e.charCode === 27 || e.key === 'Escape')) {
-      // 	this.handleCancel();
-      // }
-      // if (this.props.onKeyUp) {
-      // 	this.props.onKeyUp(e);
     }
   }
 
@@ -285,7 +269,6 @@ const mapDispatch = dispatch => {
       dispatch(logout())
     },
     findProduct: searchString => dispatch(findProduct(searchString))
-    // loadProduct: (productId) => dispatch(fetchSingleProduct(productId))
   }
 }
 const withStyleNavbar = withStyles(styles)(withRouter(Navbar))
