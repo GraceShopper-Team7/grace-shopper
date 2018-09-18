@@ -4,6 +4,12 @@ import {connect} from 'react-redux'
 import {logout} from '../store'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
+import Button from '@material-ui/core/Button'
+import {NavLink} from 'react-router-dom'
+import Menu from '@material-ui/core/Menu'
+import GridList from '@material-ui/core/GridList'
+import GridListTile from '@material-ui/core/GridListTile'
+import MenuItem from '@material-ui/core/MenuItem'
 import ToolbarGroup from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
@@ -11,6 +17,7 @@ import Input from '@material-ui/core/Input'
 import {fade} from '@material-ui/core/styles/colorManipulator'
 import {withStyles} from '@material-ui/core/styles'
 import SearchIcon from '@material-ui/icons/Search'
+import CartIcon from '@material-ui/icons/ShoppingCart'
 import {Tab} from '@material-ui/core'
 import Tabs from '@material-ui/core/Tabs'
 import {findProduct} from '../store/product'
@@ -18,7 +25,21 @@ import {withRouter} from 'react-router'
 
 const styles = theme => ({
   root: {
-    width: '100%'
+    width: 'auto',
+    marginLeft: theme.spacing.unit * 3,
+    marginRight: theme.spacing.unit * 3,
+    [theme.breakpoints.up(1100 + theme.spacing.unit * 3 * 2)]: {
+      width: 1100,
+      marginLeft: 'auto',
+      marginRight: 'auto'
+    }
+  },
+  menu: {
+    textTransform: 'capitalize',
+    backgroundColor: 'transparent',
+    '&:hover': {
+      backgroundColor: 'transparent'
+    }
   },
   grow: {
     flexGrow: 1
@@ -33,6 +54,16 @@ const styles = theme => ({
       display: 'block'
     }
   },
+  toolbarMain: {
+    borderBottom: `1px solid ${theme.palette.grey[300]}`
+  },
+  toolbarTitle: {
+    flex: 1
+  },
+  toolbarSecondary: {
+    justifyContent: 'space-between'
+  },
+
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -47,6 +78,7 @@ const styles = theme => ({
       width: 'auto'
     }
   },
+
   searchIcon: {
     width: theme.spacing.unit * 9,
     height: '100%',
@@ -79,7 +111,7 @@ const styles = theme => ({
 class Navbar extends Component {
   constructor(props) {
     super(props)
-    this.state = {searchString: ''}
+    this.state = {searchString: '', anchorEl: null}
     this.handleInput = this.handleInput.bind(this)
     this.handleKeyUp = this.handleKeyUp.bind(this)
   }
@@ -101,65 +133,120 @@ class Navbar extends Component {
       // 	this.props.onKeyUp(e);
     }
   }
+
+  handleTeaMenuClick = event => {
+    this.setState({anchorEl: event.currentTarget})
+  }
+
+  handleTeaMenuClose = () => {
+    this.setState({anchorEl: null})
+  }
+
   render() {
     const {classes} = this.props
     const {isLoggedIn} = this.props
     const {isAdmin} = this.props
     const {handleClick} = this.props
-    const {searchString} = this.state
+    const {searchString, anchorEl} = this.state
     return (
       <div className={classes.root}>
-        <AppBar position="static">
-          <Toolbar>
-            {isLoggedIn ? (
-              <div>
-                {/* The navbar will show these links after you log in */}
-                <Tab label="Home" href="/home" />
-                <Tab label="Logout" onClick={handleClick} href="#" />
-                {isAdmin && <Tab label="Admin" href="/admin" />}
-              </div>
-            ) : (
-              <div>
-                {/* The navbar will show these links before you log in */}
-                <Tab label="Login" href="/login" />
-                <Tab label="Sign Up" href="/signup" />
-              </div>
-            )}
-          </Toolbar>
-          <Toolbar>
+        <Toolbar className={classes.toolbarMain}>
+          {isLoggedIn ? (
             <div>
-              <Tabs>
-                <Tab label="Logo" href="/" />
-              </Tabs>
+              <Button variant="outlined" size="small" onClick={handleClick}>
+                Logout
+              </Button>
+              {isAdmin && (
+                <Button label="Admin" href="/admin">
+                  Admin
+                </Button>
+              )}
             </div>
-            <Tabs>
-              <Tab label="All Teas" href="/products" />
-              <Tab label="Black Tea" href="/types/1" />
-              <Tab label="Green Tea" href="/types/2" />
-              <Tab label="White Tea" href="/types/3" />
-              <Tab label="Herbal Tea" href="/types/4" />
-              <Tab label="Cart" href="/cart" />
-            </Tabs>
-
-            <div className={classes.grow} />
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-              <Input
-                placeholder="Search…"
-                value={searchString}
-                onChange={this.handleInput}
-                onKeyUp={this.handleKeyUp}
-                disableUnderline
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput
-                }}
-              />
+          ) : (
+            <div>
+              <Button variant="outlined" size="small" href="/signup">
+                Sign up
+              </Button>
+              <Button size="small" href="/login">
+                Login
+              </Button>
             </div>
-          </Toolbar>
-        </AppBar>
+          )}
+          <Typography
+            variant="headline"
+            color="inherit"
+            align="center"
+            noWrap
+            className={classes.toolbarTitle}
+          >
+            Deja Brew
+          </Typography>
+          <IconButton href="/cart">
+            <CartIcon />
+          </IconButton>
+        </Toolbar>
+        <Toolbar variant="dense" className={classes.toolbarSecondary}>
+          <Typography color="inherit" noWrap>
+            <Button
+              size="small"
+              href="/types/1"
+              disableFocusRipple
+              disableRipple
+              className={classes.menu}
+            >
+              Black Tea
+            </Button>
+          </Typography>
+          <Typography color="inherit" noWrap>
+            <Button
+              size="small"
+              href="/types/2"
+              disableFocusRipple
+              disableRipple
+              className={classes.menu}
+            >
+              Grean Tea
+            </Button>
+          </Typography>
+          <Typography color="inherit" noWrap>
+            <Button
+              size="small"
+              href="/types/3"
+              disableFocusRipple
+              disableRipple
+              className={classes.menu}
+            >
+              White Tea
+            </Button>
+          </Typography>
+          <Typography color="inherit" noWrap>
+            <Button
+              size="small"
+              href="/types/4"
+              disableFocusRipple
+              disableRipple
+              className={classes.menu}
+            >
+              Herbal Tea
+            </Button>
+          </Typography>
+          <div className={classes.search}>
+            <div className={classes.searchIcon}>
+              <SearchIcon />
+            </div>
+            <Input
+              placeholder="Search…"
+              value={searchString}
+              onChange={this.handleInput}
+              onKeyUp={this.handleKeyUp}
+              disableUnderline
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput
+              }}
+            />
+          </div>
+        </Toolbar>
       </div>
     )
   }
