@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {fetchSingleProduct} from '../store/product'
+import {fetchSingleProduct, removeProduct} from '../store/product'
 import EditProduct from './edit-product'
 import GradeIcon from '@material-ui/icons/Grade'
 
@@ -9,6 +9,10 @@ class SingleProduct extends Component {
   componentDidMount() {
     const productId = Number(this.props.match.params.id)
     this.props.fetchSingleProduct(productId)
+  }
+
+  handleClick(product) {
+    this.props.deleteProduct(product.id)
   }
 
   render() {
@@ -40,6 +44,16 @@ class SingleProduct extends Component {
           {product.ingredients && product.ingredients[1]},{' '}
           {product.ingredients && product.ingredients[2]}
         </p>
+        {this.props.user.roleId === 1 && (
+          <button
+            type="submit"
+            value={product}
+            onClick={() => this.handleClick(product)}
+          >
+            Delete
+          </button>
+        )}
+
         {/* <Tab label="Write a Review" href={`/products/${product.id}/addreview`} /> */}
         <Link to={`/products/${product.id}/addreview`}>Write a Review</Link>
         {reviews.length > 0 ? (
@@ -80,6 +94,9 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchSingleProduct: productId => {
       dispatch(fetchSingleProduct(productId))
+    },
+    deleteProduct: id => {
+      dispatch(removeProduct(id))
     }
   }
 }
