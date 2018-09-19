@@ -3,6 +3,41 @@ import React, {Component} from 'react'
 import {NavLink, withRouter} from 'react-router-dom'
 import {fetchOrderProducts, removeProductFromOrderProducts} from '../store/cart'
 import {me} from '../store/user'
+import {withStyles} from '@material-ui/core/styles'
+import DeleteIcon from '@material-ui/icons/Delete'
+import Typography from '@material-ui/core/Typography'
+import List from '@material-ui/core/List'
+import Button from '@material-ui/core/Button'
+import Paper from '@material-ui/core/Paper'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
+
+const styles = theme => ({
+  root: {
+    marginTop: theme.spacing.unit * 3,
+    marginLeft: theme.spacing.unit * 3,
+    marginRight: theme.spacing.unit * 3
+  },
+  order: {
+    width: 'auto',
+    margin: theme.spacing.unit * 3,
+    paddingTop: theme.spacing.unit * 3,
+    paddingBottom: theme.spacing.unit * 3,
+    [theme.breakpoints.up(1100 + theme.spacing.unit * 3 * 2)]: {
+      width: 1000,
+      marginLeft: 'auto',
+      marginRight: 'auto'
+    }
+  },
+  pastOrders: {
+    marginTop: theme.spacing.unit * 10
+  },
+  product: {
+    '&:hover': {
+      background: '#f8f7f9'
+    }
+  }
+})
 
 class Cart extends Component {
   constructor() {
@@ -23,7 +58,85 @@ class Cart extends Component {
     this.props.removeProductFromOrderProducts(product)
   }
 
+  renderOrder = (order, current) => {
+    const {classes} = this.props
+    if (!order) {
+      return <Typography />
+    }
+    return (
+      <Paper className={classes.order}>
+        <List disablePadding>
+          <ListItem>
+            {order.id && (
+              <Typography variant="title">
+                Order #{!order.tracking
+                  ? '(no tracking number)'
+                  : order.tracking}
+              </Typography>
+            )}
+          </ListItem>
+          {order.products.map(product => (
+            <ListItem className={classes.product} key={product.title}>
+              {current && (
+                <Button
+                  color="secondary"
+                  onClick={() => this.removeProductFromCart(product)}
+                  align="left"
+                >
+                  <DeleteIcon />
+                </Button>
+              )}
+              <img src={`/${product.imageUrl}`} width="30px" height="30px" />
+              <ListItemText primary={product.title} secondary={product.desc} />
+              <Typography variant="body2" align="right">
+                ${(
+                  product.orderProduct.quantity *
+                  product.orderProduct.price /
+                  100
+                ).toFixed(2)}
+                <Typography variant="caption">
+                  ({product.orderProduct.quantity}
+                  {` `} x {` `}
+                  ${(product.orderProduct.price / 100).toFixed(2)})
+                </Typography>
+              </Typography>
+            </ListItem>
+          ))}
+          <ListItem className={classes.listItem}>
+            <ListItemText primary="Total:" align="right" />
+            <Typography variant="subheading" className={classes.total}>
+              ${order.products
+                .reduce(
+                  (total, product) =>
+                    total +
+                    product.orderProduct.quantity *
+                      product.orderProduct.price /
+                      100,
+                  0
+                )
+                .toFixed(2)}
+            </Typography>
+          </ListItem>
+          {current && (
+            <ListItem className={classes.listItem}>
+              <Button
+                style={{marginLeft: '60px'}}
+                variant="contained"
+                href="/checkout"
+                color="primary"
+                align="right"
+              >
+                Checkout
+              </Button>
+            </ListItem>
+          )}
+        </List>
+      </Paper>
+    )
+  }
+
   render() {
+    const {classes} = this.props
     const orders = this.props.cart
     const user = this.props.user
 
@@ -47,99 +160,29 @@ class Cart extends Component {
       return product.id
     })
 
-    // if (currentOrderProducts.indexOf([]) !== -1) {
-    //   return <h3>one moment please</h3>
-    // }
-
     return (
-      <div>
-        <div className="header-cart">
-          <h1>CART</h1>
-        </div>
-
-        <div className="current-order-cart">
-          <h3>CURRENT ORDER</h3>
-
-          <ul>
-            {currentOrderProducts[0] &&
-              currentOrderProducts.map(product => (
-                <li key={product.id}>
-                  <NavLink to={`/products/${product.id}`}>
-                    {product.title}
-                  </NavLink>
-                  <img
-                    src={`/${product.imageUrl}`}
-                    width="100px"
-                    height="100px"
-                  />
-                  <p>Quantity: {product.orderProduct.quantity}</p>
-                  <p>Price per product: {product.price}</p>
-                  <p>
-                    Product Total:{' '}
-                    {findProductTotal(
-                      product.price,
-                      product.orderProduct.quantity
-                    )}
-                  </p>
-                  <span>
-                    {' '}
-                    <button
-                      type="submit"
-                      onClick={() => this.removeProductFromCart(product)}
-                    >
-                      Remove from Cart!
-                    </button>
-                  </span>
-                </li>
-              ))}
-            <h4>
-              Cart Total:{' '}
-              {currentOrderProducts && findTotalPrice(currentOrderProducts)}{' '}
-            </h4>
-          </ul>
-          <NavLink to="/checkout">Checkout</NavLink>
-        </div>
-
-        <div className="past-order-cart">
-          <h3>PAST ORDER(S)</h3>
+      <Typography className={classes.root}>
+        <Typography>
+          <Typography variant="title">Current Order</Typography>
+          {currentOrderProducts[0] &&
+            this.renderOrder({products: currentOrderProducts}, true)}
+        </Typography>
+        <Typography className={classes.pastOrders}>
+          <Typography variant="title">Past Order(s)</Typography>
           {user && user.id !== undefined ? (
             pastOrders && pastOrders.length ? (
-              <ul>
+              <Typography>
                 {pastOrders &&
-                  pastOrders.map(order => (
-                    <li key={order.id}>
-                      <h3>ORDER {order.tracking}</h3>
-                      <ul>
-                        {order.products &&
-                          order.products.map(product => (
-                            <li key={product.id}>
-                              <NavLink to={`/products/${product.id}`}>
-                                {product.title}
-                              </NavLink>
-                              <img
-                                src={`/${product.imageUrl}`}
-                                width="100px"
-                                height="100px"
-                              />
-                              {product.price}
-                            </li>
-                          ))}
-                      </ul>
-                      <h4>
-                        Total:{' '}
-                        {order.products && findTotalPrice(order.products)}
-                      </h4>
-                    </li>
-                  ))}
-              </ul>
+                  pastOrders.map(order => this.renderOrder(order, false))}
+              </Typography>
             ) : (
-              <p>~~~no past orders yet!~~~</p>
+              <Typography>~~~no past orders yet!~~~</Typography>
             )
           ) : (
-            <p>~~~login or sign up to view past orders!~~~</p>
+            <Typography>~~~login or sign up to view past orders!~~~</Typography>
           )}
-        </div>
-      </div>
+        </Typography>
+      </Typography>
     )
   }
 }
@@ -163,4 +206,4 @@ const mapDispatchToProps = dispatch => {
 
 const ConnectedCart = connect(mapStateToProps, mapDispatchToProps)(Cart)
 
-export default withRouter(ConnectedCart)
+export default withStyles(styles)(withRouter(ConnectedCart))

@@ -1,12 +1,13 @@
 const router = require('express').Router()
-const {Order} = require('../db/models')
+const {Order, Product} = require('../db/models')
 module.exports = router
 
 router.get('/orders', async (req, res, next) => {
   try {
     const ordered = await Order.findAll({
       where: {status: 'ordered'},
-      order: ['updatedAt']
+      order: ['updatedAt'],
+      include: [Product]
     })
     res.json(ordered)
   } catch (err) {
