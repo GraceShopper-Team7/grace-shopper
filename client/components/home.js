@@ -6,35 +6,36 @@ import GridListTile from '@material-ui/core/GridListTile'
 
 const tileData = [
   {
-    img: '/images/grid-list/tea1.jpg',
-    title: 'Tea1',
+    img: '/images/grid-list/BAM.jpg',
+    //img: '/images/BAM.jpg',
+    title: 'BAM',
     cols: 2,
     featured: true
   },
   {
-    img: '/images/grid-list/tea2.jpg',
-    title: 'Tea2'
+    img: '/images/grid-list/guy-drinking-tea.jpg',
+    title: 'guy-drinking-tea'
   },
   {
-    img: '/images/grid-list/tea3.jpg',
-    title: 'Tea3'
+    img: '/images/grid-list/teatime.jpg',
+    title: 'teatime'
   },
   {
-    img: '/images/grid-list/tea4.jpg',
-    title: 'Tea4',
+    img: '/images/grid-list/teabag.jpg',
+    title: 'teabag',
     featured: true
   },
   {
-    img: '/images/grid-list/tea5.jpg',
-    title: 'tea5'
+    img: '/images/grid-list/girl-wand-magic.jpg',
+    title: 'girl-wand-magic'
   },
   {
-    img: '/images/grid-list/tea6.jpg',
-    title: 'tea6'
+    img: '/images/grid-list/girl-drinking-tea.jpg',
+    title: 'girl-drinking-tea'
   },
   {
-    img: '/images/grid-list/tea7.jpg',
-    title: 'tea7',
+    img: '/images/grid-list/zap.jpg',
+    title: 'zap',
     cols: 2
   }
 ]

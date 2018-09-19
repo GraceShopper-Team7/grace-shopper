@@ -95,7 +95,7 @@ async function seed() {
     },
     {
       title: 'Raritea',
-      //imageUrl: 'img3.jpg',
+      imageUrl: 'RARITEA.PNG',
       price: 999,
       description:
         'Like a black swan, this tea is hard stuff to find. If it is in stock, gab it while you can--you will not regret it. Smooth and sweet with a bit of bite.',
@@ -105,10 +105,10 @@ async function seed() {
     },
     {
       title: 'Electricitea',
-      //imageUrl: 'img3.jpg',
+      imageUrl: 'ELECTRICITEA.PNG',
       price: 678,
       description:
-        'Put somes pep in your step and edge to your soul. Impossibly incandescent.Slimy and suave like an electric eel. Ginger and firefly flavors blend to give a unique rounding out to this tea',
+        'Impossibly incandescent! Put somes pep in your step and edge to your soul. Slimy and suave like an electric eel. Ginger and firefly flavors blend to give a unique spark to this tea',
       typeId: 4,
       ingredients: ['black pepper', 'crushed fireflies', 'ginger'],
       inventoryQty: 50
@@ -145,7 +145,7 @@ async function seed() {
     },
     {
       title: 'High Tea',
-      //imageUrl: 'img3.jpg',
+      imageUrl: 'HIGHTEA.PNG',
       price: 420,
       description:
         'A crowd pleaser, this special tea may still be illegal in some states. Please drink with care. The plant is carefully cultivated and hearvested annually on the April full moon at the 20th hour. Will cause languid attitudes and laid back behaviors in most. ',
@@ -155,7 +155,7 @@ async function seed() {
     },
     {
       title: 'Vitalitea',
-      //imageUrl: 'img3.jpg',
+      imageUrl: 'VITALITEA.PNG',
       price: 778,
       description:
         'Banish your lethargic behavior, weak breathing and downcast outlook with a cup of Vitalitea. Feel as strong an ox, as invicible as a bull--as pulsing as a beating heart in love. Tangy and metallic notes permeated this tea.',
@@ -175,7 +175,7 @@ async function seed() {
     },
     {
       title: 'Invincibilitea',
-      //imageUrl: 'img3.jpg',
+      imageUrl: 'INVINCIBILITEA.PNG',
       price: 5988,
       description:
         '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
@@ -185,7 +185,7 @@ async function seed() {
     },
     {
       title: 'Eccentricitea',
-      //imageUrl: 'img3.jpg',
+      imageUrl: 'ECCENTRICITEA.PNG',
       price: 7988,
       description:
         '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
@@ -195,7 +195,7 @@ async function seed() {
     },
     {
       title: 'Tranquilitea',
-      //imageUrl: 'img3.jpg',
+      imageUrl: 'TRANQUILITEA.PNG',
       price: 7988,
       description:
         '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
@@ -205,7 +205,7 @@ async function seed() {
     },
     {
       title: 'Responsibilitea',
-      //imageUrl: 'img3.jpg',
+      imageUrl: 'RESPONSIBILITEA.PNG',
       price: 1076,
       description:
         '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
@@ -215,7 +215,7 @@ async function seed() {
     },
     {
       title: 'Paradoxicalitea',
-      //imageUrl: 'img3.jpg',
+      imageUrl: 'PARADOXICALITEA.PNG',
       price: 1076,
       description:
         '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
@@ -225,7 +225,7 @@ async function seed() {
     },
     {
       title: 'Creativitea',
-      //imageUrl: 'img3.jpg',
+      imageUrl: 'CREATIVITEA.PNG',
       price: 3057,
       description:
         '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
@@ -235,7 +235,7 @@ async function seed() {
     },
     {
       title: 'Integritea',
-      //imageUrl: 'img3.jpg',
+      imageUrl: 'INTEGRITEA.PNG',
       price: 3057,
       description:
         '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
@@ -255,7 +255,7 @@ async function seed() {
     },
     {
       title: 'Impossibilitea',
-      //imageUrl: 'img3.jpg',
+      imageUrl: 'IMPOSSIBILITEA.PNG',
       price: 3057,
       description:
         '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
@@ -265,7 +265,7 @@ async function seed() {
     },
     {
       title: 'Tealeportation',
-      //imageUrl: 'img3.jpg',
+      imageUrl: 'TEALEPORTATION.PNG',
       price: 3057,
       description:
         '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
@@ -274,23 +274,7 @@ async function seed() {
       inventoryQty: 50
     }
   ]
-  // const categories = [
-  // 	{
-  // 		name: 'tea bag',
-  // 		description:
-  // 			'A tea bag is a small, porous, sealed bag or packet containing dried plant material, which is immersed in boiling water to make a tea or an infusion.'
-  // 	},
-  // 	{
-  // 		name: 'loose leaf',
-  // 		description:
-  // 			'Tea is an aromatic beverage commonly prepared by pouring hot or boiling water over cured leaves of the Camellia sinensis, an evergreen shrub(bush) native to Asia.'
-  // 	},
-  // 	{
-  // 		name: 'iced tea',
-  // 		description:
-  // 			'Iced tea (or ice tea) is a form of cold tea. Though usually served in a glass with ice, it can refer to any tea that has been chilled or cooled. It may be sweetened with sugar, syrup and/or apple slices.'
-  // 	}
-  // ];
+
   const types = [
     {
       name: 'black tea',
