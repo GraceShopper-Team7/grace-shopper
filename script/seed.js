@@ -95,7 +95,7 @@ async function seed() {
     },
     {
       title: 'Raritea',
-      //imageUrl: 'img3.jpg',
+      imageUrl: 'RARITEA.PNG',
       price: 999,
       description:
         'Like a black swan, this tea is hard stuff to find. If it is in stock, gab it while you can--you will not regret it. Smooth and sweet with a bit of bite.',
@@ -105,10 +105,10 @@ async function seed() {
     },
     {
       title: 'Electricitea',
-      //imageUrl: 'img3.jpg',
+      imageUrl: 'ELECTRICITEA.PNG',
       price: 678,
       description:
-        'Put somes pep in your step and edge to your soul. Impossibly incandescent.Slimy and suave like an electric eel. Ginger and firefly flavors blend to give a unique rounding out to this tea',
+        'Impossibly incandescent! Put somes pep in your step and edge to your soul. Slimy and suave like an electric eel. Ginger and firefly flavors blend to give a unique spark to this tea',
       typeId: 4,
       ingredients: ['black pepper', 'crushed fireflies', 'ginger'],
       inventoryQty: 50
@@ -129,7 +129,7 @@ async function seed() {
       price: 1111,
       description:
         'Tast the angelic, innocent and clean qualities of the tea. Even just a whiff will give your soul short refuge from all your sins. The acidity of the lemon plays with the spiky texture of the crushed pearl. Warning: this tea has a particular flavor and may give you cottonmouth. ',
-      typeId: 2,
+      typeId: 4,
       ingredients: ['pearl', 'cotton', 'lemon'],
       inventoryQty: 14
     },
@@ -145,20 +145,20 @@ async function seed() {
     },
     {
       title: 'High Tea',
-      //imageUrl: 'img3.jpg',
+      imageUrl: 'HIGHTEA.PNG',
       price: 420,
       description:
         'A crowd pleaser, this special tea may still be illegal in some states. Please drink with care. The plant is carefully cultivated and hearvested annually on the April full moon at the 20th hour. Will cause languid attitudes and laid back behaviors in most. ',
-      typeId: 2,
+      typeId: 4,
       ingredients: ['canabis bud', 'mountain yam', 'sea mist'],
       inventoryQty: 420
     },
     {
       title: 'Vitalitea',
-      //imageUrl: 'img3.jpg',
+      imageUrl: 'VITALITEA.PNG',
       price: 778,
       description:
-        'Banish your lethargic behavior, weak breathing and downcast outlook with a cup of Vitalitea. Feel as strong an ox, as invicible as a bull--as pulsing as a beating heart in love. Tangy and metallic notes permeated this tea.',
+        'Banish your lethargic behavior, weak breathing and downcast outlook with a cup of Vitalitea. Feel as strong an ox, as invicible as a bull--throbbing with energy like a beating heart in love. Tangy and metallic notes permeated this tea.',
       typeId: 3,
       ingredients: ['freckled banana peel', 'marrow', 'rose hips'],
       inventoryQty: 50
@@ -175,57 +175,57 @@ async function seed() {
     },
     {
       title: 'Invincibilitea',
-      //imageUrl: 'img3.jpg',
+      imageUrl: 'INVINCIBILITEA.PNG',
       price: 5988,
       description:
-        '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      typeId: 2,
+        'How do you think Hercules survived so long with the gods, fates and hydra coming after him? This tea was his stawart ally and it can be your too. Rise from any flame like a proud phoenix. Fine coral is sourced from the Andaman sea uner the most ethical of programs.',
+      typeId: 4,
       ingredients: ['lotus blossom', 'fine coral', 'pheonix egg'],
       inventoryQty: 50
     },
     {
       title: 'Eccentricitea',
-      //imageUrl: 'img3.jpg',
+      imageUrl: 'ECCENTRICITEA.PNG',
       price: 7988,
       description:
-        '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        'Wierd! Wild! and Wacky!! Woohoo! For those that wear shoes on their heads and socks on their elbows. Every packet of Eccentricitea has its own flavor, bursting with surprise. Grainy and turbulent on the tongue.',
       typeId: 2,
       ingredients: ['hibiscus', 'ground pebble', 'river currents'],
       inventoryQty: 50
     },
     {
       title: 'Tranquilitea',
-      //imageUrl: 'img3.jpg',
+      imageUrl: 'TRANQUILITEA.PNG',
       price: 7988,
       description:
-        '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        "Imagine you are floating on the wing of a canadian goose, cradled in soft feathers, your ears filled with the calm steady beating of the flock's wings as you are transported  over land, sea, mountain and desert. This is the calm you feel with Tranquilitea. Warning: the blackberry currant may leave your tongue a deep purple color (but you will not care).",
       typeId: 3,
       ingredients: ['soft fern', 'stream silt', 'blackberry currant'],
       inventoryQty: 50
     },
     {
       title: 'Responsibilitea',
-      //imageUrl: 'img3.jpg',
+      imageUrl: 'RESPONSIBILITEA.PNG',
       price: 1076,
       description:
-        '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        'For those times the weight on your shoulders feel a little too heavy. Lighten the load with Responsibilitea. Drinking this increases your capacity tenfold. Lemongrass and orange combine to create a tangy citrus flavor.',
       typeId: 1,
       ingredients: ['flint', 'lemongrass', 'dried orange peel'],
       inventoryQty: 50
     },
     {
       title: 'Paradoxicalitea',
-      //imageUrl: 'img3.jpg',
+      imageUrl: 'PARADOXICALITEA.PNG',
       price: 1076,
       description:
-        '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      typeId: 2,
-      ingredients: ['manuka honey', 'dandelion', 'cloud whisp'],
+        "The paradox of choice: it gets us every time. Everywhere you turn, you can't escape. Hone your instincts to adjust and adapt to these situations with Paradoxicalitea. Please keep out of heat to care that the manuka honey will melt.",
+      typeId: 4,
+      ingredients: ['manuka honey crystals', 'dandelion', 'cloud whisp'],
       inventoryQty: 50
     },
     {
       title: 'Creativitea',
-      //imageUrl: 'img3.jpg',
+      imageUrl: 'CREATIVITEA.PNG',
       price: 3057,
       description:
         '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
@@ -235,7 +235,7 @@ async function seed() {
     },
     {
       title: 'Integritea',
-      //imageUrl: 'img3.jpg',
+      imageUrl: 'INTEGRITEA.PNG',
       price: 3057,
       description:
         '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
@@ -255,7 +255,7 @@ async function seed() {
     },
     {
       title: 'Impossibilitea',
-      //imageUrl: 'img3.jpg',
+      imageUrl: 'IMPOSSIBILITEA.PNG',
       price: 3057,
       description:
         '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
@@ -265,32 +265,16 @@ async function seed() {
     },
     {
       title: 'Tealeportation',
-      //imageUrl: 'img3.jpg',
+      imageUrl: 'TEALEPORTATION.PNG',
       price: 3057,
       description:
-        '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        'Always late for meetings at work, hangouts with friends or rendez-vous with lovers? Drink this tea to for the ability of teleportation. Avoid traffic, train delays, flat tires and stalled ferries. Once you drink this tea, snap your fingers to desired location.',
       typeId: 2,
       ingredients: ['dove feather', 'puffed corn kernel', 'mountain shadow'],
       inventoryQty: 50
     }
   ]
-  // const categories = [
-  // 	{
-  // 		name: 'tea bag',
-  // 		description:
-  // 			'A tea bag is a small, porous, sealed bag or packet containing dried plant material, which is immersed in boiling water to make a tea or an infusion.'
-  // 	},
-  // 	{
-  // 		name: 'loose leaf',
-  // 		description:
-  // 			'Tea is an aromatic beverage commonly prepared by pouring hot or boiling water over cured leaves of the Camellia sinensis, an evergreen shrub(bush) native to Asia.'
-  // 	},
-  // 	{
-  // 		name: 'iced tea',
-  // 		description:
-  // 			'Iced tea (or ice tea) is a form of cold tea. Though usually served in a glass with ice, it can refer to any tea that has been chilled or cooled. It may be sweetened with sugar, syrup and/or apple slices.'
-  // 	}
-  // ];
+
   const types = [
     {
       name: 'black tea',
