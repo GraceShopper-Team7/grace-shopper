@@ -22,14 +22,21 @@ router.post('/login', async (req, res, next) => {
 
 router.post('/signup', async (req, res, next) => {
   try {
-    const user = await User.create(req.body)
+    const user = await User.create({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      phoneNumber: req.body.phoneNumber,
+      username: req.body.username
+    })
     const address = await Address.create({
       address: req.body.address,
       city: req.body.city,
       state: req.body.state,
       country: req.body.country,
       zipcode: req.body.zipcode,
-      isPrimary: true
+      isPrimary: true,
+      userId: user.id
     })
     res.json(address).send(201)
     req.login(user, err => (err ? next(err) : res.json(user)))

@@ -5,8 +5,7 @@ import TextField from '@material-ui/core/TextField'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
 
-function AddressForm(props) {
-  const handleChange = props.handleChange
+function AddressForm() {
   return (
     <React.Fragment>
       <Grid container spacing={24}>
@@ -15,7 +14,6 @@ function AddressForm(props) {
             id="addiress"
             name="addiress"
             label="Address"
-            onChange={handleChange}
             fullWidth
             autoComplete="billing address-line2"
           />
@@ -26,7 +24,6 @@ function AddressForm(props) {
             id="city"
             name="city"
             label="City"
-            onChange={handleChange}
             fullWidth
             autoComplete="billing address-level2"
           />
@@ -45,7 +42,6 @@ function AddressForm(props) {
             id="zip"
             name="zip"
             label="Zip / Postal code"
-            onChange={handleChange}
             fullWidth
             autoComplete="billing postal-code"
           />
@@ -56,7 +52,6 @@ function AddressForm(props) {
             id="country"
             name="country"
             label="Country"
-            onChange={handleChange}
             fullWidth
             autoComplete="billing country"
           />

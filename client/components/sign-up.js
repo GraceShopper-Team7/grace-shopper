@@ -56,13 +56,7 @@ class Signup extends Component {
       lastName: '',
       phoneNumber: '',
       email: '',
-      username: '',
-      address: '',
-      city: '',
-      state: '',
-      country: '',
-      zipcode: null,
-      isprimary: true
+      username: ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -145,7 +139,6 @@ class Signup extends Component {
                 />
               </FormControl>
 
-              <AddressForm handleChange={this.handleChange} />
               <Button
                 type="submit"
                 fullWidth
