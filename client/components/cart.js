@@ -76,31 +76,36 @@ class Cart extends Component {
             )}
           </ListItem>
           {order.products.map(product => (
-            <ListItem className={classes.product} key={product.title}>
-              {current && (
-                <Button
-                  color="secondary"
-                  onClick={() => this.removeProductFromCart(product)}
-                  align="left"
-                >
-                  <DeleteIcon />
-                </Button>
-              )}
-              <img src={`/${product.imageUrl}`} width="30px" height="30px" />
-              <ListItemText primary={product.title} secondary={product.desc} />
-              <Typography variant="body2" align="right">
-                ${(
-                  product.orderProduct.quantity *
-                  product.orderProduct.price /
-                  100
-                ).toFixed(2)}
-                <Typography variant="caption">
-                  ({product.orderProduct.quantity}
-                  {` `} x {` `}
-                  ${(product.orderProduct.price / 100).toFixed(2)})
+            <NavLink to={`/products/${product.id}`} key={product.id}>
+              <ListItem className={classes.product}>
+                {current && (
+                  <Button
+                    color="secondary"
+                    onClick={() => this.removeProductFromCart(product)}
+                    align="left"
+                  >
+                    <DeleteIcon />
+                  </Button>
+                )}
+                <img src={`/${product.imageUrl}`} width="30px" height="30px" />
+                <ListItemText
+                  primary={product.title}
+                  secondary={product.desc}
+                />
+                <Typography variant="body2" align="right">
+                  ${(
+                    product.orderProduct.quantity *
+                    product.orderProduct.price /
+                    100
+                  ).toFixed(2)}
+                  <Typography variant="caption">
+                    ({product.orderProduct.quantity}
+                    {` `} x {` `}
+                    ${(product.orderProduct.price / 100).toFixed(2)})
+                  </Typography>
                 </Typography>
-              </Typography>
-            </ListItem>
+              </ListItem>
+            </NavLink>
           ))}
           <ListItem className={classes.listItem}>
             <ListItemText primary="Total:" align="right" />
