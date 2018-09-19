@@ -90,7 +90,7 @@ class SingleProduct extends Component {
     return (
       <div>
         <GridList cellHeight={210} className={classes.gridList} cols={5}>
-          <GridListTile cols={1} rows={1}>
+          <GridListTile cols={2} rows={1.5}>
             <img src={`/${product.imageUrl}`} width="100%" height="100%" />
           </GridListTile>
           <GridListTile cols={2} rows={1}>
