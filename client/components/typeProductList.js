@@ -12,22 +12,11 @@ import Grid from '@material-ui/core/Grid'
 import PropTypes from 'prop-types'
 
 const styles = theme => ({
-  appBar: {
-    position: 'relative'
+  root: {
+    marginTop: theme.spacing.unit * 4
   },
   icon: {
     marginRight: theme.spacing.unit * 2
-  },
-  heroUnit: {
-    backgroundColor: theme.palette.background.paper
-  },
-  heroContent: {
-    maxWidth: 600,
-    margin: '0 auto',
-    padding: `${theme.spacing.unit * 8}px 0 ${theme.spacing.unit * 6}px`
-  },
-  heroButtons: {
-    marginTop: theme.spacing.unit * 4
   },
   layout: {
     width: 'auto',
@@ -52,10 +41,6 @@ const styles = theme => ({
   },
   cardContent: {
     flexGrow: 1
-  },
-  footer: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing.unit * 6
   }
 })
 
@@ -93,16 +78,6 @@ class TypeProductList extends Component {
                 user={user}
                 addToCart={this.addNewOrderProduct}
               />
-              {/*
-              {user.roleId === 1 && (
-                <button
-                  type="submit"
-                  value={product}
-                  onClick={() => this.handleClick(product)}
-                >
-                  Delete
-                </button>
-              )}*/}
             </Grid>
           ))}
         </Grid>

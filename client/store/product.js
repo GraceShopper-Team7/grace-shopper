@@ -52,8 +52,6 @@ const getUpdateProductQuantityAfterAddingToCart = updatedProduct => ({
 //THUNK CREATORS
 export const fetchProducts = () => {
   return async dispatch => {
-    //dispatch(setIsLoading())
-
     let res = await axios.get('/api/products')
     let products = res.data
     const action = setProductsInStore(products)
