@@ -1,54 +1,97 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {fetchProducts} from '../store/product'
-import productDisplay from './product-display'
+import {
+  fetchProducts,
+  decreaseQuantityAfterAddingToCart
+} from '../store/product'
+import {addProductToOrderProducts} from '../store/cart'
+import ProductDisplay from './product-display'
+import {withStyles} from '@material-ui/core/styles'
+import Grid from '@material-ui/core/Grid'
 
+const styles = theme => ({
+  layout: {
+    width: 'auto',
+    marginLeft: theme.spacing.unit * 3,
+    marginRight: theme.spacing.unit * 3,
+    [theme.breakpoints.up(1100 + theme.spacing.unit * 3 * 2)]: {
+      width: 1100,
+      marginLeft: 'auto',
+      marginRight: 'auto'
+    }
+  },
+  cardGrid: {
+    padding: `${theme.spacing.unit * 8}px 0`
+  },
+  card: {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  cardMedia: {
+    paddingTop: '56.25%' // 16:9
+  },
+  cardContent: {
+    flexGrow: 1
+  }
+})
 class SearchProduct extends Component {
+  constructor(props) {
+    super(props)
+    this.addNewOrderProduct = this.addNewOrderProduct.bind(this)
+  }
+
   componentDidMount() {
     console.log('Inside Searched Products')
     this.props.loadProducts()
   }
-  //   var string = "This is a test string",
-  // substring = "test";
-  // if(string.indexOf(substring) >= 0)
-  //   //substring exist
-  // else
-  //   //substring does not exist
+  addNewOrderProduct(product, user) {
+    this.props.addProductToOrderProducts(product, user)
+  }
   render() {
-    console.log('Search String from store ', this.props)
+    const {classes} = this.props
     const searchString = this.props.searchString
-    console.log('Search String from store ', searchString)
     const products = this.props.allProducts || []
+    const user = this.props.user
     const filteredProducts = products.filter(
       product => product.title.indexOf(searchString) >= 0
     )
 
-    return filteredProducts.length > 0 ? (
-      <div>
-        <h1>Teas</h1>
-        <ul>
+    return products.length > 0 ? (
+      <div className={classes.root}>
+        <Grid container spacing={40}>
           {filteredProducts.map(product => (
-            <li key={product.id}>
-              <h3>{product.title}</h3>
-              <p>Price: {product.price}</p>
-              <p>Inventory Quantity: {product.inventoryQty}</p>
-            </li>
+            <Grid item key={product.id} sm={6} md={4} lg={3}>
+              <ProductDisplay
+                product={product}
+                handleClick={this.handleClick}
+                user={user}
+                addToCart={this.addNewOrderProduct}
+              />
+            </Grid>
           ))}
-        </ul>
+        </Grid>
       </div>
     ) : (
-      <div>Product Not Found!!!!!</div>
+      <div>No Product Found!</div>
     )
   }
 }
 
 const mapStateToProps = state => ({
   searchString: state.products.searchString,
-  allProducts: state.products.all
+  allProducts: state.products.all,
+  user: state.user
 })
 
 const mapDispatchToProps = dispatch => ({
-  loadProducts: () => dispatch(fetchProducts())
+  loadProducts: () => dispatch(fetchProducts()),
+  addProductToOrderProducts: async (product, user) => {
+    await dispatch(addProductToOrderProducts(product, user))
+    await dispatch(decreaseQuantityAfterAddingToCart(product))
+  }
 })
-
-export default connect(mapStateToProps, mapDispatchToProps)(SearchProduct)
+const withStyleSearchProduct = withStyles(styles)(SearchProduct)
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withStyleSearchProduct
+)
