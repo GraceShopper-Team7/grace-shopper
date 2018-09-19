@@ -1,11 +1,50 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
 import {fetchSingleProduct, removeProduct} from '../store/product'
+import {withStyles} from '@material-ui/core/styles'
 import EditProduct from './edit-product'
 import GradeIcon from '@material-ui/icons/Grade'
+import AddShoppingCardIcon from '@material-ui/icons/AddShoppingCart'
+import Paper from '@material-ui/core/Paper'
+import GridList from '@material-ui/core/GridList'
+import GridListTile from '@material-ui/core/GridListTile'
+import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
+import Tabs from '@material-ui/core/Tabs'
+import Tab from '@material-ui/core/Tab'
+
+const styles = theme => ({
+  root: {
+    flexGrow: 1
+  },
+  tab: {
+    marginTop: theme.spacing.unit * 8,
+    display: 'flex',
+    flexDirection: 'column',
+    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme
+      .spacing.unit * 3}px `
+  },
+  gridList: {
+    padding: `${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px ${theme
+      .spacing.unit * 3}px ${theme.spacing.unit * 3}px`
+  },
+  tabContent: {
+    marginTop: theme.spacing.unit * 5,
+    display: 'flex',
+    flexDirection: 'column',
+    padding: `${theme.spacing.unit * 0}px ${theme.spacing.unit * 28}px ${theme
+      .spacing.unit * 3}px ${theme.spacing.unit * 28}px`
+  }
+})
 
 class SingleProduct extends Component {
+  constructor() {
+    super()
+    this.state = {
+      tab: 0
+    }
+  }
+
   componentDidMount() {
     const productId = Number(this.props.match.params.id)
     this.props.fetchSingleProduct(productId)
@@ -15,7 +54,12 @@ class SingleProduct extends Component {
     this.props.deleteProduct(product.id)
   }
 
+  handleChange = (event, tab) => {
+    this.setState({tab})
+  }
+
   render() {
+    const {classes} = this.props
     const product = this.props.singleProduct
     const reviews = product.reviews || []
     const rating = Math.floor(
@@ -26,58 +70,132 @@ class SingleProduct extends Component {
       grades.push(<GradeIcon />)
     }
 
+    let ingredients = []
+    for (
+      let i = 0;
+      product.ingredients && i < product.ingredients.length;
+      i++
+    ) {
+      ingredients.push(
+        <Typography variant="body1">
+          <li>{product.ingredients[i]}</li>
+        </Typography>
+      )
+    }
+
     if (!product) {
       return <h1>this tea does not exist yet!</h1>
     }
 
     return (
       <div>
-        <h1>{product.title}</h1>
-        <img src={`/${product.imageUrl}`} width="100px" height="100px" />
-        <h3>Tea details...</h3>
-        <p>{grades}</p>
-        <p>price: {product.price}</p>
-        <p>current inventory: {product.inventoryQty}</p>
-        <p>description: {product.description}</p>
-        <p>
-          ingredients: {product.ingredients && product.ingredients[0]},{' '}
-          {product.ingredients && product.ingredients[1]},{' '}
-          {product.ingredients && product.ingredients[2]}
-        </p>
-        {this.props.user.roleId === 1 && (
-          <button
-            type="submit"
-            value={product}
-            onClick={() => this.handleClick(product)}
+        <GridList cellHeight={210} className={classes.gridList} cols={5}>
+          <GridListTile cols={2} rows={1.5}>
+            <img src={`/${product.imageUrl}`} width="100%" height="100%" />
+          </GridListTile>
+          <GridListTile cols={2} rows={1}>
+            <Typography style={{paddingLeft: '20px'}}>
+              <Typography
+                variant="display2"
+                color="primary"
+                style={{fontFamily: 'Satisfy'}}
+              >
+                {product.title}
+              </Typography>
+              <Typography>{grades}</Typography>
+              <Typography variant="body2">
+                Price: ${(product.price / 100).toFixed(2)}
+              </Typography>
+              <Typography variant="body2">
+                <Button
+                  size="small"
+                  color="primary"
+                  variant="outlined"
+                  style={{marginTop: '40px'}}
+                  onClick={() => console.log('add to cart')}
+                >
+                  <AddShoppingCardIcon style={{paddingRight: '0.2em'}} /> Add to
+                  cart!
+                </Button>
+              </Typography>
+              <Typography style={{paddingTop: '10px'}}>
+                Current Inventory: {product.inventoryQty}
+              </Typography>
+            </Typography>
+          </GridListTile>
+        </GridList>
+        <Paper className={classes.tab}>
+          <Tabs
+            value={this.state.tab}
+            onChange={this.handleChange}
+            indicatorColor="primary"
+            textColor="primary"
+            centered
           >
-            Delete
-          </button>
-        )}
-
-        {/* <Tab label="Write a Review" href={`/products/${product.id}/addreview`} /> */}
-        <Link to={`/products/${product.id}/addreview`}>Write a Review</Link>
-        {reviews.length > 0 ? (
-          <div>
-            <br />
-            <hr />
-            <h2 align="center">Customers Reviews</h2>
-            <hr />
-            {reviews.map(review => (
-              <p key={review.id}>
-                <label>Rating : {review.rating}</label>
-                <label>Review : {review.content}</label>
-              </p>
-            ))}
-          </div>
-        ) : (
-          <div>There is no review for this Product.</div>
-        )}
-        {/* once ready we add the following:
-          -add to cart button component
-          -delete button component (admin) */}
-        {this.props.user.roleId === 1 && (
-          <EditProduct product={product} history={this.props.history} />
-        )}
+            <Tab label="Desicription" />
+            <Tab label="Reviews" />
+            {this.props.user.roleId === 1 && <Tab label="Admin" />}
+          </Tabs>
+          <Typography className={classes.tabContent}>
+            {this.state.tab === 0 && (
+              <Typography>
+                <Typography
+                  variant="body1"
+                  style={{fontFamily: 'inherit', textTransform: 'none'}}
+                >
+                  {product.description}
+                </Typography>
+                <Typography variant="body2" style={{marginTop: '1em'}}>
+                  Ingredients
+                </Typography>
+                <Typography>{ingredients}</Typography>
+              </Typography>
+            )}
+            {this.state.tab === 1 && (
+              <Typography>
+                <Button
+                  variant="outlined"
+                  href={`/products/${product.id}/addreview`}
+                  style={{marginTop: '0px', marginBottom: '50px'}}
+                >
+                  Write a Review
+                </Button>
+                {reviews.length > 0 ? (
+                  <Typography>
+                    <Typography variant="headline" gutterBottom>
+                      Customers Reviews
+                    </Typography>
+                    {reviews.map(review => (
+                      <Typography key={review.id}>
+                        <Typography variant="body1">
+                          Rating : {review.rating}
+                        </Typography>
+                        <Typography variant="body1">
+                          Review : {review.content}
+                        </Typography>
+                      </Typography>
+                    ))}
+                  </Typography>
+                ) : (
+                  <div>There is no review for this Product.</div>
+                )}
+              </Typography>
+            )}
+            {this.state.tab === 2 && (
+              <Typography>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  value={product}
+                  onClick={() => this.handleClick(product)}
+                >
+                  Delete
+                </Button>
+                <EditProduct product={product} history={this.props.history} />
+              </Typography>
+            )}
+          </Typography>
+        </Paper>
       </div>
     )
   }
@@ -105,4 +223,4 @@ const ConnectedSingleProduct = connect(mapStateToProps, mapDispatchToProps)(
   SingleProduct
 )
 
-export default ConnectedSingleProduct
+export default withStyles(styles)(ConnectedSingleProduct)

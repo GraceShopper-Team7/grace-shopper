@@ -1,29 +1,16 @@
 import {connect} from 'react-redux'
 import React, {Component} from 'react'
-import {fetchProducts, removeProduct} from '../store/product'
+import {
+  fetchProducts,
+  decreaseQuantityAfterAddingToCart
+} from '../store/product'
+import {addProductToOrderProducts} from '../store/cart'
 import ProductDisplay from './product-display'
 import PropTypes from 'prop-types'
 import {withStyles} from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 
 const styles = theme => ({
-  appBar: {
-    position: 'relative'
-  },
-  icon: {
-    marginRight: theme.spacing.unit * 2
-  },
-  heroUnit: {
-    backgroundColor: theme.palette.background.paper
-  },
-  heroContent: {
-    maxWidth: 600,
-    margin: '0 auto',
-    padding: `${theme.spacing.unit * 8}px 0 ${theme.spacing.unit * 6}px`
-  },
-  heroButtons: {
-    marginTop: theme.spacing.unit * 4
-  },
   layout: {
     width: 'auto',
     marginLeft: theme.spacing.unit * 3,
@@ -47,30 +34,27 @@ const styles = theme => ({
   },
   cardContent: {
     flexGrow: 1
-  },
-  footer: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing.unit * 6
   }
 })
 
 class ProductList extends Component {
   constructor(props) {
     super(props)
-    this.handleClick = this.handleClick.bind(this)
+    this.addNewOrderProduct = this.addNewOrderProduct.bind(this)
   }
 
   componentDidMount() {
     this.props.loadProducts()
   }
-  handleClick(product) {
-    this.props.deleteProduct(product.id)
+  addNewOrderProduct(product, user) {
+    this.props.addProductToOrderProducts(product, user)
   }
-
   render() {
     const {classes} = this.props
     const products = this.props.products || []
     const user = this.props.user
+    console.log('PRODUCTS: ', products)
+
     return products.length > 0 ? (
       <div className={classes.root}>
         <Grid container spacing={40}>
@@ -79,16 +63,9 @@ class ProductList extends Component {
               <ProductDisplay
                 product={product}
                 handleClick={this.handleClick}
+                user={user}
+                addToCart={this.addNewOrderProduct}
               />
-              {user.roleId === 1 && (
-                <button
-                  type="submit"
-                  value={product}
-                  onClick={() => this.handleClick(product)}
-                >
-                  Delete
-                </button>
-              )}
             </Grid>
           ))}
         </Grid>
@@ -106,7 +83,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   loadProducts: () => dispatch(fetchProducts()),
-  deleteProduct: id => dispatch(removeProduct(id))
+  addProductToOrderProducts: async (product, user) => {
+    await dispatch(addProductToOrderProducts(product, user))
+    await dispatch(decreaseQuantityAfterAddingToCart(product))
+  }
 })
 
 const withStyleProductList = withStyles(styles)(ProductList)

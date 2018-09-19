@@ -129,7 +129,7 @@ async function seed() {
       price: 1111,
       description:
         'Tast the angelic, innocent and clean qualities of the tea. Even just a whiff will give your soul short refuge from all your sins. The acidity of the lemon plays with the spiky texture of the crushed pearl. Warning: this tea has a particular flavor and may give you cottonmouth. ',
-      typeId: 2,
+      typeId: 4,
       ingredients: ['pearl', 'cotton', 'lemon'],
       inventoryQty: 14
     },
@@ -149,7 +149,7 @@ async function seed() {
       price: 420,
       description:
         'A crowd pleaser, this special tea may still be illegal in some states. Please drink with care. The plant is carefully cultivated and hearvested annually on the April full moon at the 20th hour. Will cause languid attitudes and laid back behaviors in most. ',
-      typeId: 2,
+      typeId: 4,
       ingredients: ['canabis bud', 'mountain yam', 'sea mist'],
       inventoryQty: 420
     },
@@ -158,7 +158,7 @@ async function seed() {
       imageUrl: 'VITALITEA.PNG',
       price: 778,
       description:
-        'Banish your lethargic behavior, weak breathing and downcast outlook with a cup of Vitalitea. Feel as strong an ox, as invicible as a bull--as pulsing as a beating heart in love. Tangy and metallic notes permeated this tea.',
+        'Banish your lethargic behavior, weak breathing and downcast outlook with a cup of Vitalitea. Feel as strong an ox, as invicible as a bull--throbbing with energy like a beating heart in love. Tangy and metallic notes permeated this tea.',
       typeId: 3,
       ingredients: ['freckled banana peel', 'marrow', 'rose hips'],
       inventoryQty: 50
@@ -179,7 +179,7 @@ async function seed() {
       price: 5988,
       description:
         '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      typeId: 2,
+      typeId: 4,
       ingredients: ['lotus blossom', 'fine coral', 'pheonix egg'],
       inventoryQty: 50
     },
@@ -219,7 +219,7 @@ async function seed() {
       price: 1076,
       description:
         '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      typeId: 2,
+      typeId: 4,
       ingredients: ['manuka honey', 'dandelion', 'cloud whisp'],
       inventoryQty: 50
     },
