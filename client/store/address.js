@@ -47,6 +47,7 @@ export default function(state = initialState, action) {
     }
     case SELECT_ADDRESS:
       return {...state, selected: action.id}
+
     default:
       return state
   }
