@@ -206,7 +206,7 @@ class Navbar extends Component {
               disableRipple
               className={classes.menu}
             >
-              Grean Tea
+              Green Tea
             </Button>
           </Typography>
           <Typography color="inherit" noWrap>
