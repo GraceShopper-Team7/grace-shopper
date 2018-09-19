@@ -178,7 +178,7 @@ async function seed() {
       imageUrl: 'INVINCIBILITEA.PNG',
       price: 5988,
       description:
-        '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        'How do you think Hercules survived so long with the gods, fates and hydra coming after him? This tea was his stawart ally and it can be your too. Rise from any flame like a proud phoenix. Fine coral is sourced from the Andaman sea uner the most ethical of programs.',
       typeId: 4,
       ingredients: ['lotus blossom', 'fine coral', 'pheonix egg'],
       inventoryQty: 50
@@ -188,7 +188,7 @@ async function seed() {
       imageUrl: 'ECCENTRICITEA.PNG',
       price: 7988,
       description:
-        '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        'Wierd! Wild! and Wacky!! Woohoo! For those that wear shoes on their heads and socks on their elbows. Every packet of Eccentricitea has its own flavor, bursting with surprise. Grainy and turbulent on the tongue.',
       typeId: 2,
       ingredients: ['hibiscus', 'ground pebble', 'river currents'],
       inventoryQty: 50
@@ -198,7 +198,7 @@ async function seed() {
       imageUrl: 'TRANQUILITEA.PNG',
       price: 7988,
       description:
-        '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        "Imagine you are floating on the wing of a canadian goose, cradled in soft feathers, your ears filled with the calm steady beating of the flock's wings as you are transported  over land, sea, mountain and desert. This is the calm you feel with Tranquilitea. Warning: the blackberry currant may leave your tongue a deep purple color (but you will not care).",
       typeId: 3,
       ingredients: ['soft fern', 'stream silt', 'blackberry currant'],
       inventoryQty: 50
@@ -208,7 +208,7 @@ async function seed() {
       imageUrl: 'RESPONSIBILITEA.PNG',
       price: 1076,
       description:
-        '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        'For those times the weight on your shoulders feel a little too heavy. Lighten the load with Responsibilitea. Drinking this increases your capacity tenfold. Lemongrass and orange combine to create a tangy citrus flavor.',
       typeId: 1,
       ingredients: ['flint', 'lemongrass', 'dried orange peel'],
       inventoryQty: 50
@@ -218,9 +218,9 @@ async function seed() {
       imageUrl: 'PARADOXICALITEA.PNG',
       price: 1076,
       description:
-        '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        "The paradox of choice: it gets us every time. Everywhere you turn, you can't escape. Hone your instincts to adjust and adapt to these situations with Paradoxicalitea. Please keep out of heat to care that the manuka honey will melt.",
       typeId: 4,
-      ingredients: ['manuka honey', 'dandelion', 'cloud whisp'],
+      ingredients: ['manuka honey crystals', 'dandelion', 'cloud whisp'],
       inventoryQty: 50
     },
     {
@@ -268,7 +268,7 @@ async function seed() {
       imageUrl: 'TEALEPORTATION.PNG',
       price: 3057,
       description:
-        '***Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        'Always late for meetings at work, hangouts with friends or rendez-vous with lovers? Drink this tea to for the ability of teleportation. Avoid traffic, train delays, flat tires and stalled ferries. Once you drink this tea, snap your fingers to desired location.',
       typeId: 2,
       ingredients: ['dove feather', 'puffed corn kernel', 'mountain shadow'],
       inventoryQty: 50
