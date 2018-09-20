@@ -149,7 +149,8 @@ const productReducer = (
             product => product.id !== action.updatedProduct.id
           ),
           action.updatedProduct
-        ]
+        ],
+        selected: action.updatedProduct
       }
     default:
       return state
